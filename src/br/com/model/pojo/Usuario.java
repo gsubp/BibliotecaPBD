@@ -2,20 +2,35 @@ package br.com.model.pojo;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false, unique = true)
 	private int matricula;
+	@Column(nullable = false, unique = true, length = 20)
 	private String cpf;
+	@Column(length = 50, nullable = false)
 	private String nome;
+	@Column(length = 50, nullable = false)
 	private String endereco;
+	@Column(length = 50, nullable = false, unique = true)
 	private String email;
+	@Column(length = 20, nullable = false)
 	private String situacao;
+	@Column(nullable = false)
 	private boolean isProfessor;
+	@OneToMany(mappedBy = "usuario", targetEntity = Telefone.class)
 	private List<Telefone> telefones;
 	
 	

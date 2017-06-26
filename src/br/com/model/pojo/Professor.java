@@ -6,9 +6,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "id_usuario")
+@PrimaryKeyJoinColumn(name = "id")
 public class Professor extends Usuario{
-	@JoinColumn(name = "id_departamento")
+	@JoinColumn(name = "id_departamento", nullable = false)
 	@ManyToOne
 	private Departamento departamento;
 

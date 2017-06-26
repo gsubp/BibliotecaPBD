@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "curso")
 public class Curso {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 50, nullable = false)
 	private String nome;
@@ -23,8 +23,7 @@ public class Curso {
 	
 	public Curso() {
 		super();
-	}
-	
+	}	
 	
 	public Curso(Long id, String nome) {
 		super();

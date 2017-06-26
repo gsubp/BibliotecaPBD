@@ -13,13 +13,13 @@ import javax.persistence.Table;
 @Table(name = "departamento")
 public class Departamento {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 50, nullable = false, unique = true)
 	private String nome;	
-	@OneToMany(mappedBy = "idDepartamento", targetEntity = Curso.class)
+	@OneToMany(mappedBy = "departamento", targetEntity = Curso.class)
 	private List<Curso> cursos;
-	@OneToMany(mappedBy = "idDepartamento", targetEntity = Professor.class)
+	@OneToMany(mappedBy = "departamento", targetEntity = Professor.class)
 	private List<Professor> professores;
 	
 	public Departamento() {
