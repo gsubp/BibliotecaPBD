@@ -11,16 +11,16 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Usuario {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(nullable = false, unique = true)
 	private int matricula;
 	@Column(nullable = false, unique = true, length = 20)
-	private String cpf;
-	@Column(length = 50, nullable = false)
+	private int cpf;
+	@Column(nullable = false)
 	private String nome;
 	@Column(length = 50, nullable = false)
 	private String endereco;
@@ -28,8 +28,6 @@ public class Usuario {
 	private String email;
 	@Column(length = 20, nullable = false)
 	private String situacao;
-	@Column(nullable = false)
-	private boolean isProfessor;
 	@OneToMany(mappedBy = "usuario", targetEntity = Telefone.class)
 	private List<Telefone> telefones;
 	
@@ -38,8 +36,7 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(Long id, int matricula, String cpf, String nome, String endereco, String email, String situacao,
-			boolean isProfessor) {
+	public Usuario(Long id, int matricula, int cpf, String nome, String endereco, String email, String situacao) {
 		super();
 		this.id = id;
 		this.matricula = matricula;
@@ -48,7 +45,6 @@ public class Usuario {
 		this.endereco = endereco;
 		this.email = email;
 		this.situacao = situacao;
-		this.isProfessor = isProfessor;
 	}
 
 	public Long getId() {
@@ -67,11 +63,11 @@ public class Usuario {
 		this.matricula = matricula;
 	}
 
-	public String getCpf() {
+	public int getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
+	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
 
@@ -107,14 +103,6 @@ public class Usuario {
 		this.situacao = situacao;
 	}
 
-	public boolean isProfessor() {
-		return isProfessor;
-	}
-
-	public void setProfessor(boolean isProfessor) {
-		this.isProfessor = isProfessor;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -143,7 +131,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", matricula=" + matricula + ", cpf=" + cpf + ", nome=" + nome + ", endereco="
-				+ endereco + ", email=" + email + ", situacao=" + situacao + ", isProfessor=" + isProfessor + "]";
+				+ endereco + ", email=" + email + ", situacao=" + situacao + "]";
 	}
 	
 	

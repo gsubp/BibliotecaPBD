@@ -6,7 +6,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "id")
 public class Professor extends Usuario{
 	@JoinColumn(name = "id_departamento", nullable = false)
 	@ManyToOne
@@ -16,9 +15,8 @@ public class Professor extends Usuario{
 		super();
 	}
 
-	public Professor(Long id, int matricula, String cpf, String nome, String endereco, String email, String situacao,
-			boolean isProfessor) {
-		super(id, matricula, cpf, nome, endereco, email, situacao, isProfessor);
+	public Professor(Long id, int matricula, int cpf, String nome, String endereco, String email, String situacao) {
+		super(id, matricula, cpf, nome, endereco, email, situacao);
 		// TODO Auto-generated constructor stub
 	}
 

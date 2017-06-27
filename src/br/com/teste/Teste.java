@@ -1,5 +1,7 @@
 package br.com.teste;
 
+import br.com.view.Cadastro;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -10,6 +12,7 @@ public class Teste {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("bibliotecapu");
 			EntityManager em = factory.createEntityManager();
 
+			new Cadastro().setVisible(true);
 	}
 
 }
