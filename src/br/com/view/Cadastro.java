@@ -26,6 +26,7 @@ public class Cadastro extends JFrame{
     private JButton limparButton;
     private JButton cadastrarButton;
     private JTextField matriculaField;
+    private JTextField textField1;
 
     public Cadastro() {
         setContentPane(rootPanel);
