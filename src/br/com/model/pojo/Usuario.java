@@ -28,6 +28,12 @@ public class Usuario {
 	private String email;
 	@Column(length = 20, nullable = false)
 	private String situacao;
+
+
+
+    @Column(nullable = false, length = 20)
+
+	private String senha;
 	@OneToMany(mappedBy = "usuario", targetEntity = Telefone.class)
 	private List<Telefone> telefones;
 	
@@ -36,7 +42,7 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(Long id, int matricula, int cpf, String nome, String endereco, String email, String situacao) {
+	public Usuario(Long id, int matricula, int cpf, String nome, String endereco, String email, String situacao, String senha) {
 		super();
 		this.id = id;
 		this.matricula = matricula;
@@ -45,6 +51,7 @@ public class Usuario {
 		this.endereco = endereco;
 		this.email = email;
 		this.situacao = situacao;
+		this.senha = senha;
 	}
 
 	public Long getId() {
@@ -102,6 +109,23 @@ public class Usuario {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    public String getSenha() {
+
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
 	@Override
 	public int hashCode() {

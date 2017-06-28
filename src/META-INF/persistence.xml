@@ -16,6 +16,9 @@
 	   <class>br.com.model.pojo.Telefone</class>
 	   <class>br.com.model.pojo.Livro</class>
 	   <class>br.com.model.pojo.Autor</class>
+		<class>br.com.model.pojo.Emprestimo</class>
+		<class>br.com.model.pojo.RealizaEmprestimo</class>
+
 	   <properties>
 		  <!-- dados da conexao -->
 		  <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

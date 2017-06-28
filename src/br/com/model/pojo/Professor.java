@@ -15,8 +15,9 @@ public class Professor extends Usuario{
 		super();
 	}
 
-	public Professor(Long id, int matricula, int cpf, String nome, String endereco, String email, String situacao) {
-		super(id, matricula, cpf, nome, endereco, email, situacao);
+	public Professor(Long id, int matricula, int cpf, String nome, String endereco, String email, String situacao,
+					 String senha) {
+		super(id, matricula, cpf, nome, endereco, email, situacao, senha);
 		// TODO Auto-generated constructor stub
 	}
 

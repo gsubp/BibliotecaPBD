@@ -6,12 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- * Created by guilh on 27/06/2017.
- */
+
 public class AlunoDAO {
     private static final String PERSISTENCE_UNIT_NAME = "bibliotecapu";
     private static EntityManager manager = null;
+
     private static EntityManager getEntityManager() {
         if (manager == null) {
             EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
