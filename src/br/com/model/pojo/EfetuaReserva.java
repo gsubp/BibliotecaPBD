@@ -3,17 +3,17 @@ package br.com.model.pojo;
 import javax.persistence.*;
 
 /**
- * Created by guilh on 27/06/2017.
+ * Created by guilh on 03/07/2017.
  */
 @Entity
-@Table(name = "realiza_emprestimo")
-public class RealizaEmprestimo {
+@Table(name = "efetua_reserva")
+public class EfetuaReserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
-    @JoinColumn(name = "id_emprestimo", nullable = false)
-    private Emprestimo emprestimo;
+    @JoinColumn(name = "id_reserva", nullable = false)
+    private Reserva reserva;
     @OneToOne
     @JoinColumn(name = "id_livro", nullable = false)
     private Livro livro;
@@ -24,19 +24,17 @@ public class RealizaEmprestimo {
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
 
-    public RealizaEmprestimo(){ super(); }
+    public EfetuaReserva() {}
 
-    public RealizaEmprestimo(Long id, Emprestimo emprestimo, Livro livro, Usuario usuario, Funcionario funcionario) {
+    public EfetuaReserva(Long id, Reserva reserva, Livro livro, Usuario usuario, Funcionario funcionario) {
         this.id = id;
-        this.emprestimo = emprestimo;
+        this.reserva = reserva;
         this.livro = livro;
         this.usuario = usuario;
         this.funcionario = funcionario;
     }
 
-
     public Long getId() {
-
         return id;
     }
 
@@ -44,12 +42,12 @@ public class RealizaEmprestimo {
         this.id = id;
     }
 
-    public Emprestimo getEmprestimo() {
-        return emprestimo;
+    public Reserva getReserva() {
+        return reserva;
     }
 
-    public void setEmprestimo(Emprestimo emprestimo) {
-        this.emprestimo = emprestimo;
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
     }
 
     public Livro getLivro() {
@@ -81,7 +79,7 @@ public class RealizaEmprestimo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RealizaEmprestimo that = (RealizaEmprestimo) o;
+        EfetuaReserva that = (EfetuaReserva) o;
 
         return id.equals(that.id);
     }
@@ -93,9 +91,9 @@ public class RealizaEmprestimo {
 
     @Override
     public String toString() {
-        return "RealizaEmprestimo{" +
+        return "EfetuaReserva{" +
                 "id=" + id +
-                ", emprestimo=" + emprestimo +
+                ", reserva=" + reserva +
                 ", livro=" + livro +
                 ", usuario=" + usuario +
                 ", funcionario=" + funcionario +

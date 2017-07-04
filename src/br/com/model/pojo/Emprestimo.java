@@ -2,11 +2,7 @@ package br.com.model.pojo;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
-/**
- * Created by guilh on 27/06/2017.
- */
 @Entity
 @Table(name = "emprestimo")
 public class Emprestimo {
@@ -21,6 +17,8 @@ public class Emprestimo {
     private Date entrega;
     @OneToOne(mappedBy = "emprestimo", targetEntity = RealizaEmprestimo.class)
     private RealizaEmprestimo realizaEmprestimo;
+    @Column(nullable = false)
+    private boolean isRegistrado;
 
     public Emprestimo() {super();}
 
@@ -52,6 +50,22 @@ public class Emprestimo {
 
     public void setEntrega(Date entrega) {
         this.entrega = entrega;
+    }
+
+    public RealizaEmprestimo getRealizaEmprestimo() {
+        return realizaEmprestimo;
+    }
+
+    public void setRealizaEmprestimo(RealizaEmprestimo realizaEmprestimo) {
+        this.realizaEmprestimo = realizaEmprestimo;
+    }
+
+    public boolean isRegistrado() {
+        return isRegistrado;
+    }
+
+    public void setRegistrado(boolean registrado) {
+        isRegistrado = registrado;
     }
 
     @Override

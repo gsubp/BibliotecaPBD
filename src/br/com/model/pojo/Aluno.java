@@ -9,7 +9,7 @@ public class Aluno extends Usuario{
 		super();
 	}
 
-	public Aluno(Long id, int matricula, int cpf, String nome, String endereco, String email, String situacao,
+	public Aluno(Long id, int matricula, String cpf, String nome, String endereco, String email, String situacao,
 				 String senha) {
 		super(id, matricula, cpf, nome, endereco, email, situacao, senha);
 	}

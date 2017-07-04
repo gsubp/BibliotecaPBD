@@ -7,12 +7,11 @@ import javax.swing.*;
 /**
  * Created by guilh on 27/06/2017.
  */
-public class Cadastro extends JFrame{
+public class CadastroAluno extends JFrame{
     private JPanel rootPanel;
-    private JTabbedPane tabbedPane1;
     private JTextField snomeField;
     private JTextField nomeField;
-    private JTextField ruaField;
+    private JTextField logradouroField;
     private JTextField numeroField;
     private JTextField bairroField;
     private JTextField cepField;
@@ -26,11 +25,13 @@ public class Cadastro extends JFrame{
     private JButton limparButton;
     private JButton cadastrarButton;
     private JTextField matriculaField;
-    private JTextField textField1;
+    private JTextField senhaField;
 
-    public Cadastro() {
+    public CadastroAluno() {
+        pack();
+        setTitle("Cadastro de Alunos");
         setContentPane(rootPanel);
-        setSize(500,290);
+        setSize(525,500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // add action listeners
@@ -51,8 +52,8 @@ public class Cadastro extends JFrame{
         return nomeField;
     }
 
-    public JTextField getRuaField() {
-        return ruaField;
+    public JTextField getLogradouroField() {
+        return logradouroField;
     }
 
     public JTextField getNumeroField() {
@@ -105,5 +106,9 @@ public class Cadastro extends JFrame{
 
     public JTextField getMatriculaField() {
         return matriculaField;
+    }
+
+    public JTextField getSenhaField() {
+        return senhaField;
     }
 }

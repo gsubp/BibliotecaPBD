@@ -1,7 +1,7 @@
 package br.com.control;
 
 import br.com.model.dao.FachadaDAO;
-import br.com.view.Cadastro;
+import br.com.view.CadastroAluno;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,9 +9,9 @@ import java.awt.event.ActionListener;
  * Created by guilh on 27/06/2017.
  */
 public class CadastroControl implements ActionListener {
-    private Cadastro view;
+    private CadastroAluno view;
 
-    public CadastroControl(Cadastro view) {
+    public CadastroControl(CadastroAluno view) {
         this.view = view;
     }
 
@@ -27,14 +27,20 @@ public class CadastroControl implements ActionListener {
 
     private void cadastrar() {
         String nome = view.getNomeField().getText() + " " + view.getSnomeField().getText();
-        int cpf = Integer.parseInt(view.getCpfField().getText());
+        String cpf = view.getCpfField().getText();
         int matricula = Integer.parseInt(view.getMatriculaField().getText());
-        String endereco = view.getRuaField()+ ", " + view.getNumeroField().getText() + ", " +
+        String endereco = view.getLogradouroField().getText()+ ", " + view.getNumeroField().getText() + ", " +
                 view.getBairroField().getText() + ", " + view.getCepField().getText() + ", " +
                 view.getCidadeField().getText();
         String email = view.getEmailField().getText();
+        String senha = view.getSenhaField().getText();
 
-        FachadaDAO.cadastrarAluno(nome, cpf, matricula, endereco, email);
+        try{
+            FachadaDAO.cadastrarAluno(nome, cpf, matricula, endereco, email, senha);
+            limparCampos();
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
     }
 
     private void limparCampos() {
@@ -42,10 +48,12 @@ public class CadastroControl implements ActionListener {
         view.getSnomeField().setText("");
         view.getCpfField().setText("");
         view.getMatriculaField().setText("");
-        view.getRuaField().setText("");
+        view.getLogradouroField().setText("");
         view.getNumeroField().setText("");
         view.getBairroField().setText("");
         view.getCepField().setText("");
+        view.getSenhaField().setText("");
+        view.getCidadeField().setText("");
         //view.getEstadoBox();
         view.getEmailField().setText("");
         //view.getListTelefone();

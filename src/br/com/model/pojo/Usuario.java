@@ -19,10 +19,10 @@ public class Usuario {
 	@Column(nullable = false, unique = true)
 	private int matricula;
 	@Column(nullable = false, unique = true, length = 20)
-	private int cpf;
+	private String cpf;
 	@Column(nullable = false)
 	private String nome;
-	@Column(length = 50, nullable = false)
+	@Column(nullable = false)
 	private String endereco;
 	@Column(length = 50, nullable = false, unique = true)
 	private String email;
@@ -42,7 +42,7 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(Long id, int matricula, int cpf, String nome, String endereco, String email, String situacao, String senha) {
+	public Usuario(Long id, int matricula, String cpf, String nome, String endereco, String email, String situacao, String senha) {
 		super();
 		this.id = id;
 		this.matricula = matricula;
@@ -70,11 +70,11 @@ public class Usuario {
 		this.matricula = matricula;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
