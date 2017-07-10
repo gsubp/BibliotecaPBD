@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 /**
  * Created by guilh on 27/06/2017.
  */
-public class CadastroControl implements ActionListener {
+public class CadastroAlunoControl implements ActionListener {
     private CadastroAluno view;
 
-    public CadastroControl(CadastroAluno view) {
+    public CadastroAlunoControl(CadastroAluno view) {
         this.view = view;
     }
 

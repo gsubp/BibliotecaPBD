@@ -1,9 +1,6 @@
 package br.com.teste;
 
-import br.com.view.CadastroAluno;
-import br.com.view.CadastroFuncionario;
-import br.com.view.Login;
-import br.com.view.TelaFuncionario;
+import br.com.view.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,9 +11,6 @@ public class Teste {
 	    //EntityManagerFactory factory = Persistence.createEntityManagerFactory("bibliotecapu");
 		//EntityManager em = factory.createEntityManager();
 		new Login();
-		new CadastroAluno().setVisible(true);
-		new TelaFuncionario();
-		new CadastroFuncionario();
 	}
 
 }

@@ -2,26 +2,28 @@ package br.com.model.dao;
 
 import br.com.model.pojo.Aluno;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 
-public class AlunoDAO {
-    private static final String PERSISTENCE_UNIT_NAME = "bibliotecapu";
-    private static EntityManager manager = null;
+public class AlunoDAO extends DAO{
 
-    private static EntityManager getEntityManager() {
-        if (manager == null) {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-            manager = factory.createEntityManager();
-        }
-        return manager;
-    }
+
     public static void persist(Aluno aluno) {
-        EntityManager manager = getEntityManager();
-        manager.getTransaction().begin();
-        manager.persist(aluno);
-        manager.getTransaction().commit();
+        try{
+            getEntityManager().getTransaction().begin();
+            getEntityManager().persist(aluno);
+            getEntityManager().getTransaction().commit();
+        }catch (Exception e){
+            getEntityManager().getTransaction().rollback();
+        }
+    }
+
+    public static Aluno login(String login, String senha) {
+        getEntityManager().getTransaction().begin();
+        Query query = getEntityManager().createQuery("select aluno from Aluno aluno where cpf = ? and senha = ?");
+        query.setParameter(0, login);
+        query.setParameter(1, senha);
+        Aluno aluno = (Aluno) query.getSingleResult();
+        return aluno;
     }
 }

@@ -12,7 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Usuario {
+public abstract class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

@@ -1,5 +1,7 @@
 package br.com.view;
 
+import br.com.control.TelaFuncionarioControl;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +16,6 @@ public class TelaFuncionario extends JFrame implements ActionListener{
     private JButton novoProfessorButton;
     private JButton novoLivroButton;
     private JButton buscasButton;
-    private JButton alunoButton;
-    private JButton professorButton;
-    private JButton livroButton;
-    private JButton emprestimoButton;
-    private JButton funcionárioButton;
-    private JButton reservaButton;
     private JButton registrarButton;
     private JButton emprestimosButton;
     private JButton reservasButton;
@@ -27,10 +23,13 @@ public class TelaFuncionario extends JFrame implements ActionListener{
     private JButton novoButton;
     private JButton ajudaButton;
     private JButton novoFuncionárioButton;
+    private JButton sairButton;
+    private JLabel funcionarioLabel;
 
-    public TelaFuncionario(){
+    public TelaFuncionario(String nomeFuncionario){
         pack();
         setContentPane(rootPanel);
+        funcionarioLabel.setText(nomeFuncionario);
         setSize(600,400);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -39,6 +38,10 @@ public class TelaFuncionario extends JFrame implements ActionListener{
         buscasButton.addActionListener(this);
         registrarButton.addActionListener(this);
         relatóriosButton.addActionListener(this);
+
+        novoAlunoButton.addActionListener(new TelaFuncionarioControl(this));
+        novoProfessorButton.addActionListener(new TelaFuncionarioControl(this));
+        buscasButton.addActionListener(new TelaFuncionarioControl(this));
     }
 
     public JButton getCadastrosButton() {
@@ -59,30 +62,6 @@ public class TelaFuncionario extends JFrame implements ActionListener{
 
     public JButton getBuscasButton() {
         return buscasButton;
-    }
-
-    public JButton getAlunoButton() {
-        return alunoButton;
-    }
-
-    public JButton getProfessorButton() {
-        return professorButton;
-    }
-
-    public JButton getLivroButton() {
-        return livroButton;
-    }
-
-    public JButton getEmprestimoButton() {
-        return emprestimoButton;
-    }
-
-    public JButton getFuncionárioButton() {
-        return funcionárioButton;
-    }
-
-    public JButton getReservaButton() {
-        return reservaButton;
     }
 
     public JButton getRegistrarButton() {
@@ -127,7 +106,6 @@ public class TelaFuncionario extends JFrame implements ActionListener{
     }
 
     public void showCadastros(){
-        hideBuscas();
         hideRelatorios();
         hideRegistrar();
         novoAlunoButton.setVisible(true);
@@ -145,24 +123,10 @@ public class TelaFuncionario extends JFrame implements ActionListener{
         hideCadastros();
         hideRegistrar();
         hideRelatorios();
-        alunoButton.setVisible(true);
-        professorButton.setVisible(true);
-        funcionárioButton.setVisible(true);
-        livroButton.setVisible(true);
-        emprestimoButton.setVisible(true);
-        reservaButton.setVisible(true);
     }
-    public void hideBuscas(){
-        alunoButton.setVisible(false);
-        professorButton.setVisible(false);
-        funcionárioButton.setVisible(false);
-        livroButton.setVisible(false);
-        emprestimoButton.setVisible(false);
-        reservaButton.setVisible(false);
-    }
+
     public void showRegistrar(){
         hideCadastros();
-        hideBuscas();
         hideRelatorios();
         emprestimosButton.setVisible(true);
         reservasButton.setVisible(true);
@@ -173,7 +137,6 @@ public class TelaFuncionario extends JFrame implements ActionListener{
     }
     public void showRelatorios(){
         hideCadastros();
-        hideBuscas();
         hideRegistrar();
         novoButton.setVisible(true);
     }

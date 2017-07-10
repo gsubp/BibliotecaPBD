@@ -1,12 +1,9 @@
 package br.com.view;
 
-import br.com.control.CadastroControl;
+import br.com.control.CadastroAlunoControl;
 
 import javax.swing.*;
 
-/**
- * Created by guilh on 27/06/2017.
- */
 public class CadastroAluno extends JFrame{
     private JPanel rootPanel;
     private JTextField snomeField;
@@ -35,13 +32,15 @@ public class CadastroAluno extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // add action listeners
-        addButton.addActionListener(new CadastroControl(this));
-        limparButton.addActionListener(new CadastroControl(this));
-        cadastrarButton.addActionListener(new CadastroControl(this));
+        addButton.addActionListener(new CadastroAlunoControl(this));
+        limparButton.addActionListener(new CadastroAlunoControl(this));
+        cadastrarButton.addActionListener(new CadastroAlunoControl(this));
 
         //  definindo model para list telefones
         DefaultListModel<String> model = new DefaultListModel<>();
         listTelefone.setModel(model);
+
+        setVisible(true);
     }
 
     public JTextField getSnomeField() {

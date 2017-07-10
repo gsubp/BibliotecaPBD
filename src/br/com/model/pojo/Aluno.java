@@ -2,8 +2,10 @@ package br.com.model.pojo;
 
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "aluno")
 public class Aluno extends Usuario{
 	public Aluno() {
 		super();

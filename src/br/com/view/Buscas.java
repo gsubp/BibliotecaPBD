@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Created by guilh on 04/07/2017.
  */
-public class Buscas {
+public class Buscas extends JFrame{
     private JPanel rootPanel;
     private JTabbedPane tabbedPane1;
     private JTextField cpfField;
@@ -25,4 +25,24 @@ public class Buscas {
     private JTextField textField9;
     private JList list1;
     private JList list2;
+    private JRadioButton tituloRadioButton;
+    private JRadioButton radioButton2;
+    private JRadioButton alunoRadioButton;
+    private JRadioButton professorRadioButton;
+    private JTextField textField10;
+    private JButton buscarButton2;
+    private JList list3;
+    private JRadioButton alunoRadioButton1;
+    private JRadioButton professorRadioButton1;
+    private JTextField textField11;
+    private JButton buscarButton3;
+    private JList list4;
+
+    public Buscas(){
+        pack();
+        setSize(600,400);
+        setContentPane(rootPanel);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
 }

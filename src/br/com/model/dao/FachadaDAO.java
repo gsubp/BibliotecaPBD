@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import br.com.model.pojo.Aluno;
+import br.com.model.pojo.Funcionario;
 import br.com.model.pojo.Professor;
 import br.com.model.pojo.Telefone;
 
@@ -22,5 +23,17 @@ public class FachadaDAO {
         aluno.setSituacao("Regularizado");
 
         AlunoDAO.persist(aluno);
+    }
+
+    public static Aluno loginAluno(String login, String senha) {
+       return AlunoDAO.login(login, senha);
+    }
+
+    public static Professor loginProfessor(String login, String senha) {
+        return ProfessorDAO.login(login,senha);
+    }
+
+    public static Funcionario loginFuncionario(String login, String senha) {
+        return FuncionarioDAO.login(login,senha);
     }
 }
