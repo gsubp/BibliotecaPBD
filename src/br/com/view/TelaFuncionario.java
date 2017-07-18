@@ -41,6 +41,7 @@ public class TelaFuncionario extends JFrame{
         novoFuncionárioButton.addActionListener(new TelaFuncionarioControl(this));
         novoDepartamentoButton.addActionListener(new TelaFuncionarioControl(this));
         novoCursoButton.addActionListener(new TelaFuncionarioControl(this));
+        novoLivroButton.addActionListener(new TelaFuncionarioControl(this));
     }
 
     public JButton getNovoAlunoButton() {

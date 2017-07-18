@@ -22,7 +22,7 @@ public class FachadaDAO {
         aluno.setSituacao("Regularizado");
         for(String s : telefones){
             Telefone telefone = new Telefone();
-            telefone.setUsuario(aluno);
+            telefone.setTelefone(s);
             telefoneList.add(telefone);
         }
         aluno.setTelefones(telefoneList);
@@ -89,7 +89,7 @@ public class FachadaDAO {
         livro.setAno(ano);
         for(int i = 0; i < exemplares; i++) {
             Exemplar exemplar = new Exemplar();
-            exemplar.setLivro(livro);
+            exemplar.setSituacao("Disponível");
             exemplaresList.add(exemplar);
         }
         for(String s : autoresList){
@@ -116,7 +116,6 @@ public class FachadaDAO {
         professor.setSituacao("Regularizado");
         for(String s : telefones){
             Telefone telefone = new Telefone();
-            telefone.setUsuario(professor);
             telefoneListf.add(telefone);
         }
         professor.setTelefones(telefoneListf);

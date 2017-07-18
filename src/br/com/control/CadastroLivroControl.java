@@ -22,7 +22,6 @@ public class CadastroLivroControl implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == view.getAddButton()){
             String autor = view.getAutorField().getText();
-            //String texto = view.getAutoresList().getText();
             view.getLista().add(autor);
             view.getAutorField().setText("");
             StringBuilder builder = new StringBuilder();

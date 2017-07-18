@@ -17,13 +17,15 @@ public class LivroDAO extends DAO{
         Livro livro = (Livro) object;
         ExemplarDAO exemplarDAO = new ExemplarDAO();
         AutorDAO autorDAO = new AutorDAO();
-        for(Exemplar exemplar : livro.getExemplares()){
-            exemplar.setLivro(livro);
-            exemplarDAO.persist(exemplar);
-        }
+
         for(Autor autor : livro.getAutores()){
             autor.setLivro(livro);
             autorDAO.persist(autor);
+        }
+
+        for(Exemplar exemplar : livro.getExemplares()){
+            exemplar.setLivro(livro);
+            exemplarDAO.persist(exemplar);
         }
     }
 }
