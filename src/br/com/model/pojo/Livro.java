@@ -2,22 +2,15 @@ package br.com.model.pojo;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "livro")
 public class Livro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique = true, nullable= false)
-	private int codigo;
+	@Column(length = 10, unique = true, nullable= false)
+	private String codigo;
 	@Column(nullable = false, length = 50)
 	private String titulo;
 	@Column(length = 50, nullable = false)
@@ -26,18 +19,15 @@ public class Livro {
 	private String edicao;
 	@Column(nullable = false)
 	private int ano;
-	@Column(nullable = false)
-	private int exemplares;
-	@Column(nullable = false)
-	private String situacao;
 	@OneToMany(mappedBy = "livro", targetEntity = Autor.class)
 	private List<Autor> autores;
+	@OneToMany(mappedBy = "livro", targetEntity = Exemplar.class)
+	private List<Exemplar> exemplares;
 	
 	public Livro() {
 		super();
 	}
-	public Livro(Long id, int codigo, String titulo, String editora, String edicao, int ano, int exemplares,
-			String situacao) {
+	public Livro(Long id, String codigo, String titulo, String editora, String edicao, int ano) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -45,8 +35,6 @@ public class Livro {
 		this.editora = editora;
 		this.edicao = edicao;
 		this.ano = ano;
-		this.exemplares = exemplares;
-		this.situacao = situacao;
 	}
 	public Long getId() {
 		return id;
@@ -54,10 +42,10 @@ public class Livro {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 	public String getTitulo() {
@@ -84,25 +72,22 @@ public class Livro {
 	public void setAno(int ano) {
 		this.ano = ano;
 	}
-	public int getExemplares() {
-		return exemplares;
-	}
-	public void setExemplares(int exemplares) {
-		this.exemplares = exemplares;
-	}
-	public String getSituacao() {
-		return situacao;
-	}
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
 	public List<Autor> getAutores() {
 		return autores;
 	}
 	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
-	@Override
+
+    public List<Exemplar> getExemplares() {
+        return exemplares;
+    }
+
+    public void setExemplares(List<Exemplar> exemplaresList) {
+        this.exemplares = exemplaresList;
+    }
+
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -128,7 +113,7 @@ public class Livro {
 	@Override
 	public String toString() {
 		return "Livro [id=" + id + ", codigo=" + codigo + ", titulo=" + titulo + ", editora=" + editora + ", edicao="
-				+ edicao + ", ano=" + ano + ", exemplares=" + exemplares + ", situacao=" + situacao + "]";
+				+ edicao + ", ano=" + ano + "]";
 	}
 	
 	

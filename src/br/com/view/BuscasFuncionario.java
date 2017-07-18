@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Created by guilh on 04/07/2017.
  */
-public class Buscas extends JFrame{
+public class BuscasFuncionario extends JFrame{
     private JPanel rootPanel;
     private JTabbedPane tabbedPane1;
     private JTextField cpfField;
@@ -38,11 +38,11 @@ public class Buscas extends JFrame{
     private JButton buscarButton3;
     private JList list4;
 
-    public Buscas(){
+    public BuscasFuncionario(){
         pack();
         setSize(600,400);
         setContentPane(rootPanel);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 }

@@ -4,11 +4,9 @@ import br.com.model.dao.FachadaDAO;
 import br.com.model.pojo.Aluno;
 import br.com.model.pojo.Funcionario;
 import br.com.model.pojo.Professor;
-import br.com.view.Login;
-import br.com.view.TelaAluno;
-import br.com.view.TelaFuncionario;
-import br.com.view.TelaProfessor;
+import br.com.view.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +19,7 @@ public class LoginControl implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // eventos da tela de login
         if(e.getSource() == view.getLoginButton()){
             String login = view.getLoginField().getText();
             String senha = view.getSenhaField().getText();
@@ -30,6 +29,8 @@ public class LoginControl implements ActionListener {
                     new TelaAluno(aluno.getNome());
                     view.dispose();
                 }
+                else
+                    JOptionPane.showMessageDialog(null,"Aluno não cadastrado!");
             }
             if(view.getComboBox().getSelectedIndex() == 1) {
                 Professor professor = FachadaDAO.loginProfessor(login, senha);
@@ -37,6 +38,8 @@ public class LoginControl implements ActionListener {
                     new TelaProfessor(professor.getNome());
                     view.dispose();
                 }
+                else
+                    JOptionPane.showMessageDialog(null,"Professor não cadastrado!");
             }
             if(view.getComboBox().getSelectedIndex() == 2) {
                 Funcionario funcionario =  FachadaDAO.loginFuncionario(login, senha);
@@ -44,7 +47,14 @@ public class LoginControl implements ActionListener {
                     new TelaFuncionario(funcionario.getNome());
                     view.dispose();
                 }
+                else
+                    JOptionPane.showMessageDialog(null,"Funcionário não cadastrado!");
             }
         }
+
+        if(e.getSource() == view.getPrimeiroAcessoButton())
+            new PrimeiroAcesso();
+        if(e.getSource() == view.getCancelarButton())
+            System.exit(0);
     }
 }

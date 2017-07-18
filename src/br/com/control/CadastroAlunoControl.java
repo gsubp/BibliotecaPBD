@@ -31,7 +31,7 @@ public class CadastroAlunoControl implements ActionListener {
         int matricula = Integer.parseInt(view.getMatriculaField().getText());
         String endereco = view.getLogradouroField().getText()+ ", " + view.getNumeroField().getText() + ", " +
                 view.getBairroField().getText() + ", " + view.getCepField().getText() + ", " +
-                view.getCidadeField().getText();
+                view.getCidadeField().getText() + " - " + view.getEstadoBox().getSelectedItem().toString();
         String email = view.getEmailField().getText();
         String senha = view.getSenhaField().getText();
 
@@ -54,9 +54,9 @@ public class CadastroAlunoControl implements ActionListener {
         view.getCepField().setText("");
         view.getSenhaField().setText("");
         view.getCidadeField().setText("");
-        //view.getEstadoBox();
+        view.getEstadoBox().setSelectedIndex(0);
         view.getEmailField().setText("");
-        //view.getListTelefone();
+        view.getListTelefone();
     }
 
     private void addTelefone() {

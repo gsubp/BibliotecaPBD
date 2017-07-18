@@ -1,9 +1,6 @@
 package br.com.control;
 
-import br.com.view.Buscas;
-import br.com.view.CadastroAluno;
-import br.com.view.CadastroProfessor;
-import br.com.view.TelaFuncionario;
+import br.com.view.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,9 +19,13 @@ public class TelaFuncionarioControl implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == view.getNovoAlunoButton())
             new CadastroAluno();
-        if(e.getSource() == view.getBuscasButton())
-            new Buscas();
         if(e.getSource() == view.getNovoProfessorButton())
             new CadastroProfessor();
+        if(e.getSource() == view.getNovoFuncionárioButton())
+            new CadastroFuncionario();
+        if(e.getSource() == view.getNovoDepartamentoButton())
+            new CadastroDepartamento();
+        if(e.getSource() == view.getNovoCursoButton())
+            new CadastroCurso();
     }
 }

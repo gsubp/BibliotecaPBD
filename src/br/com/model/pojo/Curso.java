@@ -10,15 +10,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "curso")
 public class Curso {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 50, nullable = false)
 	private String nome;
-	@JoinColumn(name = "id_departmanto")
     @ManyToOne
+	@JoinColumn(name = "id_departmanto")
 	private Departamento departamento;
 	
 	public Curso() {

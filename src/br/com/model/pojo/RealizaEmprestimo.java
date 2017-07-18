@@ -15,8 +15,8 @@ public class RealizaEmprestimo {
     @JoinColumn(name = "id_emprestimo", nullable = false)
     private Emprestimo emprestimo;
     @OneToOne
-    @JoinColumn(name = "id_livro", nullable = false)
-    private Livro livro;
+    @JoinColumn(name = "id_exemplar", nullable = false)
+    private Exemplar exemplar;
     @OneToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
@@ -26,10 +26,10 @@ public class RealizaEmprestimo {
 
     public RealizaEmprestimo(){ super(); }
 
-    public RealizaEmprestimo(Long id, Emprestimo emprestimo, Livro livro, Usuario usuario, Funcionario funcionario) {
+    public RealizaEmprestimo(Long id, Emprestimo emprestimo, Exemplar exemplar, Usuario usuario, Funcionario funcionario) {
         this.id = id;
         this.emprestimo = emprestimo;
-        this.livro = livro;
+        this.exemplar = exemplar;
         this.usuario = usuario;
         this.funcionario = funcionario;
     }
@@ -52,12 +52,12 @@ public class RealizaEmprestimo {
         this.emprestimo = emprestimo;
     }
 
-    public Livro getLivro() {
-        return livro;
+    public Exemplar getExemplar() {
+        return exemplar;
     }
 
-    public void setLivro(Livro livro) {
-        this.livro = livro;
+    public void setExemplar(Exemplar livro) {
+        this.exemplar = livro;
     }
 
     public Usuario getUsuario() {
@@ -96,7 +96,7 @@ public class RealizaEmprestimo {
         return "RealizaEmprestimo{" +
                 "id=" + id +
                 ", emprestimo=" + emprestimo +
-                ", livro=" + livro +
+                ", livro=" + exemplar +
                 ", usuario=" + usuario +
                 ", funcionario=" + funcionario +
                 '}';

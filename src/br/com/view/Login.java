@@ -11,15 +11,20 @@ public class Login extends JFrame{
     private JButton loginButton;
     private JButton cancelarButton;
     private JComboBox comboBox;
+    private JButton primeiroAcessoButton;
 
     public Login(){
         pack();
         setContentPane(rootPanel);
         setSize(300,200);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
+
 
         loginButton.addActionListener(new LoginControl(this));
+        primeiroAcessoButton.addActionListener(new LoginControl(this));
+        cancelarButton.addActionListener(new LoginControl(this));
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     public JTextField getLoginField() {
@@ -41,4 +46,9 @@ public class Login extends JFrame{
     public JComboBox getComboBox() {
         return comboBox;
     }
+
+    public JButton getPrimeiroAcessoButton() {
+        return primeiroAcessoButton;
+    }
+
 }

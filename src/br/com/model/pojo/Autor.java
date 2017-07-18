@@ -17,8 +17,8 @@ public class Autor {
 	private Long id;
 	@Column(nullable = false, length = 50)
 	private String autor;
-	@JoinColumn(name = "id_livro")
 	@ManyToOne
+	@JoinColumn(name = "id_livro")
 	private Livro livro;
 	
 	public Autor() {

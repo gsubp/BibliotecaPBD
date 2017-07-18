@@ -29,7 +29,12 @@ public class CadastroAluno extends JFrame{
         setTitle("Cadastro de Alunos");
         setContentPane(rootPanel);
         setSize(525,500);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(new String[]{ "AC", "AL", "AM", "AP", "BA",
+                "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS",
+                "SC", "SE", "SP", "TO" });
+        estadoBox.setModel(model);
 
         // add action listeners
         addButton.addActionListener(new CadastroAlunoControl(this));
@@ -37,8 +42,8 @@ public class CadastroAluno extends JFrame{
         cadastrarButton.addActionListener(new CadastroAlunoControl(this));
 
         //  definindo model para list telefones
-        DefaultListModel<String> model = new DefaultListModel<>();
-        listTelefone.setModel(model);
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        listTelefone.setModel(listModel);
 
         setVisible(true);
     }

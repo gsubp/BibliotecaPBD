@@ -6,46 +6,41 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by guilh on 04/07/2017.
- */
-public class TelaFuncionario extends JFrame implements ActionListener{
+public class TelaFuncionario extends JFrame{
     private JPanel rootPanel;
-    private JButton cadastrosButton;
     private JButton novoAlunoButton;
     private JButton novoProfessorButton;
     private JButton novoLivroButton;
-    private JButton buscasButton;
     private JButton registrarButton;
     private JButton emprestimosButton;
     private JButton reservasButton;
     private JButton relatóriosButton;
     private JButton novoButton;
-    private JButton ajudaButton;
     private JButton novoFuncionárioButton;
-    private JButton sairButton;
     private JLabel funcionarioLabel;
+    private JButton novoDepartamentoButton;
+    private JButton sairButton;
+    private JButton novoCursoButton;
+    private JButton livroButton;
+    private JButton departamentoButton;
+    private JButton cursoButton;
+    private JButton funcionárioButton;
+    private JButton alunoButton;
+    private JButton professorButton;
 
     public TelaFuncionario(String nomeFuncionario){
         pack();
         setContentPane(rootPanel);
         funcionarioLabel.setText(nomeFuncionario);
-        setSize(600,400);
+        setSize(650,300);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        cadastrosButton.addActionListener(this);
-        buscasButton.addActionListener(this);
-        registrarButton.addActionListener(this);
-        relatóriosButton.addActionListener(this);
-
         novoAlunoButton.addActionListener(new TelaFuncionarioControl(this));
         novoProfessorButton.addActionListener(new TelaFuncionarioControl(this));
-        buscasButton.addActionListener(new TelaFuncionarioControl(this));
-    }
-
-    public JButton getCadastrosButton() {
-        return cadastrosButton;
+        novoFuncionárioButton.addActionListener(new TelaFuncionarioControl(this));
+        novoDepartamentoButton.addActionListener(new TelaFuncionarioControl(this));
+        novoCursoButton.addActionListener(new TelaFuncionarioControl(this));
     }
 
     public JButton getNovoAlunoButton() {
@@ -58,10 +53,6 @@ public class TelaFuncionario extends JFrame implements ActionListener{
 
     public JButton getNovoLivroButton() {
         return novoLivroButton;
-    }
-
-    public JButton getBuscasButton() {
-        return buscasButton;
     }
 
     public JButton getRegistrarButton() {
@@ -84,63 +75,19 @@ public class TelaFuncionario extends JFrame implements ActionListener{
         return novoButton;
     }
 
-    public JButton getAjudaButton() {
-        return ajudaButton;
-    }
-
     public JButton getNovoFuncionárioButton() {
         return novoFuncionárioButton;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == cadastrosButton)
-            showCadastros();
-        if(e.getSource() == buscasButton)
-            showBuscas();
-        if(e.getSource() == registrarButton)
-            showRegistrar();
-        if(e.getSource() == relatóriosButton)
-            showRelatorios();
-
+    public JLabel getFuncionarioLabel() {
+        return funcionarioLabel;
     }
 
-    public void showCadastros(){
-        hideRelatorios();
-        hideRegistrar();
-        novoAlunoButton.setVisible(true);
-        novoProfessorButton.setVisible(true);
-        novoFuncionárioButton.setVisible(true);
-        novoLivroButton.setVisible(true);
-    }
-    public void hideCadastros(){
-        novoAlunoButton.setVisible(false);
-        novoProfessorButton.setVisible(false);
-        novoFuncionárioButton.setVisible(false);
-        novoLivroButton.setVisible(false);
-    }
-    public void showBuscas(){
-        hideCadastros();
-        hideRegistrar();
-        hideRelatorios();
+    public JButton getNovoDepartamentoButton() {
+        return novoDepartamentoButton;
     }
 
-    public void showRegistrar(){
-        hideCadastros();
-        hideRelatorios();
-        emprestimosButton.setVisible(true);
-        reservasButton.setVisible(true);
-    }
-    public void hideRegistrar(){
-        emprestimosButton.setVisible(false);
-        reservasButton.setVisible(false);
-    }
-    public void showRelatorios(){
-        hideCadastros();
-        hideRegistrar();
-        novoButton.setVisible(true);
-    }
-    public void hideRelatorios(){
-        novoButton.setVisible(false);
+    public JButton getNovoCursoButton() {
+        return novoCursoButton;
     }
 }

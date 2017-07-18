@@ -4,12 +4,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- * Created by guilh on 07/07/2017.
- */
 public  abstract class DAO {
     private static final String PERSISTENCE_UNIT_NAME = "bibliotecapu";
-    private static EntityManager manager = null;
+    private static EntityManager manager;
 
     public static EntityManager getEntityManager() {
         if (manager == null) {
@@ -17,5 +14,27 @@ public  abstract class DAO {
             manager = factory.createEntityManager();
         }
         return manager;
+    }
+
+    public void persist(Object object){
+        try{
+            getEntityManager().getTransaction().begin();
+            getEntityManager().persist(object);
+            getEntityManager().getTransaction().commit();
+        }catch (Exception e){
+            getEntityManager().getTransaction().rollback();
+        }
+    }
+
+    public void merge(Object object){
+        try{
+            getEntityManager().getTransaction().begin();
+            getEntityManager().merge(object);
+            getEntityManager().getTransaction().commit();
+        }catch (Exception e){
+            getEntityManager().getTransaction().rollback();
+        }finally {
+            getEntityManager().close();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package br.com.teste;
 
+import br.com.model.dao.LivroDAO;
 import br.com.view.*;
 
 import javax.persistence.EntityManager;

@@ -23,7 +23,7 @@ public class CadastroFuncionario extends JFrame{
         setSize(500,175);
 
         cadasdtrarButton.addActionListener(new CadasdtroFuncionarioControl(this));
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
 
     }
