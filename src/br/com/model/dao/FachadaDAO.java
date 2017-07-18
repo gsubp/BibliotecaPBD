@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FachadaDAO {
-    public static void cadastrarAluno(String nome, String cpf, int matricula, String endereco, String email, String senha) {
+    public static void cadastrarAluno(String nome, String cpf, int matricula, String endereco, String email, String senha, List<String> telefones) {
         Aluno aluno = new Aluno();
+        List<Telefone> telefoneList = new ArrayList<>();
         aluno.setNome(nome);
         aluno.setCpf(cpf);
         aluno.setMatricula(matricula);
@@ -19,7 +20,12 @@ public class FachadaDAO {
         aluno.setEmail(email);
         aluno.setSenha(senha);
         aluno.setSituacao("Regularizado");
-
+        for(String s : telefones){
+            Telefone telefone = new Telefone();
+            telefone.setUsuario(aluno);
+            telefoneList.add(telefone);
+        }
+        aluno.setTelefones(telefoneList);
         AlunoDAO dao = new AlunoDAO();
         dao.persist(aluno);
     }

@@ -3,6 +3,8 @@ package br.com.view;
 import br.com.control.CadastroAlunoControl;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CadastroAluno extends JFrame{
     private JPanel rootPanel;
@@ -16,13 +18,14 @@ public class CadastroAluno extends JFrame{
     private JComboBox estadoBox;
     private JTextField emailField;
     private JButton addButton;
-    private JList listTelefone;
+    private JTextArea listTelefone;
     private JTextField cpfField;
     private JTextField telefoneField;
-    private JButton limparButton;
+    private JButton cancelarButton;
     private JButton cadastrarButton;
     private JTextField matriculaField;
     private JTextField senhaField;
+    private List<String> lista;
 
     public CadastroAluno() {
         pack();
@@ -31,6 +34,8 @@ public class CadastroAluno extends JFrame{
         setSize(525,500);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+        lista = new ArrayList<>();
+
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(new String[]{ "AC", "AL", "AM", "AP", "BA",
                 "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS",
                 "SC", "SE", "SP", "TO" });
@@ -38,12 +43,8 @@ public class CadastroAluno extends JFrame{
 
         // add action listeners
         addButton.addActionListener(new CadastroAlunoControl(this));
-        limparButton.addActionListener(new CadastroAlunoControl(this));
+        cancelarButton.addActionListener(new CadastroAlunoControl(this));
         cadastrarButton.addActionListener(new CadastroAlunoControl(this));
-
-        //  definindo model para list telefones
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        listTelefone.setModel(listModel);
 
         setVisible(true);
     }
@@ -88,7 +89,7 @@ public class CadastroAluno extends JFrame{
         return addButton;
     }
 
-    public JList getListTelefone() {
+    public JTextArea getListTelefone() {
         return listTelefone;
     }
 
@@ -100,8 +101,8 @@ public class CadastroAluno extends JFrame{
         return telefoneField;
     }
 
-    public JButton getLimparButton() {
-        return limparButton;
+    public JButton getCancelarButton() {
+        return cancelarButton;
     }
 
     public JButton getCadastrarButton() {
@@ -114,5 +115,9 @@ public class CadastroAluno extends JFrame{
 
     public JTextField getSenhaField() {
         return senhaField;
+    }
+
+    public List<String> getLista() {
+        return lista;
     }
 }

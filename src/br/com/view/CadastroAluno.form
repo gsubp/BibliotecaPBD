@@ -234,14 +234,6 @@
                   <text value="Telefones"/>
                 </properties>
               </component>
-              <component id="2c4a9" class="javax.swing.JList" binding="listTelefone">
-                <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
               <hspacer id="fda17">
                 <constraints>
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -263,6 +255,19 @@
                   <text value="Email"/>
                 </properties>
               </component>
+              <scrollpane id="79802">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="f3573" class="javax.swing.JTextArea" binding="listTelefone">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </grid>
           <component id="de246" class="javax.swing.JPasswordField" binding="senhaField">
@@ -277,12 +282,12 @@
           </component>
         </children>
       </grid>
-      <component id="6e4f2" class="javax.swing.JButton" binding="limparButton" default-binding="true">
+      <component id="6e4f2" class="javax.swing.JButton" binding="cancelarButton">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Limpar"/>
+          <text value="Cancelar"/>
         </properties>
       </component>
       <component id="3b605" class="javax.swing.JButton" binding="cadastrarButton">

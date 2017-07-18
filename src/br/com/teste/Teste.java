@@ -12,6 +12,7 @@ public class Teste {
 	    //EntityManagerFactory factory = Persistence.createEntityManagerFactory("bibliotecapu");
 		//EntityManager em = factory.createEntityManager();
 		new Login();
+		new CadastroAluno();
 	}
 
 }

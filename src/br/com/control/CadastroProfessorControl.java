@@ -20,17 +20,14 @@ public class CadastroProfessorControl implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == view.getAddButton()){
-            if(e.getSource() == view.getAddButton()) {
-                String autor = view.getTelefoneField().getText();
-                //String texto = view.getAutoresList().getText();
-                view.getLista().add(autor);
-                view.getTelefoneField().setText("");
-                StringBuilder builder = new StringBuilder();
-                for (String s : view.getLista())
-                    builder.append(s + "\n");
-                view.getListTelefone().setText(builder.toString());
-            }
+        if(e.getSource() == view.getAddButton()) {
+            String telefone = view.getTelefoneField().getText();
+            view.getLista().add(telefone);
+            view.getTelefoneField().setText("");
+            StringBuilder builder = new StringBuilder();
+            for (String s : view.getLista())
+                builder.append(s + "\n");
+            view.getListTelefone().setText(builder.toString());
         }
         if(e.getSource() == view.getCadastrarButton()){
             String nome = view.getNomeField().getText() + " " + view.getSnomeField().getText();
