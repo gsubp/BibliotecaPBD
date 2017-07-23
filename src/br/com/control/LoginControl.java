@@ -26,7 +26,7 @@ public class LoginControl implements ActionListener {
             if(view.getComboBox().getSelectedIndex() == 0) {
                 Aluno aluno = FachadaDAO.loginAluno(login, senha);
                 if(aluno != null) {
-                    new TelaAluno(aluno.getNome());
+                    new TelaAluno(aluno);
                     view.dispose();
                 }
                 else

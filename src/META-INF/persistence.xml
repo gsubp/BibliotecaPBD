@@ -11,7 +11,7 @@
            <property name="hibernate.archive.autodetection" value="class" />
            <!-- dados da conexao -->
            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-		   <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/teste" />
+		   <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/bibliotecapbd" />
 		   <property name="javax.persistence.jdbc.user" value="root" />
 		   <property name="javax.persistence.jdbc.password" value="root" />
 		

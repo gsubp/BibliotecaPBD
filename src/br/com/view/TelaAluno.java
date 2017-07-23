@@ -1,5 +1,8 @@
 package br.com.view;
 
+import br.com.control.TelaAlunoControl;
+import br.com.model.pojo.Aluno;
+
 import javax.swing.*;
 
 public class TelaAluno extends JFrame{
@@ -7,25 +10,29 @@ public class TelaAluno extends JFrame{
     private JButton buscasButton;
     private JButton emprestimosButton;
     private JButton reservasButton;
-    private JButton devoluçãoButton;
+    private JButton devolucaoButton;
     private JButton livroButton;
     private JButton novoEmprestimoButton;
     private JButton verEmprestimosButton;
     private JButton novaReservaButton;
     private JButton verReservasButton;
-    private JButton realizarDevoluçãoButton;
-    private JButton verDevoluçãoButton;
+    private JButton realizarDevolucaoButton;
+    private JButton verDevolucaoButton;
     private JButton sairButton;
     private JLabel alunoLabel;
+    private Aluno aluno;
 
-    public TelaAluno(String nomeAluno){
+    public TelaAluno(Aluno aluno){
         pack();
         setContentPane(rootPanel);
-        alunoLabel.setText(nomeAluno);
+        this.aluno = aluno;
+        alunoLabel.setText(aluno.getNome());
         setSize(550,200);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+        livroButton.addActionListener(new TelaAlunoControl(this));
+        novoEmprestimoButton.addActionListener(new TelaAlunoControl(this));
     }
 
     public JButton getBuscasButton() {
@@ -40,8 +47,8 @@ public class TelaAluno extends JFrame{
         return reservasButton;
     }
 
-    public JButton getDevoluçãoButton() {
-        return devoluçãoButton;
+    public JButton getDevolucaoButton() {
+        return devolucaoButton;
     }
 
     public JButton getLivroButton() {
@@ -64,15 +71,19 @@ public class TelaAluno extends JFrame{
         return verReservasButton;
     }
 
-    public JButton getRealizarDevoluçãoButton() {
-        return realizarDevoluçãoButton;
+    public JButton getRealizarDevolucaoButton() {
+        return realizarDevolucaoButton;
     }
 
-    public JButton getVerDevoluçãoButton() {
-        return verDevoluçãoButton;
+    public JButton getVerDevolucaoButton() {
+        return verDevolucaoButton;
     }
 
     public JButton getSairButton() {
         return sairButton;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
     }
 }

@@ -28,11 +28,7 @@ public abstract class Usuario {
 	private String email;
 	@Column(length = 20, nullable = false)
 	private String situacao;
-
-
-
     @Column(nullable = false, length = 20)
-
 	private String senha;
 	@OneToMany(mappedBy = "usuario", targetEntity = Telefone.class)
 	private List<Telefone> telefones;

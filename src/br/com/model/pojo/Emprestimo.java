@@ -15,9 +15,9 @@ public class Emprestimo {
     @Column(name = "data_entrega", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date entrega;
-    @OneToOne(mappedBy = "emprestimo", targetEntity = RealizaEmprestimo.class)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "emprestimo", targetEntity = RealizaEmprestimo.class)
     private RealizaEmprestimo realizaEmprestimo;
-    @Column(nullable = false)
+    @Column
     private boolean isRegistrado;
 
     public Emprestimo() {super();}

@@ -1,13 +1,9 @@
 package br.com.model.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import br.com.model.pojo.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.util.*;
 
 public class FachadaDAO {
     public static void cadastrarAluno(String nome, String cpf, int matricula, String endereco, String email, String senha, List<String> telefones) {
@@ -121,5 +117,54 @@ public class FachadaDAO {
         professor.setTelefones(telefoneListf);
         ProfessorDAO dao = new ProfessorDAO();
         dao.persist(professor);
+    }
+
+    public static List<Livro> buscaLivroFiltro(String filtro, String busca) {
+        LivroDAO dao = new LivroDAO();
+        List<Livro> livros = null;
+        if(filtro.equals("Palavra-chave"))
+            livros = dao.findByPalavraChave(busca);
+        if(filtro.equals("Titulo"))
+            livros = dao.findByTitulo(busca);
+        if(filtro.equals("Autor"))
+            livros = dao.findByAutor(busca);
+        if(filtro.equals("Editora"))
+            livros = dao.findByEditora(busca);
+        if(filtro.equals("Ano"))
+            livros = dao.findByAno(busca);
+        return livros;
+    }
+
+    public static List<Livro> listarLivros() {
+        return new LivroDAO().getLivros();
+    }
+
+    public static int verificaEmprestimosAluno(Usuario usuario) {
+        return new AlunoDAO().getQntEmprestimos(usuario.getId());
+    }
+
+    public static void realizaEmprestimo(Usuario usuario, Long idLivro) {
+        Emprestimo emprestimo = new Emprestimo();
+        EmprestimoDAO dao = new EmprestimoDAO();
+        System.out.println("add emprestimo");
+
+        Calendar c = new GregorianCalendar();
+        Date dataEmprestimo = c.getTime();
+        emprestimo.setEmprestimo(dataEmprestimo);
+        c.add((GregorianCalendar.DAY_OF_MONTH), 7);
+        Date dataEntrega = c.getTime();
+        emprestimo.setEntrega(dataEntrega);
+
+        emprestimo.setRegistrado(false);
+
+        Exemplar exemplar = new ExemplarDAO().findByIdLivro(idLivro);
+
+        RealizaEmprestimo realiza = new RealizaEmprestimo();
+        realiza.setExemplar(exemplar);
+        realiza.setUsuario(usuario);
+        realiza.setEmprestimo(emprestimo);
+        emprestimo.setRealizaEmprestimo(realiza);
+
+        dao.persist(emprestimo);
     }
 }

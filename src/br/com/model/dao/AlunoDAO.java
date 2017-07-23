@@ -33,4 +33,11 @@ public class AlunoDAO extends DAO{
             dao.persist(telefone);
         }
     }
+
+    public int getQntEmprestimos(Long id) {
+        Query query = getEntityManager().createQuery("select count(r.usuario.id) from Aluno a join RealizaEmprestimo r " +
+                "on ? = r.usuario.id");
+        query.setParameter(0, id);
+        return Integer.parseInt(query.getSingleResult().toString());
+    }
 }

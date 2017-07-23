@@ -11,7 +11,7 @@ public class RealizaEmprestimo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_emprestimo", nullable = false)
     private Emprestimo emprestimo;
     @OneToOne
