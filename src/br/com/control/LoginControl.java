@@ -54,6 +54,8 @@ public class LoginControl implements ActionListener {
 
         if(e.getSource() == view.getPrimeiroAcessoButton())
             new PrimeiroAcesso();
+        if(e.getSource() == view.getSomenteBuscasButton())
+            new BuscaLivro();
         if(e.getSource() == view.getCancelarButton())
             System.exit(0);
     }

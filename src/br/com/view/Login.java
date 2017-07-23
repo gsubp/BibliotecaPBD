@@ -12,16 +12,18 @@ public class Login extends JFrame{
     private JButton cancelarButton;
     private JComboBox comboBox;
     private JButton primeiroAcessoButton;
+    private JButton somenteBuscasButton;
 
     public Login(){
         pack();
         setContentPane(rootPanel);
-        setSize(300,200);
+        setSize(350,200);
 
 
         loginButton.addActionListener(new LoginControl(this));
         primeiroAcessoButton.addActionListener(new LoginControl(this));
         cancelarButton.addActionListener(new LoginControl(this));
+        somenteBuscasButton.addActionListener(new LoginControl(this));
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -51,4 +53,7 @@ public class Login extends JFrame{
         return primeiroAcessoButton;
     }
 
+    public JButton getSomenteBuscasButton() {
+        return somenteBuscasButton;
+    }
 }
