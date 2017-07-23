@@ -23,6 +23,7 @@ public class LoginControl implements ActionListener {
         if(e.getSource() == view.getLoginButton()){
             String login = view.getLoginField().getText();
             String senha = view.getSenhaField().getText();
+
             if(view.getComboBox().getSelectedIndex() == 0) {
                 Aluno aluno = FachadaDAO.loginAluno(login, senha);
                 if(aluno != null) {

@@ -27,6 +27,7 @@ public class TelaFuncionario extends JFrame{
     private JButton funcionárioButton;
     private JButton alunoButton;
     private JButton professorButton;
+    private JButton registrarDevoluçõesButton;
 
     public TelaFuncionario(String nomeFuncionario){
         pack();

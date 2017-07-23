@@ -4,6 +4,8 @@ import br.com.control.TelaAlunoControl;
 import br.com.model.pojo.Aluno;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TelaAluno extends JFrame{
     private JPanel rootPanel;
@@ -20,6 +22,7 @@ public class TelaAluno extends JFrame{
     private JButton verDevolucaoButton;
     private JButton sairButton;
     private JLabel alunoLabel;
+    private JButton dadosDoAlunoButton;
     private Aluno aluno;
 
     public TelaAluno(Aluno aluno){
@@ -33,6 +36,7 @@ public class TelaAluno extends JFrame{
         setVisible(true);
         livroButton.addActionListener(new TelaAlunoControl(this));
         novoEmprestimoButton.addActionListener(new TelaAlunoControl(this));
+        realizarDevolucaoButton.addActionListener(new TelaAlunoControl(this));
     }
 
     public JButton getBuscasButton() {

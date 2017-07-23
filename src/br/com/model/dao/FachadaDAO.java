@@ -167,4 +167,36 @@ public class FachadaDAO {
 
         dao.persist(emprestimo);
     }
+
+    public static void efetuarReserva(Usuario usuario, Long idLivro) {
+        Exemplar exemplar = new ExemplarDAO().findByIdLivro(idLivro);
+        Reserva reserva = new Reserva();
+        Calendar c = new GregorianCalendar();
+        Date dataRealizacao = c.getTime();
+        reserva.setRealizacao(dataRealizacao);
+        Date dataValidação = null;
+        c.add((GregorianCalendar.DAY_OF_MONTH), 7);
+        Date dataLimite = c.getTime();
+        if(exemplar != null) {
+            dataValidação = dataRealizacao;
+            reserva.setValidacao(dataValidação);
+        }
+    }
+
+    public static List<Emprestimo> getAlunoEmprestimos(Aluno aluno) {
+        return new EmprestimoDAO().findByIdAluno(aluno.getId());
+    }
+
+    public static List<Emprestimo> getProfessorEmprestimos(Professor professor) {
+        return new EmprestimoDAO().findByIdProfessor(professor.getId());
+    }
+
+    public static void devolverEmprestimo(Usuario usuario,Long id) {
+        DevolveEmprestimo devolucao = new DevolveEmprestimo();
+        Emprestimo emprestimo = new EmprestimoDAO().findById(id);
+        devolucao.setEmprestimo(emprestimo);
+        devolucao.setUsuario(usuario);
+        DevolverEmprestimoDAO dao = new DevolverEmprestimoDAO();
+        dao.persist(devolucao);
+    }
 }

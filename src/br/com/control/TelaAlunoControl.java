@@ -1,6 +1,7 @@
 package br.com.control;
 
 import br.com.view.BuscaLivro;
+import br.com.view.DevolveEmprestimo;
 import br.com.view.NovoEmprestimo;
 import br.com.view.TelaAluno;
 
@@ -19,6 +20,8 @@ public class TelaAlunoControl implements ActionListener {
             new BuscaLivro();
         if(e.getSource() == view.getNovoEmprestimoButton())
             new NovoEmprestimo(view.getAluno());
+        if(e.getSource() == view.getRealizarDevolucaoButton())
+            new DevolveEmprestimo(view.getAluno());
 
     }
 }
