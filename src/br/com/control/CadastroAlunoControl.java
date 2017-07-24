@@ -27,7 +27,7 @@ public class CadastroAlunoControl implements ActionListener {
             view.getListTelefone().setText(builder.toString());
         }
         if(e.getSource() == view.getCancelarButton())
-            limparCampos();
+            view.dispose();
         if(e.getSource() == view.getCadastrarButton()){
             String nome = view.getNomeField().getText() + " " + view.getSnomeField().getText();
             String cpf = view.getCpfField().getText();
@@ -37,18 +37,15 @@ public class CadastroAlunoControl implements ActionListener {
                     view.getCidadeField().getText() + " - " + view.getEstadoBox().getSelectedItem().toString();
             String email = view.getEmailField().getText();
             String senha = view.getSenhaField().getText();
+            String codigo = view.getCodigoField().getText();
 
             try{
-                FachadaDAO.cadastrarAluno(nome, cpf, matricula, endereco, email, senha, view.getLista());
+                FachadaDAO.cadastrarAluno(nome, cpf, matricula, endereco, email, senha, codigo, view.getLista());
                 limparCampos();
             }catch (Exception ex ){
                 ex.printStackTrace();
             }
         }
-    }
-
-    private void cadastrar() {
-
     }
 
     private void limparCampos() {
@@ -64,6 +61,6 @@ public class CadastroAlunoControl implements ActionListener {
         view.getCidadeField().setText("");
         view.getEstadoBox().setSelectedIndex(0);
         view.getEmailField().setText("");
-        view.getListTelefone();
+        view.getListTelefone().setText("");
     }
 }

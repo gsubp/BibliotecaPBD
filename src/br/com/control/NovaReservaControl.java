@@ -50,9 +50,9 @@ public class NovaReservaControl implements ActionListener {
                 model.addRow(new Object[]{l.getId(), l.getTitulo(), l.getAutores().get(0).getAutor()+"...", l.getEditora(),
                         l.getEdicao(), l.getAno(), l.getExemplares().size()});
             }}
-        if(e.getSource() == view.getEfetuarrButton()){
-            //TODO: fazer ação de reserva...
-            FachadaDAO.efetuarReserva(view.getUsuario(), Long.valueOf(view.getIdField().getText()));
-        }
+//        if(e.getSource() == view.getEfetuarrButton()){
+//            //TODO: fazer ação de reserva...
+//            FachadaDAO.efetuarReserva(view.getUsuario(), Long.valueOf(view.getIdField().getText()));
+//        }
     }
 }

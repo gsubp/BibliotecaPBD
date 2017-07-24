@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class LivroDAO extends DAO{
     @Override
-    public void persist(Object object) {
+    public Object persist(Object object) {
         super.persist(object);
         Livro livro = (Livro) object;
         ExemplarDAO exemplarDAO = new ExemplarDAO();
@@ -27,6 +27,7 @@ public class LivroDAO extends DAO{
             exemplar.setLivro(livro);
             exemplarDAO.persist(exemplar);
         }
+        return livro;
     }
 
     public List<Livro> findByTitulo(String busca) {

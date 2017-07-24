@@ -27,15 +27,7 @@ public class Livro {
 	public Livro() {
 		super();
 	}
-	public Livro(Long id, String codigo, String titulo, String editora, String edicao, int ano) {
-		super();
-		this.id = id;
-		this.codigo = codigo;
-		this.titulo = titulo;
-		this.editora = editora;
-		this.edicao = edicao;
-		this.ano = ano;
-	}
+
 	public Long getId() {
 		return id;
 	}

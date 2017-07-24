@@ -34,9 +34,9 @@ public class BuscaLivroControl implements ActionListener {
             filtro = view.getAnoRadioButton().getText();
 
         livros = new ArrayList<>(FachadaDAO.buscaLivroFiltro(filtro, view.getBuscaField().getText()));
-
+        DefaultTableModel model = (DefaultTableModel) view.getLivroTable().getModel();
+        model.setRowCount(0);
         for(Livro l : livros){
-            DefaultTableModel model = (DefaultTableModel) view.getLivroTable().getModel();
             model.addRow(new Object[]{l.getId(), l.getTitulo(), l.getAutores().get(0).getAutor()+"...", l.getEditora(),
                     l.getEdicao(), l.getAno(), l.getExemplares().size()});
         }

@@ -10,6 +10,7 @@ public  abstract class DAO {
     private static final String PERSISTENCE_UNIT_NAME = "bibliotecapu";
     private static EntityManager manager;
 
+    //singleton e template method
     public static EntityManager getEntityManager() {
         if (manager == null) {
             EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
@@ -18,7 +19,7 @@ public  abstract class DAO {
         return manager;
     }
 
-    public void persist(Object object){
+    public Object persist(Object object){
         try{
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(object);
@@ -26,6 +27,7 @@ public  abstract class DAO {
         }catch (Exception e){
             getEntityManager().getTransaction().rollback();
         }
+        return object;
     }
 
     public void merge(Object object){
@@ -35,8 +37,6 @@ public  abstract class DAO {
             getEntityManager().getTransaction().commit();
         }catch (Exception e){
             getEntityManager().getTransaction().rollback();
-        }finally {
-            getEntityManager().close();
         }
     }
 

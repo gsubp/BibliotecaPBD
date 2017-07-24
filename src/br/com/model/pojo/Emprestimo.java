@@ -22,12 +22,6 @@ public class Emprestimo {
 
     public Emprestimo() {super();}
 
-    public Emprestimo(Long id, Date emprestimo, Date entrega) {
-        this.id = id;
-        this.emprestimo = emprestimo;
-        this.entrega = entrega;
-    }
-
     public Long getId() {
         return id;
     }

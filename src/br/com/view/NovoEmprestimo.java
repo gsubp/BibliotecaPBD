@@ -19,23 +19,28 @@ public class NovoEmprestimo extends JFrame{
     private JTextField idField;
     private JButton realizarButton;
     private JButton listarTodosButton;
-    private Usuario usuario;
+    private JRadioButton alunoRadioButton;
+    private JRadioButton professorRadioButton;
+    private JTextField cpfField;
+    private JButton buscarUsuarioButton;
 
-    public NovoEmprestimo(Usuario usuario){
+    public NovoEmprestimo(){
         pack();;
         setTitle("Buscar Livros");
         setContentPane(rootPanel);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(600,500);
-        this.usuario = usuario;
-        ButtonGroup group = new ButtonGroup();
+        ButtonGroup groupBusca = new ButtonGroup();
         palavraChaveRadioButton.setSelected(true);
-        group.add(palavraChaveRadioButton);
-        group.add(tituloRadioButton);
-        group.add(autorRadioButton);
-        group.add(editoraRadioButton);
-        group.add(autorRadioButton);
-        group.add(anoRadioButton);
+        groupBusca.add(palavraChaveRadioButton);
+        groupBusca.add(tituloRadioButton);
+        groupBusca.add(autorRadioButton);
+        groupBusca.add(editoraRadioButton);
+        groupBusca.add(anoRadioButton);
+
+        ButtonGroup groupTipo = new ButtonGroup();
+        groupTipo.add(alunoRadioButton);
+        groupTipo.add(professorRadioButton);
 
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("id");
@@ -46,11 +51,12 @@ public class NovoEmprestimo extends JFrame{
         model.addColumn("Ano de publicação");
         model.addColumn("Nº de Exemplares");
         livroTable.setModel(model);
-
-        buscarButton.addActionListener(new NovoEmprestimoControl(this));
-        idField.addActionListener(new NovoEmprestimoControl(this));
-        listarTodosButton.addActionListener(new NovoEmprestimoControl(this));
-        realizarButton.addActionListener(new NovoEmprestimoControl(this));
+        NovoEmprestimoControl control = new NovoEmprestimoControl(this);
+        buscarButton.addActionListener(control);
+        idField.addActionListener(control);
+        listarTodosButton.addActionListener(control);
+        realizarButton.addActionListener(control);
+        buscarUsuarioButton.addActionListener(control);
 
         setVisible(true);
 
@@ -100,7 +106,19 @@ public class NovoEmprestimo extends JFrame{
         return listarTodosButton;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public JRadioButton getAlunoRadioButton() {
+        return alunoRadioButton;
+    }
+
+    public JRadioButton getProfessorRadioButton() {
+        return professorRadioButton;
+    }
+
+    public JTextField getCpfField() {
+        return cpfField;
+    }
+
+    public JButton getBuscarUsuarioButton() {
+        return buscarUsuarioButton;
     }
 }

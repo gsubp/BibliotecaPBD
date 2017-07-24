@@ -25,12 +25,6 @@ public class Telefone {
 		super();
 	}
 
-	public Telefone(Long id, String telefone) {
-		super();
-		this.id = id;
-		this.telefone = telefone;
-	}
-
 	public Long getId() {
 		return id;
 	}

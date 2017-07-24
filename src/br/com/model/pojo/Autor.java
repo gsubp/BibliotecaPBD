@@ -25,12 +25,6 @@ public class Autor {
 		super();
 	}
 
-	public Autor(Long id, String autor) {
-		super();
-		this.id = id;
-		this.autor = autor;
-	}
-
 	public Long getId() {
 		return id;
 	}

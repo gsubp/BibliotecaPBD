@@ -25,6 +25,7 @@ public class CadastroAluno extends JFrame{
     private JButton cadastrarButton;
     private JTextField matriculaField;
     private JTextField senhaField;
+    private JTextField codigoField;
     private List<String> lista;
 
     public CadastroAluno() {
@@ -119,5 +120,9 @@ public class CadastroAluno extends JFrame{
 
     public List<String> getLista() {
         return lista;
+    }
+
+    public JTextField getCodigoField() {
+        return codigoField;
     }
 }

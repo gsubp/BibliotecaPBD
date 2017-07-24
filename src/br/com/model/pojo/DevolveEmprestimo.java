@@ -12,10 +12,10 @@ public class DevolveEmprestimo {
     @JoinColumn(nullable = false)
     private Emprestimo emprestimo;
     @OneToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name = "id_funcionario", nullable = false)
     private Funcionario funcionario;
 
     public DevolveEmprestimo() {

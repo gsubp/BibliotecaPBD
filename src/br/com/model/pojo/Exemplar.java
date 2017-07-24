@@ -19,11 +19,6 @@ public class Exemplar {
     public Exemplar() {
     }
 
-    public Exemplar(String situacao, Livro livro) {
-        this.situacao = situacao;
-        this.livro = livro;
-    }
-
     public Long getId() {
         return id;
     }

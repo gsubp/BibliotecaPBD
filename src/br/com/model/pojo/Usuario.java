@@ -38,18 +38,6 @@ public abstract class Usuario {
 		super();
 	}
 
-	public Usuario(Long id, int matricula, String cpf, String nome, String endereco, String email, String situacao, String senha) {
-		super();
-		this.id = id;
-		this.matricula = matricula;
-		this.cpf = cpf;
-		this.nome = nome;
-		this.endereco = endereco;
-		this.email = email;
-		this.situacao = situacao;
-		this.senha = senha;
-	}
-
 	public Long getId() {
 		return id;
 	}

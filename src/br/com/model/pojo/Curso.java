@@ -22,12 +22,6 @@ public class Curso {
 	
 	public Curso() {
 		super();
-	}	
-	
-	public Curso(Long id, String nome) {
-		super();
-		this.id = id;
-		this.nome = nome;
 	}
 
 	public Long getId() {

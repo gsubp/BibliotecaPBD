@@ -29,13 +29,6 @@ public class Reserva {
 
     public Reserva(){}
 
-    public Reserva(long id, Date realizacao, Date validacao, Date limite) {
-        this.id = id;
-        this.realizacao = realizacao;
-        this.validacao = validacao;
-        this.limite = limite;
-    }
-
     public Long getId() {
         return id;
     }

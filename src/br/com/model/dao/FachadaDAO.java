@@ -6,7 +6,8 @@ import java.text.DateFormat;
 import java.util.*;
 
 public class FachadaDAO {
-    public static void cadastrarAluno(String nome, String cpf, int matricula, String endereco, String email, String senha, List<String> telefones) {
+    public static Aluno cadastrarAluno(String nome, String cpf, int matricula, String endereco, String email,
+                                      String senha, String codigo, List<String> telefones) {
         Aluno aluno = new Aluno();
         List<Telefone> telefoneList = new ArrayList<>();
         aluno.setNome(nome);
@@ -15,6 +16,7 @@ public class FachadaDAO {
         aluno.setEndereco(endereco);
         aluno.setEmail(email);
         aluno.setSenha(senha);
+        aluno.setCodigo(codigo);
         aluno.setSituacao("Regularizado");
         for(String s : telefones){
             Telefone telefone = new Telefone();
@@ -23,7 +25,7 @@ public class FachadaDAO {
         }
         aluno.setTelefones(telefoneList);
         AlunoDAO dao = new AlunoDAO();
-        dao.persist(aluno);
+        return (Aluno) dao.persist(aluno);
     }
 
     public static Aluno loginAluno(String login, String senha) {
@@ -38,22 +40,22 @@ public class FachadaDAO {
         return FuncionarioDAO.login(login,senha);
     }
 
-    public static void cadastrarFuncionario(String nome, String cpf, String senha, int matricula) {
+    public static Funcionario cadastrarFuncionario(String nome, String cpf, String senha, int matricula) {
         Funcionario funcionario = new Funcionario();
         funcionario.setNome(nome);
         funcionario.setCpf(cpf);
         funcionario.setMatricula(matricula);
         funcionario.setSenha(senha);
         FuncionarioDAO dao = new FuncionarioDAO();
-        dao.persist(funcionario);
+        return (Funcionario) dao.persist(funcionario);
     }
 
-    public void cadastrarDepartamento(String nome) {
+    public static Departamento cadastrarDepartamento(String nome) {
         Departamento departamento = new Departamento();
         departamento.setNome(nome);
 
         DepartamentoDAO dao = new DepartamentoDAO();
-        dao.persist(departamento);
+        return (Departamento) dao.persist(departamento);
     }
 
     public static Departamento buscaDepartamento(String nomeDepartamento) {
@@ -139,13 +141,12 @@ public class FachadaDAO {
         return new LivroDAO().getLivros();
     }
 
-    public static int verificaEmprestimosAluno(Usuario usuario) {
-        return new AlunoDAO().getQntEmprestimos(usuario.getId());
+    public static int verificaEmprestimosAluno(Aluno aluno) {
+        return new AlunoDAO().getQntEmprestimos(aluno.getId());
     }
 
-    public static void realizaEmprestimo(Usuario usuario, Long idLivro) {
+    public static Emprestimo realizaEmprestimo(Usuario usuario, Long idLivro) {
         Emprestimo emprestimo = new Emprestimo();
-        EmprestimoDAO dao = new EmprestimoDAO();
         System.out.println("add emprestimo");
 
         Calendar c = new GregorianCalendar();
@@ -158,6 +159,7 @@ public class FachadaDAO {
         emprestimo.setRegistrado(false);
 
         Exemplar exemplar = new ExemplarDAO().findByIdLivro(idLivro);
+        exemplar.setSituacao("Emprestado");
 
         RealizaEmprestimo realiza = new RealizaEmprestimo();
         realiza.setExemplar(exemplar);
@@ -165,23 +167,23 @@ public class FachadaDAO {
         realiza.setEmprestimo(emprestimo);
         emprestimo.setRealizaEmprestimo(realiza);
 
-        dao.persist(emprestimo);
+        return (Emprestimo) new EmprestimoDAO().persist(emprestimo);
     }
-
-    public static void efetuarReserva(Usuario usuario, Long idLivro) {
-        Exemplar exemplar = new ExemplarDAO().findByIdLivro(idLivro);
-        Reserva reserva = new Reserva();
-        Calendar c = new GregorianCalendar();
-        Date dataRealizacao = c.getTime();
-        reserva.setRealizacao(dataRealizacao);
-        Date dataValidação = null;
-        c.add((GregorianCalendar.DAY_OF_MONTH), 7);
-        Date dataLimite = c.getTime();
-        if(exemplar != null) {
-            dataValidação = dataRealizacao;
-            reserva.setValidacao(dataValidação);
-        }
-    }
+// TODO: fachada de reserva
+//    public static void efetuarReserva(Usuario usuario, Long idLivro) {
+//        Exemplar exemplar = new ExemplarDAO().findByIdLivro(idLivro);
+//        Reserva reserva = new Reserva();
+//        Calendar c = new GregorianCalendar();
+//        Date dataRealizacao = c.getTime();
+//        reserva.setRealizacao(dataRealizacao);
+//        Date dataValidação = null;
+//        c.add((GregorianCalendar.DAY_OF_MONTH), 7);
+//        Date dataLimite = c.getTime();
+//        if(exemplar != null) {
+//            dataValidação = dataRealizacao;
+//            reserva.setValidacao(dataValidação);
+//        }
+//    }
 
     public static List<Emprestimo> getAlunoEmprestimos(Aluno aluno) {
         return new EmprestimoDAO().findByIdAluno(aluno.getId());
@@ -191,12 +193,27 @@ public class FachadaDAO {
         return new EmprestimoDAO().findByIdProfessor(professor.getId());
     }
 
-    public static void devolverEmprestimo(Usuario usuario,Long id) {
+    public static DevolveEmprestimo devolverEmprestimo(Usuario usuario,Long id) {
         DevolveEmprestimo devolucao = new DevolveEmprestimo();
         Emprestimo emprestimo = new EmprestimoDAO().findById(id);
         devolucao.setEmprestimo(emprestimo);
         devolucao.setUsuario(usuario);
-        DevolverEmprestimoDAO dao = new DevolverEmprestimoDAO();
-        dao.persist(devolucao);
+        Exemplar exemplar = emprestimo.getRealizaEmprestimo().getExemplar();
+        exemplar.setSituacao("Disponível");
+        new ExemplarDAO().merge(exemplar);
+        return (DevolveEmprestimo) new DevolverEmprestimoDAO().persist(devolucao);
+    }
+
+    public static Aluno buscaAlunoCPF(String cpf) {
+
+        return new AlunoDAO().findByCpf(cpf);
+    }
+
+    public static Professor buscaProfessorCPF(String cpf) {
+        return new ProfessorDAO().findByCPF(cpf);
+    }
+
+    public static int verificaEmprestimosProfessor(Professor professor) {
+        return new ProfessorDAO().getQntEmprestimos(professor.getId());
     }
 }

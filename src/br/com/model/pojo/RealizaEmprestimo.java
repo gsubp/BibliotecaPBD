@@ -26,15 +26,6 @@ public class RealizaEmprestimo {
 
     public RealizaEmprestimo(){ super(); }
 
-    public RealizaEmprestimo(Long id, Emprestimo emprestimo, Exemplar exemplar, Usuario usuario, Funcionario funcionario) {
-        this.id = id;
-        this.emprestimo = emprestimo;
-        this.exemplar = exemplar;
-        this.usuario = usuario;
-        this.funcionario = funcionario;
-    }
-
-
     public Long getId() {
 
         return id;

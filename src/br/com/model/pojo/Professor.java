@@ -15,12 +15,6 @@ public class Professor extends Usuario{
 		super();
 	}
 
-	public Professor(Long id, int matricula, String cpf, String nome, String endereco, String email, String situacao,
-					 String senha) {
-		super(id, matricula, cpf, nome, endereco, email, situacao, senha);
-		// TODO Auto-generated constructor stub
-	}
-
 	public Departamento getDepartamento() {
 		return departamento;
 	}

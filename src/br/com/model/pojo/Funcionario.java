@@ -26,15 +26,6 @@ public class Funcionario{
         super();
     }
 
-    public Funcionario(Long id, int matricula, String nome, String cpf, String senha) {
-        super();
-        this.id = id;
-        this.matricula = matricula;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.senha = senha;
-    }
-
     public Long getId() {
         return id;
     }

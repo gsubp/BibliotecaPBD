@@ -1,22 +1,22 @@
 package br.com.view;
 
-import br.com.control.DevolveEmprestimoControl;
-import br.com.model.pojo.Usuario;
+import br.com.control.NovaDevolucaoControl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class DevolveEmprestimo extends JFrame{
-    private Usuario usuario;
+public class NovaDevolução extends JFrame{
     private JPanel rootPanel;
-    private JButton verEmprestimosButton;
     private JTextField idField;
     private JButton devolverButton;
     private JTextField multaField;
     private JTable emprestimoTable;
+    private JRadioButton alunoRadioButton;
+    private JRadioButton professorRadioButton;
+    private JTextField cpfField;
+    private JButton buscarUsuarioButton;
 
-    public DevolveEmprestimo(Usuario usuario){
-        this.usuario = usuario;
+    public NovaDevolução(){
         setContentPane(rootPanel);
         setSize(600,500);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -26,19 +26,11 @@ public class DevolveEmprestimo extends JFrame{
         model.addColumn("Livro");
         model.addColumn("Data de Realizaço");
         model.addColumn("Data para Entrega");
-
+        NovaDevolucaoControl control = new NovaDevolucaoControl(this);
         emprestimoTable.setModel(model);
-        verEmprestimosButton.addActionListener(new DevolveEmprestimoControl(this));
-        devolverButton.addActionListener(new DevolveEmprestimoControl(this));
+        devolverButton.addActionListener(control);
+        buscarUsuarioButton.addActionListener(control);
         setVisible(true);
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public JButton getVerEmprestimosButton() {
-        return verEmprestimosButton;
     }
 
     public JTextField getIdField() {
@@ -55,5 +47,21 @@ public class DevolveEmprestimo extends JFrame{
 
     public JTable getEmprestimoTable() {
         return emprestimoTable;
+    }
+
+    public JRadioButton getAlunoRadioButton() {
+        return alunoRadioButton;
+    }
+
+    public JRadioButton getProfessorRadioButton() {
+        return professorRadioButton;
+    }
+
+    public JTextField getCpfField() {
+        return cpfField;
+    }
+
+    public JButton getBuscarUsuarioButton() {
+        return buscarUsuarioButton;
     }
 }

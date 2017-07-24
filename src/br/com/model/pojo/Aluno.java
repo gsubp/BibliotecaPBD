@@ -1,19 +1,21 @@
 package br.com.model.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "aluno")
 public class Aluno extends Usuario{
+    @Column(nullable = false, unique = true)
+    private String codigo;
 	public Aluno() {
 		super();
 	}
 
-	public Aluno(Long id, int matricula, String cpf, String nome, String endereco, String email, String situacao,
-				 String senha) {
-		super(id, matricula, cpf, nome, endereco, email, situacao, senha);
-	}
-	
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 }

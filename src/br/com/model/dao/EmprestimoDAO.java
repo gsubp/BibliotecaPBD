@@ -9,15 +9,16 @@ import java.util.List;
 
 public class EmprestimoDAO extends DAO{
     @Override
-    public void persist(Object object) {
+    public Object persist(Object object) {
         super.persist(object);
         Emprestimo emprestimo = (Emprestimo) object;
         System.out.println(emprestimo.getId());
         RealizaEmprestimo realiza = emprestimo.getRealizaEmprestimo();
+        new ExemplarDAO().merge(realiza.getExemplar());
         realiza.setEmprestimo(emprestimo);
         RealizaEmprestimoDAO dao = new RealizaEmprestimoDAO();
         dao.persist(realiza);
-
+        return emprestimo;
     }
 
     public List<Emprestimo> findByIdAluno(long id){

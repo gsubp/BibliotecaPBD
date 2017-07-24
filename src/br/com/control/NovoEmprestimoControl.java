@@ -1,8 +1,7 @@
 package br.com.control;
 
 import br.com.model.dao.FachadaDAO;
-import br.com.model.pojo.Aluno;
-import br.com.model.pojo.Livro;
+import br.com.model.pojo.*;
 import br.com.view.NovoEmprestimo;
 
 import javax.swing.*;
@@ -14,6 +13,8 @@ import java.util.List;
 
 public class NovoEmprestimoControl implements ActionListener {
     private NovoEmprestimo view;
+    private Usuario usuario = null;
+    private Emprestimo emprestimo = null;
     public NovoEmprestimoControl(NovoEmprestimo view) {
         this.view = view;
     }
@@ -21,6 +22,32 @@ public class NovoEmprestimoControl implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         List<Livro> livros;
+        if(e.getSource() == view.getBuscarUsuarioButton()){
+            if(view.getAlunoRadioButton().isSelected())
+                usuario = FachadaDAO.buscaAlunoCPF(view.getCpfField().getText());
+            if(view.getProfessorRadioButton().isSelected())
+                usuario = FachadaDAO.buscaProfessorCPF(view.getCpfField().getText());
+            if(!usuario.equals(null)){
+                JOptionPane.showMessageDialog(null, "Encotrado!");
+                if(usuario instanceof Aluno){
+                    if(FachadaDAO.verificaEmprestimosAluno((Aluno) usuario) == 3) {
+                        JOptionPane.showMessageDialog(null, "O Aluno não pode fazer novos " +
+                                "emprestimos!");
+                        usuario = null;
+                    }
+                }
+                else{
+                    if(FachadaDAO.verificaEmprestimosProfessor((Professor) usuario) == 5){
+                        JOptionPane.showMessageDialog(null, "O Professor não pode fazer novos " +
+                                "emprestimos!");
+                        usuario = null;
+                    }
+                }
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Não encontrado!");
+        }
+
         if(e.getSource() == view.getBuscarButton()){
             String filtro = null;
             if(view.getPalavraChaveRadioButton().isSelected())
@@ -51,21 +78,15 @@ public class NovoEmprestimoControl implements ActionListener {
                         l.getEdicao(), l.getAno(), l.getExemplares().size()});
             }}
         if(e.getSource() == view.getRealizarButton()){
-
-            if(view.getUsuario() instanceof Aluno){
-                if(FachadaDAO.verificaEmprestimosAluno(view.getUsuario()) < 3)
-                    FachadaDAO.realizaEmprestimo(view.getUsuario(), Long.valueOf(view.getIdField().getText()));
+            if(usuario != null){
+                emprestimo = FachadaDAO.realizaEmprestimo(usuario, Long.valueOf(view.getIdField().getText()));
+                if(emprestimo.getId() != null)
+                    JOptionPane.showMessageDialog(null, "Emprestimo realizado");
                 else
-                    JOptionPane.showMessageDialog(null, "O Aluno já realizou todos os " +
-                            "seus emprestimos!");
+                    JOptionPane.showMessageDialog(null, "Emprestimo não realizado");
             }
-            else{
-                if(FachadaDAO.verificaEmprestimosAluno(view.getUsuario()) < 5)
-                    FachadaDAO.realizaEmprestimo(view.getUsuario(), Long.valueOf(view.getIdField().getText()));
-                else
-                    JOptionPane.showMessageDialog(null, "O Professor já realizou todos os " +
-                            "seus emprestimos!");
-            }
+            else
+                JOptionPane.showMessageDialog(null, "Busque um Aluno ou Professor");
         }
     }
 }

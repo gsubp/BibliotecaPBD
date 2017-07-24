@@ -26,14 +26,6 @@ public class EfetuaReserva {
 
     public EfetuaReserva() {}
 
-    public EfetuaReserva(Long id, Reserva reserva, Livro livro, Usuario usuario, Funcionario funcionario) {
-        this.id = id;
-        this.reserva = reserva;
-        this.livro = livro;
-        this.usuario = usuario;
-        this.funcionario = funcionario;
-    }
-
     public Long getId() {
         return id;
     }
