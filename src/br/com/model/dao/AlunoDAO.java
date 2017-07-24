@@ -5,6 +5,7 @@ import br.com.model.pojo.Telefone;
 import br.com.model.pojo.Usuario;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 public class AlunoDAO extends DAO{
@@ -42,5 +43,9 @@ public class AlunoDAO extends DAO{
         Query query = getEntityManager().createQuery("select a from Aluno a where a.cpf = ?");
         query.setParameter(0, cpf);
         return (Aluno) query.getSingleResult();
+    }
+
+    public List<Aluno> list() {
+        return getEntityManager().createQuery("select a from Aluno a").getResultList();
     }
 }

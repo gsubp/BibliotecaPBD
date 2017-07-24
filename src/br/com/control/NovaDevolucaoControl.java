@@ -55,7 +55,7 @@ public class NovaDevolucaoControl implements ActionListener {
 
         if(e.getSource() == view.getDevolverButton()){
             devolveEmprestimo = FachadaDAO.devolverEmprestimo(usuario,
-                    Long.valueOf(view.getIdField().getText()));
+                    Long.valueOf(view.getIdField().getText()), view.getFuncionario());
             Emprestimo emprestimo = devolveEmprestimo.getEmprestimo();
             Date dataEntrega = emprestimo.getEmprestimo();
             Date dataAtual = new Date();

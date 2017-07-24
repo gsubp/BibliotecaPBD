@@ -2,6 +2,7 @@ package br.com.model.dao;
 
 import br.com.model.pojo.Funcionario;
 import javax.persistence.Query;
+import java.util.List;
 
 public class FuncionarioDAO extends DAO{
 
@@ -18,5 +19,15 @@ public class FuncionarioDAO extends DAO{
             getEntityManager().getTransaction().rollback();
         }
         return funcionario;
+    }
+
+    public Funcionario findByCPF(String cpf) {
+        Query query = getEntityManager().createQuery("select f from Funcionario f where f.cpf = ?");
+        query.setParameter(0, cpf);
+        return (Funcionario) query.getSingleResult();
+    }
+
+    public List<Funcionario> list() {
+        return getEntityManager().createQuery("select f from Funcionario f").getResultList();
     }
 }

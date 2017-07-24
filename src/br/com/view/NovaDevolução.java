@@ -1,6 +1,7 @@
 package br.com.view;
 
 import br.com.control.NovaDevolucaoControl;
+import br.com.model.pojo.Funcionario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,11 +16,19 @@ public class NovaDevolução extends JFrame{
     private JRadioButton professorRadioButton;
     private JTextField cpfField;
     private JButton buscarUsuarioButton;
+    private Funcionario funcionario;
 
-    public NovaDevolução(){
+    public NovaDevolução(Funcionario funcionario){
+        this.funcionario = funcionario;
+
         setContentPane(rootPanel);
         setSize(600,500);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(alunoRadioButton);
+        group.add(professorRadioButton);
+        alunoRadioButton.setSelected(true);
 
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("id");
@@ -63,5 +72,9 @@ public class NovaDevolução extends JFrame{
 
     public JButton getBuscarUsuarioButton() {
         return buscarUsuarioButton;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 }

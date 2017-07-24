@@ -1,6 +1,7 @@
 package br.com.view;
 
 import br.com.control.TelaFuncionarioControl;
+import br.com.model.pojo.Funcionario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,11 +28,13 @@ public class TelaFuncionario extends JFrame{
     private JButton alunoButton;
     private JButton professorButton;
     private JButton registrarDevoluçõesButton;
+    private Funcionario funcionario;
 
-    public TelaFuncionario(String nomeFuncionario){
+    public TelaFuncionario(Funcionario funcionario){
+        this.funcionario = funcionario;
         pack();
         setContentPane(rootPanel);
-        funcionarioLabel.setText(nomeFuncionario);
+        funcionarioLabel.setText(funcionario.getNome());
         setSize(650,300);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -45,6 +48,11 @@ public class TelaFuncionario extends JFrame{
         livroButton.addActionListener(new TelaFuncionarioControl(this));
         emprestimosButton.addActionListener(new TelaFuncionarioControl(this));
         registrarDevoluçõesButton.addActionListener(new TelaFuncionarioControl(this));
+        alunoButton.addActionListener(new TelaFuncionarioControl(this));
+        professorButton.addActionListener(new TelaFuncionarioControl(this));
+        funcionárioButton.addActionListener(new TelaFuncionarioControl(this));
+        departamentoButton.addActionListener(new TelaFuncionarioControl(this));
+        cursoButton.addActionListener(new TelaFuncionarioControl(this));
     }
 
     public JButton getNovoAlunoButton() {
@@ -121,5 +129,9 @@ public class TelaFuncionario extends JFrame{
 
     public JButton getRegistrarDevoluçõesButton() {
         return registrarDevoluçõesButton;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 }

@@ -193,11 +193,12 @@ public class FachadaDAO {
         return new EmprestimoDAO().findByIdProfessor(professor.getId());
     }
 
-    public static DevolveEmprestimo devolverEmprestimo(Usuario usuario,Long id) {
+    public static DevolveEmprestimo devolverEmprestimo(Usuario usuario, Long id, Funcionario funcionario) {
         DevolveEmprestimo devolucao = new DevolveEmprestimo();
         Emprestimo emprestimo = new EmprestimoDAO().findById(id);
         devolucao.setEmprestimo(emprestimo);
         devolucao.setUsuario(usuario);
+        devolucao.setFuncionario(funcionario);
         Exemplar exemplar = emprestimo.getRealizaEmprestimo().getExemplar();
         exemplar.setSituacao("Disponível");
         new ExemplarDAO().merge(exemplar);
@@ -215,5 +216,29 @@ public class FachadaDAO {
 
     public static int verificaEmprestimosProfessor(Professor professor) {
         return new ProfessorDAO().getQntEmprestimos(professor.getId());
+    }
+
+    public static List<Aluno> listarAlunos() {
+        return new AlunoDAO().list();
+    }
+
+    public static List<Professor> listarProfessores() {
+        return new ProfessorDAO().list();
+    }
+
+    public static Funcionario buscaFuncionarioCPF(String cpf) {
+        return new FuncionarioDAO().findByCPF(cpf);
+    }
+
+    public static Curso buscaCurso(String nome) {
+        return new CursoDAO().findByNome(nome);
+    }
+
+    public static List<Curso> listarCursos() {
+        return new CursoDAO().list();
+    }
+
+    public static List<Funcionario> listarFuncionarios() {
+        return new FuncionarioDAO().list();
     }
 }

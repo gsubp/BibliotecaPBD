@@ -34,6 +34,16 @@ public class TelaFuncionarioControl implements ActionListener {
         if(e.getSource() == view.getEmprestimosButton())
             new NovoEmprestimo();
         if(e.getSource() == view.getRegistrarDevoluçõesButton())
-            new NovaDevolução();
+            new NovaDevolução(view.getFuncionario());
+        if(e.getSource() == view.getAlunoButton())
+            new BuscaAluno();
+        if(e.getSource() == view.getProfessorButton())
+            new BuscaProfessor();
+        if(e.getSource() == view.getFuncionárioButton())
+            new BuscaFuncionario();
+        if(e.getSource() == view.getDepartamentoButton())
+            new BuscaDepartamento();
+        if(e.getSource() == view.getCursoButton())
+            new BuscaCurso();
     }
 }

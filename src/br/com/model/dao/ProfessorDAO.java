@@ -4,6 +4,7 @@ import br.com.model.pojo.Professor;
 import br.com.model.pojo.Telefone;
 
 import javax.persistence.Query;
+import java.util.List;
 
 public class ProfessorDAO extends DAO{
     public static Professor login(String login, String senha) {
@@ -45,5 +46,9 @@ public class ProfessorDAO extends DAO{
                 "on ? = r.usuario.id");
         query.setParameter(0, id);
         return Integer.parseInt(query.getSingleResult().toString());
+    }
+
+    public List<Professor> list() {
+        return getEntityManager().createQuery("select p from Professor p").getResultList();
     }
 }

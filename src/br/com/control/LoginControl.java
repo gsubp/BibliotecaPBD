@@ -45,7 +45,7 @@ public class LoginControl implements ActionListener {
             if(view.getComboBox().getSelectedIndex() == 2) {
                 Funcionario funcionario =  FachadaDAO.loginFuncionario(login, senha);
                 if(funcionario != null){
-                    new TelaFuncionario(funcionario.getNome());
+                    new TelaFuncionario(funcionario);
                     view.dispose();
                 }
                 else
