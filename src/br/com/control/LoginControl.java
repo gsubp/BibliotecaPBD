@@ -36,7 +36,7 @@ public class LoginControl implements ActionListener {
             if(view.getComboBox().getSelectedIndex() == 1) {
                 Professor professor = FachadaDAO.loginProfessor(login, senha);
                 if(professor != null){
-                    new TelaProfessor(professor.getNome());
+                    new TelaProfessor(professor);
                     view.dispose();
                 }
                 else

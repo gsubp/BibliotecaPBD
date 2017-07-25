@@ -2,8 +2,10 @@ package br.com.control;
 
 import br.com.model.dao.FachadaDAO;
 import br.com.model.pojo.Departamento;
+import br.com.model.pojo.Professor;
 import br.com.view.CadastroProfessor;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ import java.util.List;
  */
 public class CadastroProfessorControl implements ActionListener {
     private CadastroProfessor view;
+    private Professor professor = null;
+
     public CadastroProfessorControl(CadastroProfessor view) {
         this.view = view;
     }
@@ -41,12 +45,13 @@ public class CadastroProfessorControl implements ActionListener {
             String nomeDepartamento = view.getDepartamentoBox().getSelectedItem().toString();
             Departamento departamento = FachadaDAO.buscaDepartamento(nomeDepartamento);
 
-            try{
-                FachadaDAO.cadastrarProfessor(nome, cpf, matricula, endereco, email, senha, view.getLista(), departamento);
-                limparCampos();
-            }catch (Exception ex ){
-                ex.printStackTrace();
-            }
+
+            professor =  FachadaDAO.cadastrarProfessor(nome, cpf, matricula, endereco, email, senha, view.getLista(), departamento);
+            if(professor != null)
+                JOptionPane.showMessageDialog(null, "PRofessor cadastrado com sucessor");
+            else
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+            limparCampos();
         }
         if(e.getSource() == view.getCancelarButton())
             view.dispose();

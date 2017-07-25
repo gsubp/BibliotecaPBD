@@ -1,7 +1,10 @@
 package br.com.control;
 
 import br.com.model.dao.FachadaDAO;
+import br.com.model.pojo.Aluno;
 import br.com.view.CadastroAluno;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class CadastroAlunoControl implements ActionListener {
     private CadastroAluno view;
+    private Aluno aluno = null;
 
     public CadastroAlunoControl(CadastroAluno view) {
         this.view = view;
@@ -39,12 +43,14 @@ public class CadastroAlunoControl implements ActionListener {
             String senha = view.getSenhaField().getText();
             String codigo = view.getCodigoField().getText();
 
-            try{
-                FachadaDAO.cadastrarAluno(nome, cpf, matricula, endereco, email, senha, codigo, view.getLista());
-                limparCampos();
-            }catch (Exception ex ){
-                ex.printStackTrace();
-            }
+
+            aluno = FachadaDAO.cadastrarAluno(nome, cpf, matricula, endereco, email, senha, codigo, view.getLista());
+            if(aluno != null)
+                JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucessor");
+            else
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+            limparCampos();
+
         }
     }
 

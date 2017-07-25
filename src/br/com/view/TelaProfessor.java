@@ -1,6 +1,7 @@
 package br.com.view;
 
 import br.com.control.TelaProfessorControl;
+import br.com.model.pojo.Professor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,13 +21,20 @@ public class TelaProfessor extends JFrame{
     private JButton verReservasButton;
     private JButton realizarDevoluçãoButton;
     private JButton verDevoluçõesButton;
+    private JButton dadosDoProfessorButton;
+    private JLabel situacaoLabel;
+    private Professor professor;
 
-    public TelaProfessor(String nomeProfessor){
+    public TelaProfessor(Professor professor){
+        this.professor = professor;
         pack();
         setSize(400,200);
         setContentPane(rootPanel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        professorLabel.setText(professor.getNome());
+        situacaoLabel.setText("Situação: " + professor.getSituacao());
         livroButton.addActionListener(new TelaProfessorControl(this));
+        verEmprestimosButton.addActionListener(new TelaProfessorControl(this));
         setVisible(true);
 
     }
@@ -65,5 +73,9 @@ public class TelaProfessor extends JFrame{
 
     public JButton getVerDevoluçõesButton() {
         return verDevoluçõesButton;
+    }
+
+    public Professor getProfessor() {
+        return professor;
     }
 }

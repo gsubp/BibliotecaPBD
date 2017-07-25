@@ -102,7 +102,7 @@ public class FachadaDAO {
 
     }
 
-    public static void cadastrarProfessor(String nome, String cpf, int matricula, String endereco, String email, String senha, List<String> telefones, Departamento departamento) {
+    public static Professor cadastrarProfessor(String nome, String cpf, int matricula, String endereco, String email, String senha, List<String> telefones, Departamento departamento) {
         Professor professor = new Professor();
         List<Telefone> telefoneListf = new ArrayList<>();
         professor.setNome(nome);
@@ -111,14 +111,15 @@ public class FachadaDAO {
         professor.setEndereco(endereco);
         professor.setEmail(email);
         professor.setSenha(senha);
+        professor.setDepartamento(departamento);
         professor.setSituacao("Regularizado");
         for(String s : telefones){
             Telefone telefone = new Telefone();
+            telefone.setTelefone(s);
             telefoneListf.add(telefone);
         }
         professor.setTelefones(telefoneListf);
-        ProfessorDAO dao = new ProfessorDAO();
-        dao.persist(professor);
+        return  (Professor) new ProfessorDAO().persist(professor);
     }
 
     public static List<Livro> buscaLivroFiltro(String filtro, String busca) {
@@ -155,8 +156,6 @@ public class FachadaDAO {
         c.add((GregorianCalendar.DAY_OF_MONTH), 7);
         Date dataEntrega = c.getTime();
         emprestimo.setEntrega(dataEntrega);
-
-        emprestimo.setRegistrado(false);
 
         Exemplar exemplar = new ExemplarDAO().findByIdLivro(idLivro);
         exemplar.setSituacao("Emprestado");

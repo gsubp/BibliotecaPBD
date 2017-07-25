@@ -9,10 +9,6 @@ import java.awt.event.ActionListener;
 
 public class TelaAluno extends JFrame{
     private JPanel rootPanel;
-    private JButton buscasButton;
-    private JButton emprestimosButton;
-    private JButton reservasButton;
-    private JButton devolucaoButton;
     private JButton livroButton;
     private JButton novoEmprestimoButton;
     private JButton verEmprestimosButton;
@@ -23,36 +19,24 @@ public class TelaAluno extends JFrame{
     private JButton sairButton;
     private JLabel alunoLabel;
     private JButton dadosDoAlunoButton;
+    private JLabel situacaoLabel;
     private Aluno aluno;
 
     public TelaAluno(Aluno aluno){
+        this.aluno = aluno;
         pack();
         setContentPane(rootPanel);
-        this.aluno = aluno;
-        alunoLabel.setText(aluno.getNome());
         setSize(550,200);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
+
+        alunoLabel.setText(aluno.getNome());
+        situacaoLabel.setText("Situação: " + aluno.getSituacao());
         livroButton.addActionListener(new TelaAlunoControl(this));
-        novoEmprestimoButton.addActionListener(new TelaAlunoControl(this));
-        realizarDevolucaoButton.addActionListener(new TelaAlunoControl(this));
-    }
+        verEmprestimosButton.addActionListener(new TelaAlunoControl(this));
 
-    public JButton getBuscasButton() {
-        return buscasButton;
-    }
+        setVisible(true);
 
-    public JButton getEmprestimosButton() {
-        return emprestimosButton;
-    }
-
-    public JButton getReservasButton() {
-        return reservasButton;
-    }
-
-    public JButton getDevolucaoButton() {
-        return devolucaoButton;
     }
 
     public JButton getLivroButton() {

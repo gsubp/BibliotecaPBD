@@ -17,8 +17,6 @@ public class Emprestimo {
     private Date entrega;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "emprestimo", targetEntity = RealizaEmprestimo.class)
     private RealizaEmprestimo realizaEmprestimo;
-    @Column
-    private boolean isRegistrado;
 
     public Emprestimo() {super();}
 
@@ -52,14 +50,6 @@ public class Emprestimo {
 
     public void setRealizaEmprestimo(RealizaEmprestimo realizaEmprestimo) {
         this.realizaEmprestimo = realizaEmprestimo;
-    }
-
-    public boolean isRegistrado() {
-        return isRegistrado;
-    }
-
-    public void setRegistrado(boolean registrado) {
-        isRegistrado = registrado;
     }
 
     @Override
