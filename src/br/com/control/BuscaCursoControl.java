@@ -2,7 +2,6 @@ package br.com.control;
 
 import br.com.model.dao.FachadaDAO;
 import br.com.model.pojo.Curso;
-import br.com.model.pojo.Professor;
 import br.com.view.BuscaCurso;
 
 import javax.swing.*;
@@ -26,16 +25,16 @@ public class BuscaCursoControl implements ActionListener {
         List<Curso> cursos;
         model = (DefaultTableModel) view.getTable().getModel();
         model.setRowCount(0);
-        if(e.getSource() == view.getBuscarButton()){
+        if (e.getSource() == view.getBuscarButton()) {
             curso = FachadaDAO.buscaCurso(view.getNomeField().getText());
-            if(curso != null)
+            if (curso != null)
                 model.addRow(new Object[]{curso.getId(), curso.getNome(), curso.getIdDepartamento().getNome()});
             else
                 JOptionPane.showMessageDialog(null, "Aluno não encontrado");
         }
-        if(e.getSource() == view.getListarTodosButton()){
+        if (e.getSource() == view.getListarTodosButton()) {
             cursos = new ArrayList<>(FachadaDAO.listarCursos());
-            for(Curso curso : cursos)
+            for (Curso curso : cursos)
                 model.addRow(new Object[]{curso.getId(), curso.getNome(), curso.getIdDepartamento().getNome()});
         }
 

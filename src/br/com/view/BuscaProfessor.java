@@ -1,22 +1,22 @@
 package br.com.view;
 
-import br.com.control.BuscaAlunoControl;
 import br.com.control.BuscaProfessorControl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
-public class BuscaProfessor extends JFrame{
+public class BuscaProfessor extends JFrame {
     private JPanel rootPanel;
     private JTextField cpfField;
     private JButton buscarButton;
     private JButton listarTodosButton;
     private JTable table;
 
-    public BuscaProfessor(){
+    public BuscaProfessor() {
         pack();
         setContentPane(rootPanel);
-        setSize(500,500);
+        setSize(500, 500);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         DefaultTableModel model = new DefaultTableModel();
@@ -53,4 +53,5 @@ public class BuscaProfessor extends JFrame{
     public JTable getTable() {
         return table;
     }
+
 }

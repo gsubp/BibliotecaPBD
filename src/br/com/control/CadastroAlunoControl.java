@@ -21,7 +21,7 @@ public class CadastroAlunoControl implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == view.getAddButton()) {
+        if (e.getSource() == view.getAddButton()) {
             String telefone = view.getTelefoneField().getText();
             view.getLista().add(telefone);
             view.getTelefoneField().setText("");
@@ -30,13 +30,13 @@ public class CadastroAlunoControl implements ActionListener {
                 builder.append(s + "\n");
             view.getListTelefone().setText(builder.toString());
         }
-        if(e.getSource() == view.getCancelarButton())
+        if (e.getSource() == view.getCancelarButton())
             view.dispose();
-        if(e.getSource() == view.getCadastrarButton()){
+        if (e.getSource() == view.getCadastrarButton()) {
             String nome = view.getNomeField().getText() + " " + view.getSnomeField().getText();
             String cpf = view.getCpfField().getText();
             int matricula = Integer.parseInt(view.getMatriculaField().getText());
-            String endereco = view.getLogradouroField().getText()+ ", " + view.getNumeroField().getText() + ", " +
+            String endereco = view.getLogradouroField().getText() + ", " + view.getNumeroField().getText() + ", " +
                     view.getBairroField().getText() + ", " + view.getCepField().getText() + ", " +
                     view.getCidadeField().getText() + " - " + view.getEstadoBox().getSelectedItem().toString();
             String email = view.getEmailField().getText();
@@ -45,7 +45,7 @@ public class CadastroAlunoControl implements ActionListener {
 
 
             aluno = FachadaDAO.cadastrarAluno(nome, cpf, matricula, endereco, email, senha, codigo, view.getLista());
-            if(aluno != null)
+            if (aluno != null)
                 JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucessor");
             else
                 JOptionPane.showMessageDialog(null, "Erro ao cadastrar");

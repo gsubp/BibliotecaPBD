@@ -1,12 +1,10 @@
 package br.com.model.dao;
 
-import br.com.model.pojo.Livro;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public  abstract class DAO {
+public abstract class DAO {
     private static final String PERSISTENCE_UNIT_NAME = "bibliotecapu";
     private static EntityManager manager;
 
@@ -19,23 +17,23 @@ public  abstract class DAO {
         return manager;
     }
 
-    public Object persist(Object object){
-        try{
+    public Object persist(Object object) {
+        try {
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(object);
             getEntityManager().getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             getEntityManager().getTransaction().rollback();
         }
         return object;
     }
 
-    public void merge(Object object){
-        try{
+    public void merge(Object object) {
+        try {
             getEntityManager().getTransaction().begin();
             getEntityManager().merge(object);
             getEntityManager().getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             getEntityManager().getTransaction().rollback();
         }
     }

@@ -24,7 +24,7 @@ public class CadastroProfessorControl implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == view.getAddButton()) {
+        if (e.getSource() == view.getAddButton()) {
             String telefone = view.getTelefoneField().getText();
             view.getLista().add(telefone);
             view.getTelefoneField().setText("");
@@ -33,11 +33,11 @@ public class CadastroProfessorControl implements ActionListener {
                 builder.append(s + "\n");
             view.getListTelefone().setText(builder.toString());
         }
-        if(e.getSource() == view.getCadastrarButton()){
+        if (e.getSource() == view.getCadastrarButton()) {
             String nome = view.getNomeField().getText() + " " + view.getSnomeField().getText();
             String cpf = view.getCpfField().getText();
             int matricula = Integer.parseInt(view.getMatriculaField().getText());
-            String endereco = view.getLogradouroField().getText()+ ", " + view.getNumeroField().getText() + ", " +
+            String endereco = view.getLogradouroField().getText() + ", " + view.getNumeroField().getText() + ", " +
                     view.getBairroField().getText() + ", " + view.getCepField().getText() + ", " +
                     view.getCidadeField().getText() + " - " + view.getEstadoBox().getSelectedItem().toString();
             String email = view.getEmailField().getText();
@@ -46,14 +46,14 @@ public class CadastroProfessorControl implements ActionListener {
             Departamento departamento = FachadaDAO.buscaDepartamento(nomeDepartamento);
 
 
-            professor =  FachadaDAO.cadastrarProfessor(nome, cpf, matricula, endereco, email, senha, view.getLista(), departamento);
-            if(professor != null)
+            professor = FachadaDAO.cadastrarProfessor(nome, cpf, matricula, endereco, email, senha, view.getLista(), departamento);
+            if (professor != null)
                 JOptionPane.showMessageDialog(null, "PRofessor cadastrado com sucessor");
             else
                 JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
             limparCampos();
         }
-        if(e.getSource() == view.getCancelarButton())
+        if (e.getSource() == view.getCancelarButton())
             view.dispose();
     }
 
@@ -74,9 +74,9 @@ public class CadastroProfessorControl implements ActionListener {
         view.getDepartamentoBox().setSelectedIndex(0);
     }
 
-    public void getDepartemtos(){
+    public void getDepartemtos() {
         List<Departamento> departamentos = new ArrayList<>(FachadaDAO.listarDepartamentos());
-        for(Departamento departamento : departamentos)
+        for (Departamento departamento : departamentos)
             view.getDepartamentoBox().addItem(departamento.getNome());
     }
 }

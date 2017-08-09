@@ -25,20 +25,19 @@ public class BuscaAlunoControl implements ActionListener {
         List<Aluno> alunos;
         model = (DefaultTableModel) view.getTable().getModel();
         model.setRowCount(0);
-        if(e.getSource() == view.getBuscarButton()){
+        if (e.getSource() == view.getBuscarButton()) {
             aluno = FachadaDAO.buscaAlunoCPF(view.getCpfField().getText());
-            if(aluno != null){
+            if (aluno != null) {
                 model.addRow(new Object[]{aluno.getId(), aluno.getNome(), aluno.getCpf(), aluno.getMatricula(),
                         aluno.getEndereco(), aluno.getEmail(), aluno.getSituacao()});
-            }
-            else
+            } else
                 JOptionPane.showMessageDialog(null, "Aluno não encontrado");
         }
-        if(e.getSource() == view.getListarTodosButton()){
+        if (e.getSource() == view.getListarTodosButton()) {
             alunos = new ArrayList<>(FachadaDAO.listarAlunos());
-            for(Aluno aluno : alunos){
+            for (Aluno aluno : alunos) {
                 model.addRow(new Object[]{aluno.getId(), aluno.getNome(), aluno.getCpf(), aluno.getMatricula(),
-                aluno.getEndereco(), aluno.getEmail(), aluno.getSituacao()});
+                        aluno.getEndereco(), aluno.getEmail(), aluno.getSituacao()});
             }
         }
     }

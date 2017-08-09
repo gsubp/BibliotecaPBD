@@ -23,7 +23,7 @@ public class VerEmprestimoControl implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == view.getListarTodosButton()) {
+        if (e.getSource() == view.getListarTodosButton()) {
             if (view.getUsuario() instanceof Aluno)
                 emprestimos = new ArrayList<>(FachadaDAO.getAlunoEmprestimos((Aluno) view.getUsuario()));
             else

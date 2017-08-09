@@ -2,12 +2,11 @@ package br.com.model.dao;
 
 import br.com.model.pojo.*;
 
-import java.text.DateFormat;
 import java.util.*;
 
 public class FachadaDAO {
     public static Aluno cadastrarAluno(String nome, String cpf, int matricula, String endereco, String email,
-                                      String senha, String codigo, List<String> telefones) {
+                                       String senha, String codigo, List<String> telefones) {
         Aluno aluno = new Aluno();
         List<Telefone> telefoneList = new ArrayList<>();
         aluno.setNome(nome);
@@ -18,7 +17,7 @@ public class FachadaDAO {
         aluno.setSenha(senha);
         aluno.setCodigo(codigo);
         aluno.setSituacao("Regularizado");
-        for(String s : telefones){
+        for (String s : telefones) {
             Telefone telefone = new Telefone();
             telefone.setTelefone(s);
             telefoneList.add(telefone);
@@ -29,15 +28,15 @@ public class FachadaDAO {
     }
 
     public static Aluno loginAluno(String login, String senha) {
-       return AlunoDAO.login(login, senha);
+        return AlunoDAO.login(login, senha);
     }
 
     public static Professor loginProfessor(String login, String senha) {
-        return ProfessorDAO.login(login,senha);
+        return ProfessorDAO.login(login, senha);
     }
 
     public static Funcionario loginFuncionario(String login, String senha) {
-        return FuncionarioDAO.login(login,senha);
+        return FuncionarioDAO.login(login, senha);
     }
 
     public static Funcionario cadastrarFuncionario(String nome, String cpf, String senha, int matricula) {
@@ -85,12 +84,12 @@ public class FachadaDAO {
         livro.setEdicao(edicao);
         livro.setEditora(editora);
         livro.setAno(ano);
-        for(int i = 0; i < exemplares; i++) {
+        for (int i = 0; i < exemplares; i++) {
             Exemplar exemplar = new Exemplar();
             exemplar.setSituacao("Disponível");
             exemplaresList.add(exemplar);
         }
-        for(String s : autoresList){
+        for (String s : autoresList) {
             Autor autor = new Autor();
             autor.setAutor(s);
             autores.add(autor);
@@ -113,27 +112,27 @@ public class FachadaDAO {
         professor.setSenha(senha);
         professor.setDepartamento(departamento);
         professor.setSituacao("Regularizado");
-        for(String s : telefones){
+        for (String s : telefones) {
             Telefone telefone = new Telefone();
             telefone.setTelefone(s);
             telefoneListf.add(telefone);
         }
         professor.setTelefones(telefoneListf);
-        return  (Professor) new ProfessorDAO().persist(professor);
+        return (Professor) new ProfessorDAO().persist(professor);
     }
 
     public static List<Livro> buscaLivroFiltro(String filtro, String busca) {
         LivroDAO dao = new LivroDAO();
         List<Livro> livros = null;
-        if(filtro.equals("Palavra-chave"))
+        if (filtro.equals("Palavra-chave"))
             livros = dao.findByPalavraChave(busca);
-        if(filtro.equals("Titulo"))
+        if (filtro.equals("Titulo"))
             livros = dao.findByTitulo(busca);
-        if(filtro.equals("Autor"))
+        if (filtro.equals("Autor"))
             livros = dao.findByAutor(busca);
-        if(filtro.equals("Editora"))
+        if (filtro.equals("Editora"))
             livros = dao.findByEditora(busca);
-        if(filtro.equals("Ano"))
+        if (filtro.equals("Ano"))
             livros = dao.findByAno(busca);
         return livros;
     }

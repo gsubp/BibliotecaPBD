@@ -3,10 +3,11 @@ package br.com.view;
 import br.com.control.CadastroAlunoControl;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CadastroAluno extends JFrame{
+public class CadastroAluno extends JFrame {
     private JPanel rootPanel;
     private JTextField snomeField;
     private JTextField nomeField;
@@ -32,14 +33,14 @@ public class CadastroAluno extends JFrame{
         pack();
         setTitle("Cadastro de Alunos");
         setContentPane(rootPanel);
-        setSize(525,500);
+        setSize(525, 500);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         lista = new ArrayList<>();
 
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(new String[]{ "AC", "AL", "AM", "AP", "BA",
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(new String[]{"AC", "AL", "AM", "AP", "BA",
                 "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS",
-                "SC", "SE", "SP", "TO" });
+                "SC", "SE", "SP", "TO"});
         estadoBox.setModel(model);
 
         // add action listeners
@@ -125,4 +126,5 @@ public class CadastroAluno extends JFrame{
     public JTextField getCodigoField() {
         return codigoField;
     }
+
 }

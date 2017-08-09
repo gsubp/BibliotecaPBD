@@ -5,7 +5,6 @@ import br.com.model.pojo.Livro;
 import br.com.view.BuscaLivro;
 
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,22 +21,22 @@ public class BuscaLivroControl implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String filtro = null;
         List<Livro> livros;
-        if(view.getPalavraChaveRadioButton().isSelected())
+        if (view.getPalavraChaveRadioButton().isSelected())
             filtro = view.getPalavraChaveRadioButton().getText();
-        if(view.getTituloRadioButton().isSelected())
+        if (view.getTituloRadioButton().isSelected())
             filtro = view.getTituloRadioButton().getText();
-        if(view.getAutorRadioButton().isSelected())
+        if (view.getAutorRadioButton().isSelected())
             filtro = view.getAutorRadioButton().getText();
-        if(view.getEditoraRadioButton().isSelected())
+        if (view.getEditoraRadioButton().isSelected())
             filtro = view.getEditoraRadioButton().getText();
-        if(view.getAnoRadioButton().isSelected())
+        if (view.getAnoRadioButton().isSelected())
             filtro = view.getAnoRadioButton().getText();
 
         livros = new ArrayList<>(FachadaDAO.buscaLivroFiltro(filtro, view.getBuscaField().getText()));
         DefaultTableModel model = (DefaultTableModel) view.getLivroTable().getModel();
         model.setRowCount(0);
-        for(Livro l : livros){
-            model.addRow(new Object[]{l.getId(), l.getTitulo(), l.getAutores().get(0).getAutor()+"...", l.getEditora(),
+        for (Livro l : livros) {
+            model.addRow(new Object[]{l.getId(), l.getTitulo(), l.getAutores().get(0).getAutor() + "...", l.getEditora(),
                     l.getEdicao(), l.getAno(), l.getExemplares().size()});
         }
     }

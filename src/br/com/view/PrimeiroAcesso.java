@@ -3,11 +3,12 @@ package br.com.view;
 import br.com.control.PrimeiroAcessoControl;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by guilh on 10/07/2017.
  */
-public class PrimeiroAcesso extends JFrame{
+public class PrimeiroAcesso extends JFrame {
     private JPanel rootPanel;
     private JButton cancelarButton;
     private JButton OKButton;
@@ -15,10 +16,10 @@ public class PrimeiroAcesso extends JFrame{
     private JRadioButton professorRadioButton;
     private JRadioButton funcionárioRadioButton;
 
-    public PrimeiroAcesso(){
+    public PrimeiroAcesso() {
         pack();
         setContentPane(rootPanel);
-        setSize(325,175);
+        setSize(325, 175);
 
         ButtonGroup group = new ButtonGroup();
         group.add(alunoRadioButton);
@@ -50,4 +51,5 @@ public class PrimeiroAcesso extends JFrame{
     public JRadioButton getFuncionárioRadioButton() {
         return funcionárioRadioButton;
     }
+
 }

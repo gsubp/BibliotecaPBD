@@ -2,7 +2,6 @@ package br.com.control;
 
 import br.com.model.dao.FachadaDAO;
 import br.com.model.pojo.Funcionario;
-import br.com.model.pojo.Professor;
 import br.com.view.BuscaFuncionario;
 
 import javax.swing.*;
@@ -26,17 +25,17 @@ public class BuscaFuncionarioControl implements ActionListener {
         List<Funcionario> funcionarios;
         model = (DefaultTableModel) view.getTable().getModel();
         model.setRowCount(0);
-        if(e.getSource() == view.getBuscarButton()){
+        if (e.getSource() == view.getBuscarButton()) {
             funcionario = FachadaDAO.buscaFuncionarioCPF(view.getCpfField().getText());
-            if(funcionario != null)
+            if (funcionario != null)
                 model.addRow(new Object[]{funcionario.getId(), funcionario.getNome(), funcionario.getCpf(),
                         funcionario.getMatricula()});
             else
                 JOptionPane.showMessageDialog(null, "Aluno não encontrado");
         }
-        if(e.getSource() == view.getListarTodosButton()){
+        if (e.getSource() == view.getListarTodosButton()) {
             funcionarios = new ArrayList<>(FachadaDAO.listarFuncionarios());
-            for(Funcionario funcionario : funcionarios)
+            for (Funcionario funcionario : funcionarios)
                 model.addRow(new Object[]{funcionario.getId(), funcionario.getNome(), funcionario.getCpf(),
                         funcionario.getMatricula()});
         }

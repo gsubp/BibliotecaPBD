@@ -5,8 +5,9 @@ import br.com.model.pojo.Funcionario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
-public class NovaDevolução extends JFrame{
+public class NovaDevolução extends JFrame {
     private JPanel rootPanel;
     private JTextField idField;
     private JButton devolverButton;
@@ -18,11 +19,11 @@ public class NovaDevolução extends JFrame{
     private JButton buscarUsuarioButton;
     private Funcionario funcionario;
 
-    public NovaDevolução(Funcionario funcionario){
+    public NovaDevolução(Funcionario funcionario) {
         this.funcionario = funcionario;
 
         setContentPane(rootPanel);
-        setSize(600,500);
+        setSize(600, 500);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         ButtonGroup group = new ButtonGroup();
@@ -77,4 +78,5 @@ public class NovaDevolução extends JFrame{
     public Funcionario getFuncionario() {
         return funcionario;
     }
+
 }

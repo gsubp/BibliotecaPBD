@@ -4,10 +4,9 @@ import br.com.control.TelaAlunoControl;
 import br.com.model.pojo.Aluno;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 
-public class TelaAluno extends JFrame{
+public class TelaAluno extends JFrame {
     private JPanel rootPanel;
     private JButton livroButton;
     private JButton novoEmprestimoButton;
@@ -22,11 +21,11 @@ public class TelaAluno extends JFrame{
     private JLabel situacaoLabel;
     private Aluno aluno;
 
-    public TelaAluno(Aluno aluno){
+    public TelaAluno(Aluno aluno) {
         this.aluno = aluno;
         pack();
         setContentPane(rootPanel);
-        setSize(550,200);
+        setSize(550, 200);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,4 +73,5 @@ public class TelaAluno extends JFrame{
     public Aluno getAluno() {
         return aluno;
     }
+
 }

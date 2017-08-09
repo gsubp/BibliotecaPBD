@@ -1,22 +1,22 @@
 package br.com.view;
 
-import br.com.control.BuscaAlunoControl;
 import br.com.control.BuscaFuncionarioControl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
-public class BuscaFuncionario extends JFrame{
+public class BuscaFuncionario extends JFrame {
     private JTextField cpfField;
     private JButton buscarButton;
     private JButton listarTodosButton;
     private JTable table;
     private JPanel rootPanel;
 
-    public BuscaFuncionario(){
+    public BuscaFuncionario() {
         pack();
         setContentPane(rootPanel);
-        setSize(500,500);
+        setSize(500, 500);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         DefaultTableModel model = new DefaultTableModel();
@@ -49,4 +49,5 @@ public class BuscaFuncionario extends JFrame{
     public JTextField getCpfField() {
         return cpfField;
     }
+
 }

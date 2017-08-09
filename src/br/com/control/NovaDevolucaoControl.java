@@ -28,32 +28,31 @@ public class NovaDevolucaoControl implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         List<Emprestimo> emprestimos;
-        if(e.getSource() == view.getBuscarUsuarioButton()){
-            if(view.getAlunoRadioButton().isSelected())
+        if (e.getSource() == view.getBuscarUsuarioButton()) {
+            if (view.getAlunoRadioButton().isSelected())
                 usuario = FachadaDAO.buscaAlunoCPF(view.getCpfField().getText());
-            if(view.getProfessorRadioButton().isSelected())
+            if (view.getProfessorRadioButton().isSelected())
                 usuario = FachadaDAO.buscaProfessorCPF(view.getCpfField().getText());
-            if(!usuario.equals(null))
+            if (!usuario.equals(null))
                 JOptionPane.showMessageDialog(null, "Encotrado!");
             else
                 JOptionPane.showMessageDialog(null, "Não encontrado!");
-            if(usuario instanceof Aluno){
+            if (usuario instanceof Aluno) {
                 emprestimos = new ArrayList<>(FachadaDAO.getAlunoEmprestimos((Aluno) usuario));
-            }
-            else
+            } else
                 emprestimos = new ArrayList<>(FachadaDAO.getProfessorEmprestimos((Professor) usuario));
 
 
             model = (DefaultTableModel) view.getEmprestimoTable().getModel();
             model.setRowCount(0);
-            for(Emprestimo emprestimo : emprestimos){
+            for (Emprestimo emprestimo : emprestimos) {
                 model.addRow(new Object[]{emprestimo.getId(),
                         emprestimo.getRealizaEmprestimo().getExemplar().getLivro().getTitulo(),
                         emprestimo.getEmprestimo(), emprestimo.getEntrega()});
             }
         }
 
-        if(e.getSource() == view.getDevolverButton()){
+        if (e.getSource() == view.getDevolverButton()) {
             devolveEmprestimo = FachadaDAO.devolverEmprestimo(usuario,
                     Long.valueOf(view.getIdField().getText()), view.getFuncionario());
             Emprestimo emprestimo = devolveEmprestimo.getEmprestimo();
@@ -64,11 +63,11 @@ public class NovaDevolucaoControl implements ActionListener {
             Period period = Period.between(dEntrega, dAtual);
             int dias = period.getDays();
             int multa;
-            if(dias > 0){
+            if (dias > 0) {
                 multa = dias;
                 JOptionPane.showMessageDialog(null, "Multa de R$!!" + multa + ",00");
             }
-            if(devolveEmprestimo != null)
+            if (devolveEmprestimo != null)
                 JOptionPane.showMessageDialog(null, "Devolução efetuada.");
             else
                 JOptionPane.showMessageDialog(null, "Devolução não efetuada.");

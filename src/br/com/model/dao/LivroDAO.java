@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by guilh on 17/07/2017.
  */
-public class LivroDAO extends DAO{
+public class LivroDAO extends DAO {
     @Override
     public Object persist(Object object) {
         super.persist(object);
@@ -18,12 +18,12 @@ public class LivroDAO extends DAO{
         ExemplarDAO exemplarDAO = new ExemplarDAO();
         AutorDAO autorDAO = new AutorDAO();
 
-        for(Autor autor : livro.getAutores()){
+        for (Autor autor : livro.getAutores()) {
             autor.setLivro(livro);
             autorDAO.persist(autor);
         }
 
-        for(Exemplar exemplar : livro.getExemplares()){
+        for (Exemplar exemplar : livro.getExemplares()) {
             exemplar.setLivro(livro);
             exemplarDAO.persist(exemplar);
         }
@@ -57,11 +57,11 @@ public class LivroDAO extends DAO{
 
     public List<Livro> findByPalavraChave(String busca) {
         Query query = getEntityManager().createQuery("select l from Livro l where titulo like ?");
-        query.setParameter(0, "%"+busca+"%");
+        query.setParameter(0, "%" + busca + "%");
         return query.getResultList();
     }
 
-    public List<Livro> getLivros(){
+    public List<Livro> getLivros() {
         Query query = getEntityManager().createQuery("select l from Livro l");
         return query.getResultList();
     }

@@ -11,14 +11,15 @@ import java.awt.event.ActionListener;
  */
 public class CadasdtroFuncionarioControl implements ActionListener {
     private CadastroFuncionario view;
+
     public CadasdtroFuncionarioControl(CadastroFuncionario view) {
         this.view = view;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == view.getCadasdtrarButton()){
-            String nome = view.getNomeFIeld().getText() + " "+ view.getSnomeField().getText();
+        if (e.getSource() == view.getCadasdtrarButton()) {
+            String nome = view.getNomeFIeld().getText() + " " + view.getSnomeField().getText();
             String cpf = view.getCpfField().getText();
             String senha = String.valueOf(view.getSenhaField().getPassword());
             int matricula = Integer.parseInt(view.getMatriculaField().getText());
@@ -26,12 +27,12 @@ public class CadasdtroFuncionarioControl implements ActionListener {
             limpar();
             try {
 
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
         }
-        if(e.getSource() == view.getLimparButton()){
+        if (e.getSource() == view.getLimparButton()) {
             limpar();
         }
     }

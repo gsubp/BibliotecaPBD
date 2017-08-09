@@ -4,8 +4,9 @@ import br.com.control.BuscaLivroControl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
-public class BuscaLivro extends JFrame{
+public class BuscaLivro extends JFrame {
     private JPanel rootPanel;
     private JRadioButton palavraChaveRadioButton;
     private JRadioButton autorRadioButton;
@@ -16,12 +17,13 @@ public class BuscaLivro extends JFrame{
     private JButton buscarButton;
     private JTable livroTable;
 
-    public BuscaLivro(){
-        pack();;
+    public BuscaLivro() {
+        pack();
+        ;
         setTitle("Buscar Livros");
         setContentPane(rootPanel);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(600,500);
+        setSize(600, 500);
 
         ButtonGroup group = new ButtonGroup();
         palavraChaveRadioButton.setSelected(true);
@@ -78,4 +80,5 @@ public class BuscaLivro extends JFrame{
     public JTable getLivroTable() {
         return livroTable;
     }
+
 }

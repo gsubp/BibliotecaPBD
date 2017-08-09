@@ -24,7 +24,8 @@ public class EfetuaReserva {
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
 
-    public EfetuaReserva() {}
+    public EfetuaReserva() {
+    }
 
     public Long getId() {
         return id;

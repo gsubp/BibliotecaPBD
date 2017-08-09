@@ -5,17 +5,19 @@ import br.com.model.pojo.Usuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
-public class VerEmprestimo extends JFrame{
+public class VerEmprestimo extends JFrame {
     private JPanel rootPanel;
     private JButton listarTodosButton;
     private JTable table;
     private Usuario usuario;
-    public VerEmprestimo(Usuario usuario){
+
+    public VerEmprestimo(Usuario usuario) {
         this.usuario = usuario;
         pack();
         setContentPane(rootPanel);
-        setSize(500,500);
+        setSize(500, 500);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         DefaultTableModel model = new DefaultTableModel();
@@ -42,4 +44,5 @@ public class VerEmprestimo extends JFrame{
     public Usuario getUsuario() {
         return usuario;
     }
+
 }

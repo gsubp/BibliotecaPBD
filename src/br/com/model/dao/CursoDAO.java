@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by guilh on 17/07/2017.
  */
-public class CursoDAO extends DAO{
+public class CursoDAO extends DAO {
     public Curso findByNome(String nome) {
         Query query = getEntityManager().createQuery("select c from Curso c where c.nome = ?");
         query.setParameter(0, nome);

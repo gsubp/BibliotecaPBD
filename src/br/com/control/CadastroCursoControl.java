@@ -14,25 +14,26 @@ import java.util.List;
  */
 public class CadastroCursoControl implements ActionListener {
     private CadastroCurso view;
+
     public CadastroCursoControl(CadastroCurso view) {
         this.view = view;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == view.getCadastrarButton()) {
+        if (e.getSource() == view.getCadastrarButton()) {
             String nome = view.getCursoField().getText();
             String nomeDepartamento = view.getComboBox().getSelectedItem().toString();
             Departamento departamento = FachadaDAO.buscaDepartamento(nomeDepartamento);
             FachadaDAO.cadastrarCurso(nome, departamento);
         }
-        if(e.getSource() == view.getCancelarButton())
+        if (e.getSource() == view.getCancelarButton())
             view.dispose();
     }
 
-    public void getDepartemtos(){
+    public void getDepartemtos() {
         List<Departamento> departamentos = new ArrayList<>(FachadaDAO.listarDepartamentos());
-        for(Departamento departamento : departamentos)
+        for (Departamento departamento : departamentos)
             view.getComboBox().addItem(departamento.getNome());
     }
 }

@@ -18,7 +18,9 @@ public class Emprestimo {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "emprestimo", targetEntity = RealizaEmprestimo.class)
     private RealizaEmprestimo realizaEmprestimo;
 
-    public Emprestimo() {super();}
+    public Emprestimo() {
+        super();
+    }
 
     public Long getId() {
         return id;

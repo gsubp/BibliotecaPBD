@@ -3,14 +3,14 @@ package br.com.view;
 import br.com.control.CadastroLivroControl;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Created by guilh on 17/07/2017.
  */
-public class CadastroLivro extends JFrame{
+public class CadastroLivro extends JFrame {
     private List<String> lista;
     private JButton cancelarButton;
     private JButton cadastrarButton;
@@ -25,11 +25,11 @@ public class CadastroLivro extends JFrame{
     private JTextField anoField;
     private JTextArea autoresList;
 
-    public CadastroLivro(){
+    public CadastroLivro() {
         pack();
         setContentPane(rootPanel);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(500,375);
+        setSize(500, 375);
 
         lista = new ArrayList<>();
         cadastrarButton.addActionListener(new CadastroLivroControl(this));
@@ -85,4 +85,5 @@ public class CadastroLivro extends JFrame{
     public List<String> getLista() {
         return lista;
     }
+
 }

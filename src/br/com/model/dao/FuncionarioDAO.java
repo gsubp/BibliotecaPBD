@@ -1,10 +1,11 @@
 package br.com.model.dao;
 
 import br.com.model.pojo.Funcionario;
+
 import javax.persistence.Query;
 import java.util.List;
 
-public class FuncionarioDAO extends DAO{
+public class FuncionarioDAO extends DAO {
 
     public static Funcionario login(String login, String senha) {
         Funcionario funcionario = null;
@@ -15,7 +16,7 @@ public class FuncionarioDAO extends DAO{
             query.setParameter(1, senha);
             funcionario = (Funcionario) query.getSingleResult();
             getEntityManager().getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             getEntityManager().getTransaction().rollback();
         }
         return funcionario;

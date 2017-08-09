@@ -21,9 +21,9 @@ public class CadastroDepartamentoControl implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == view.getCadastrarButton()) {
+        if (e.getSource() == view.getCadastrarButton()) {
             departamento = FachadaDAO.cadastrarDepartamento(view.getDepartamentoField().getText());
-            if(departamento != null)
+            if (departamento != null)
                 JOptionPane.showMessageDialog(null, "Departamento cadastrado.");
             else
                 JOptionPane.showMessageDialog(null, "Erro cadastrar.");

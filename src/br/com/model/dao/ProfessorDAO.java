@@ -1,22 +1,22 @@
 package br.com.model.dao;
-import br.com.model.pojo.Aluno;
+
 import br.com.model.pojo.Professor;
 import br.com.model.pojo.Telefone;
 
 import javax.persistence.Query;
 import java.util.List;
 
-public class ProfessorDAO extends DAO{
+public class ProfessorDAO extends DAO {
     public static Professor login(String login, String senha) {
         Professor professor = null;
-        try{
+        try {
             getEntityManager().getTransaction().begin();
             Query query = getEntityManager().createQuery("select professor from Professor professor " +
                     "where cpf = ? and senha = ?");
             query.setParameter(0, login);
             query.setParameter(1, senha);
             professor = (Professor) query.getSingleResult();
-        }catch (Exception e){
+        } catch (Exception e) {
             getEntityManager().getTransaction().rollback();
         }
         return professor;
@@ -27,7 +27,7 @@ public class ProfessorDAO extends DAO{
         super.persist(object);
         Professor professor = (Professor) object;
         TelefoneDAO dao = new TelefoneDAO();
-        for(Telefone telefone : professor.getTelefones()){
+        for (Telefone telefone : professor.getTelefones()) {
             telefone.setUsuario(professor);
             dao.persist(telefone);
         }

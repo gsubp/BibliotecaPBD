@@ -3,17 +3,18 @@ package br.com.view;
 import br.com.control.CadastroDepartamentoControl;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class CadastroDepartamento extends JFrame{
+public class CadastroDepartamento extends JFrame {
     private JPanel rootPanel;
     private JButton cancelarButton;
     private JButton cadastrarButton;
     private JTextField departamentoField;
 
-    public CadastroDepartamento(){
+    public CadastroDepartamento() {
         pack();
         setContentPane(rootPanel);
-        setSize(325,125);
+        setSize(325, 125);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -33,4 +34,5 @@ public class CadastroDepartamento extends JFrame{
     public JTextField getDepartamentoField() {
         return departamentoField;
     }
+
 }

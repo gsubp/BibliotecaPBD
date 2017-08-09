@@ -3,13 +3,14 @@ package br.com.view;
 import br.com.control.CadastroProfessorControl;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by guilh on 04/07/2017.
  */
-public class CadastroProfessor extends JFrame{
+public class CadastroProfessor extends JFrame {
     private JPanel rootPanel;
     private JTextField nomeField;
     private JTextField snomeField;
@@ -31,16 +32,16 @@ public class CadastroProfessor extends JFrame{
     private JTextArea listTelefone;
     private List<String> lista;
 
-    public CadastroProfessor(){
+    public CadastroProfessor() {
         pack();
         setContentPane(rootPanel);
-        setSize(525,600);
+        setSize(525, 600);
         setTitle("Cadastro de Professores");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         lista = new ArrayList<>();
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(new String[]{ "AC", "AL", "AM", "AP", "BA",
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(new String[]{"AC", "AL", "AM", "AP", "BA",
                 "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS",
-                "SC", "SE", "SP", "TO" });
+                "SC", "SE", "SP", "TO"});
         estadoBox.setModel(model);
 
         new CadastroProfessorControl(this).getDepartemtos();
@@ -126,4 +127,5 @@ public class CadastroProfessor extends JFrame{
     public List<String> getLista() {
         return lista;
     }
+
 }

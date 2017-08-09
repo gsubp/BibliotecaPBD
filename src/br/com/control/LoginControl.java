@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 
 public class LoginControl implements ActionListener {
     private Login view;
+
     public LoginControl(Login view) {
         this.view = view;
     }
@@ -20,44 +21,41 @@ public class LoginControl implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // eventos da tela de login
-        if(e.getSource() == view.getLoginButton()){
+        if (e.getSource() == view.getLoginButton()) {
             String login = view.getLoginField().getText();
             String senha = view.getSenhaField().getText();
 
-            if(view.getComboBox().getSelectedIndex() == 0) {
+            if (view.getComboBox().getSelectedIndex() == 0) {
                 Aluno aluno = FachadaDAO.loginAluno(login, senha);
-                if(aluno != null) {
+                if (aluno != null) {
                     new TelaAluno(aluno);
                     view.dispose();
-                }
-                else
-                    JOptionPane.showMessageDialog(null,"Aluno não cadastrado!");
+                } else
+                    JOptionPane.showMessageDialog(null, "Aluno não cadastrado!");
             }
-            if(view.getComboBox().getSelectedIndex() == 1) {
+            if (view.getComboBox().getSelectedIndex() == 1) {
                 Professor professor = FachadaDAO.loginProfessor(login, senha);
-                if(professor != null){
+                if (professor != null) {
                     new TelaProfessor(professor);
                     view.dispose();
-                }
-                else
-                    JOptionPane.showMessageDialog(null,"Professor não cadastrado!");
+                } else
+                    JOptionPane.showMessageDialog(null, "Professor não cadastrado!");
             }
-            if(view.getComboBox().getSelectedIndex() == 2) {
-                Funcionario funcionario =  FachadaDAO.loginFuncionario(login, senha);
-                if(funcionario != null){
-                    new TelaFuncionario(funcionario);
+            if (view.getComboBox().getSelectedIndex() == 2) {
+                Funcionario funcionario = FachadaDAO.loginFuncionario(login, senha);
+                if (funcionario != null) {
+                    new HomeFuncionario(funcionario);
                     view.dispose();
-                }
-                else
-                    JOptionPane.showMessageDialog(null,"Funcionário não cadastrado!");
+                } else
+                    JOptionPane.showMessageDialog(null, "Funcionário não cadastrado!");
             }
         }
 
-        if(e.getSource() == view.getPrimeiroAcessoButton())
+        if (e.getSource() == view.getPrimeiroAcessoButton())
             new PrimeiroAcesso();
-        if(e.getSource() == view.getSomenteBuscasButton())
+        if (e.getSource() == view.getSomenteBuscasButton())
             new BuscaLivro();
-        if(e.getSource() == view.getCancelarButton())
+        if (e.getSource() == view.getCancelarButton())
             System.exit(0);
     }
 }

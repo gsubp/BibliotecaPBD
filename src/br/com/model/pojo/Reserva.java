@@ -12,13 +12,13 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "data_realizacao", nullable =  false)
+    @Column(name = "data_realizacao", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date realizacao;
-    @Column(name = "data_validacao", nullable =  false)
+    @Column(name = "data_validacao", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date validacao;
-    @Column(name = "data_limite", nullable =  false)
+    @Column(name = "data_limite", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date limite;
     @OneToOne(mappedBy = "reserva", targetEntity = EfetuaReserva.class)
@@ -27,7 +27,8 @@ public class Reserva {
     private boolean isRegistrado;
 
 
-    public Reserva(){}
+    public Reserva() {
+    }
 
     public Long getId() {
         return id;

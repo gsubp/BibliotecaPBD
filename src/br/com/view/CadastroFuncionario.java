@@ -3,11 +3,12 @@ package br.com.view;
 import br.com.control.CadasdtroFuncionarioControl;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by guilh on 04/07/2017.
  */
-public class CadastroFuncionario extends JFrame{
+public class CadastroFuncionario extends JFrame {
     private JPanel rootPanel;
     private JTextField nomeFIeld;
     private JTextField snomeField;
@@ -17,10 +18,10 @@ public class CadastroFuncionario extends JFrame{
     private JButton limparButton;
     private JButton cadasdtrarButton;
 
-    public CadastroFuncionario(){
+    public CadastroFuncionario() {
         pack();
         setContentPane(rootPanel);
-        setSize(500,175);
+        setSize(500, 175);
 
         cadasdtrarButton.addActionListener(new CadasdtroFuncionarioControl(this));
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -55,4 +56,5 @@ public class CadastroFuncionario extends JFrame{
     public JButton getCadasdtrarButton() {
         return cadasdtrarButton;
     }
+
 }

@@ -24,7 +24,9 @@ public class RealizaEmprestimo {
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
 
-    public RealizaEmprestimo(){ super(); }
+    public RealizaEmprestimo() {
+        super();
+    }
 
     public Long getId() {
 

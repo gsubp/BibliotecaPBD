@@ -4,13 +4,12 @@ import br.com.control.TelaProfessorControl;
 import br.com.model.pojo.Professor;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 
 /**
  * Created by guilh on 10/07/2017.
  */
-public class TelaProfessor extends JFrame{
+public class TelaProfessor extends JFrame {
     private JPanel rootPanel;
     private JButton sairButton;
     private JLabel professorLabel;
@@ -25,10 +24,10 @@ public class TelaProfessor extends JFrame{
     private JLabel situacaoLabel;
     private Professor professor;
 
-    public TelaProfessor(Professor professor){
+    public TelaProfessor(Professor professor) {
         this.professor = professor;
         pack();
-        setSize(400,200);
+        setSize(400, 200);
         setContentPane(rootPanel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         professorLabel.setText(professor.getNome());
@@ -78,4 +77,5 @@ public class TelaProfessor extends JFrame{
     public Professor getProfessor() {
         return professor;
     }
+
 }

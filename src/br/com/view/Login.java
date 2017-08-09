@@ -3,8 +3,9 @@ package br.com.view;
 import br.com.control.LoginControl;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class Login extends JFrame{
+public class Login extends JFrame {
     private JPanel rootPanel;
     private JTextField loginField;
     private JTextField senhaField;
@@ -14,10 +15,11 @@ public class Login extends JFrame{
     private JButton primeiroAcessoButton;
     private JButton somenteBuscasButton;
 
-    public Login(){
-        pack();
+    public Login() {
         setContentPane(rootPanel);
-        setSize(350,200);
+        pack();
+
+        setSize(350, 200);
 
 
         loginButton.addActionListener(new LoginControl(this));
@@ -56,4 +58,5 @@ public class Login extends JFrame{
     public JButton getSomenteBuscasButton() {
         return somenteBuscasButton;
     }
+
 }

@@ -5,8 +5,9 @@ import br.com.model.pojo.Usuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
-public class NovaReserva extends JFrame{
+public class NovaReserva extends JFrame {
     private JPanel rootPanel;
     private JRadioButton palavraChaveRadioButton;
     private JRadioButton anoRadioButton;
@@ -21,12 +22,13 @@ public class NovaReserva extends JFrame{
     private JButton efetuarrButton;
     private Usuario usuario;
 
-    public NovaReserva(Usuario usuario){
-        pack();;
+    public NovaReserva(Usuario usuario) {
+        pack();
+        ;
         setTitle("Buscar Livros");
         setContentPane(rootPanel);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(600,500);
+        setSize(600, 500);
         this.usuario = usuario;
         ButtonGroup group = new ButtonGroup();
         palavraChaveRadioButton.setSelected(true);
@@ -102,4 +104,5 @@ public class NovaReserva extends JFrame{
     public Usuario getUsuario() {
         return usuario;
     }
+
 }

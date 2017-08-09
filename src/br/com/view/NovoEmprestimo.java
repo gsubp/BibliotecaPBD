@@ -1,12 +1,12 @@
 package br.com.view;
 
-import br.com.control.BuscaLivroControl;
 import br.com.control.NovoEmprestimoControl;
-import br.com.model.pojo.Usuario;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
-public class NovoEmprestimo extends JFrame{
+public class NovoEmprestimo extends JFrame {
     private JPanel rootPanel;
     private JRadioButton palavraChaveRadioButton;
     private JRadioButton anoRadioButton;
@@ -24,12 +24,13 @@ public class NovoEmprestimo extends JFrame{
     private JTextField cpfField;
     private JButton buscarUsuarioButton;
 
-    public NovoEmprestimo(){
-        pack();;
+    public NovoEmprestimo() {
+        pack();
+        ;
         setTitle("Buscar Livros");
         setContentPane(rootPanel);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(600,500);
+        setSize(600, 500);
         ButtonGroup groupBusca = new ButtonGroup();
         palavraChaveRadioButton.setSelected(true);
         groupBusca.add(palavraChaveRadioButton);
@@ -121,4 +122,5 @@ public class NovoEmprestimo extends JFrame{
     public JButton getBuscarUsuarioButton() {
         return buscarUsuarioButton;
     }
+
 }
