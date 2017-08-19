@@ -46,6 +46,10 @@ public class AlunoDAO extends DAO {
         return (Aluno) query.getSingleResult();
     }
 
+    public Aluno findById(Long id){
+        return getEntityManager().find(Aluno.class, id);
+    }
+
     public List<Aluno> list() {
         return getEntityManager().createQuery("select a from Aluno a").getResultList();
     }

@@ -51,4 +51,8 @@ public class ProfessorDAO extends DAO {
     public List<Professor> list() {
         return getEntityManager().createQuery("select p from Professor p").getResultList();
     }
+
+    public Professor findById(Long id) {
+        return getEntityManager().find(Professor.class, id);
+    }
 }

@@ -156,6 +156,7 @@ public class HomeFuncionario extends JFrame{
         buscaDevButton.addActionListener(control);
         buscaResButton.addActionListener(control);
         findAllUserButton.addActionListener(control);
+        blockUserButton.addActionListener(control);
     }
 
     public JButton getNovoAlunoButton() {

@@ -83,18 +83,47 @@ public class TelaFuncionarioControl implements ActionListener {
             }
         }
         if(e.getSource() == view.getFindAllUserButton()){
-            List<Aluno> alunos = new ArrayList<>(FachadaDAO.listarAlunos());
-            List<Professor> professors = new ArrayList<>(FachadaDAO.listarProfessores());
-
-            DefaultTableModel alunoModel = (DefaultTableModel) view.getAlunosTable().getModel();
-            alunoModel.setRowCount(0);
-            for(Aluno a : alunos)
-                alunoModel.addRow(new Object[]{a.getId(), a.getCpf(), a.getNome(), a.getSituacao()});
-
-            DefaultTableModel professorModel =(DefaultTableModel) view.getProfessoresTable().getModel();
-            professorModel.setRowCount(0);
-            for(Professor p : professors)
-                professorModel.addRow(new Object[]{p.getId(), p.getCpf(), p.getNome(), p.getSituacao()});
+            list();
         }
+        if(e.getSource() == view.getBlockUserButton()){
+            int[] rows = view.getAlunosTable().getSelectedRows();
+            for(int r : rows){
+                aluno = FachadaDAO.buscaAlunoId((Long) view.getAlunosTable().getValueAt(r,0));
+                FachadaDAO.suspenderAluno(aluno);
+            }
+
+            rows = view.getProfessoresTable().getSelectedRows();
+            for (int r : rows){
+                professor = FachadaDAO.buscaProfessorId((Long) view.getProfessoresTable().getValueAt(r,0));
+                FachadaDAO.suspenderProfessor(professor);
+            }
+            list();
+        }
+
+
+
+
+
+
+
+        if(e.getSource() == view.getSairButton()){
+            new Login();
+            view.dispose();
+        }
+    }
+
+    private void list() {
+        List<Aluno> alunos = new ArrayList<>(FachadaDAO.listarAlunos());
+        List<Professor> professors = new ArrayList<>(FachadaDAO.listarProfessores());
+
+        DefaultTableModel alunoModel = (DefaultTableModel) view.getAlunosTable().getModel();
+        alunoModel.setRowCount(0);
+        for(Aluno a : alunos)
+            alunoModel.addRow(new Object[]{a.getId(), a.getCpf(), a.getNome(), a.getSituacao()});
+
+        DefaultTableModel professorModel =(DefaultTableModel) view.getProfessoresTable().getModel();
+        professorModel.setRowCount(0);
+        for(Professor p : professors)
+            professorModel.addRow(new Object[]{p.getId(), p.getCpf(), p.getNome(), p.getSituacao()});
     }
 }

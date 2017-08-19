@@ -239,4 +239,23 @@ public class FachadaDAO {
     public static List<Funcionario> listarFuncionarios() {
         return new FuncionarioDAO().list();
     }
+
+    public static Aluno buscaAlunoId(Long id) {
+        return new AlunoDAO().findById(id);
+    }
+
+    public static void suspenderAluno(Aluno aluno) {
+        aluno.setSituacao("Suspenso");
+        new AlunoDAO().merge(aluno);
+    }
+
+    public static Professor buscaProfessorId(Long id) {
+        return new ProfessorDAO().findById(id);
+    }
+
+    public static void suspenderProfessor(Professor professor) {
+        professor.setSituacao("Suspenso");
+        new ProfessorDAO().merge(professor);
+    }
+
 }
