@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="301" height="191"/>
+      <xy x="20" y="20" width="340" height="191"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -23,14 +23,6 @@
             <properties>
               <text value="Login"/>
             </properties>
-          </component>
-          <component id="2ecdc" class="javax.swing.JTextField" binding="loginField">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="204" height="24"/>
-              </grid>
-            </constraints>
-            <properties/>
           </component>
           <component id="bfc12" class="javax.swing.JLabel">
             <constraints>
@@ -85,6 +77,14 @@
             <properties>
               <text value="Primeiro Acesso"/>
             </properties>
+          </component>
+          <component id="ad806" class="javax.swing.JFormattedTextField" binding="loginField">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
           </component>
         </children>
       </grid>

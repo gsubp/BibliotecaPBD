@@ -4,6 +4,7 @@ import br.com.model.pojo.Emprestimo;
 import br.com.model.pojo.RealizaEmprestimo;
 
 import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 import java.util.List;
 
 public class EmprestimoDAO extends DAO {
@@ -20,17 +21,15 @@ public class EmprestimoDAO extends DAO {
         return emprestimo;
     }
 
-    public List<Emprestimo> findByIdAluno(long id) {
-        Query query = getEntityManager().createQuery("select e from Emprestimo e join RealizaEmprestimo r " +
-                "on e.id = r.emprestimo.id join Aluno on ? = r.usuario.id");
-        query.setParameter(0, id);
+    public List<Emprestimo> findByIdAluno(Long id) {
+       StoredProcedureQuery query = getEntityManager().createNamedStoredProcedureQuery("getAlunoEmprestimos").
+                    setParameter("id_aluno", id);
         return query.getResultList();
     }
 
-    public List<Emprestimo> findByIdProfessor(long id) {
-        Query query = getEntityManager().createQuery("select e from Emprestimo e join RealizaEmprestimo r " +
-                "on e.id = r.emprestimo.id join Professor on ? = r.usuario.id");
-        query.setParameter(0, id);
+    public List<Emprestimo> findByIdProfessor(Long id) {
+        StoredProcedureQuery query = getEntityManager().createNamedStoredProcedureQuery("getProfessorEmprestimos").
+                setParameter("id_professor", id);
         return query.getResultList();
     }
 

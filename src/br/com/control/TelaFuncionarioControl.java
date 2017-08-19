@@ -1,8 +1,7 @@
 package br.com.control;
 
 import br.com.model.dao.FachadaDAO;
-import br.com.model.pojo.Funcionario;
-import br.com.model.pojo.Livro;
+import br.com.model.pojo.*;
 import br.com.view.*;
 
 import javax.swing.table.DefaultTableModel;
@@ -16,7 +15,9 @@ import java.util.List;
  */
 public class TelaFuncionarioControl implements ActionListener {
     private HomeFuncionario view;
-    private int op = 0;
+    private List<Emprestimo> emprestimos;
+    private Aluno aluno;
+    private Professor professor;
 
     public TelaFuncionarioControl(HomeFuncionario view, Funcionario funcionario) {
         this.view = view;
@@ -38,24 +39,6 @@ public class TelaFuncionarioControl implements ActionListener {
             new CadastroCurso();
         if (e.getSource() == view.getNovoLivroButton())
             new CadastroLivro();
-        if (e.getSource() == view.getEmprestimosButton()){
-            op = 0;
-            view.getReceberButton().setVisible(false);
-            view.getRegistrosTable().setModel(view.getEmprestimoTableModel());
-            view.getEmprestimoTableModel().setRowCount(0);
-        }
-        if(e.getSource() == view.getDevolucaoButton()){
-            op = 1;
-            view.getReceberButton().setVisible(true);
-            view.getRegistrosTable().setModel(view.getDevolucaoTableModel());
-            view.getDevolucaoTableModel().setRowCount(0);
-        }
-        if(e.getSource() == view.getReservasButton()){
-            op = 2;
-            view.getReceberButton().setVisible(false);
-            view.getRegistrosTable().setModel(view.getReservaTableModel());
-            view.getReservaTableModel().setRowCount(0);
-        }
         if (e.getSource() == view.getSairButton()){
             new Login();
             view.dispose();;
@@ -81,6 +64,37 @@ public class TelaFuncionarioControl implements ActionListener {
                 model.addRow(new Object[]{l.getId(), l.getTitulo(), l.getAutores().get(0).getAutor() + "...", l.getEditora(),
                         l.getEdicao(), l.getAno(), l.getExemplares().size()});
             }
+        }
+        if(e.getSource() == view.getBuscarEmpButton()){
+            if (view.getAlunoEmpRadioButton().isSelected()) {
+                aluno = FachadaDAO.buscaAlunoCPF(view.getCpfEmprestimoField().getText());
+                emprestimos = new ArrayList<>(FachadaDAO.getAlunoEmprestimos(aluno));
+            }
+            if (view.getProfessorEmpRadioButton().isSelected()) {
+                professor = FachadaDAO.buscaProfessorCPF(view.getCpfEmprestimoField().getText());
+                emprestimos = new ArrayList<>(FachadaDAO.getProfessorEmprestimos(professor));
+            }
+            DefaultTableModel model = (DefaultTableModel) view.getEmprestimosTable().getModel();
+            model.setRowCount(0);
+            for(Emprestimo emp : emprestimos){
+                model.addRow(new Object[]{emp.getId(), emp.getRealizaEmprestimo().getExemplar().getLivro().getTitulo(),
+                emp.getEmprestimo(), emp.getEntrega(), emp.getSituacao()});
+
+            }
+        }
+        if(e.getSource() == view.getFindAllUserButton()){
+            List<Aluno> alunos = new ArrayList<>(FachadaDAO.listarAlunos());
+            List<Professor> professors = new ArrayList<>(FachadaDAO.listarProfessores());
+
+            DefaultTableModel alunoModel = (DefaultTableModel) view.getAlunosTable().getModel();
+            alunoModel.setRowCount(0);
+            for(Aluno a : alunos)
+                alunoModel.addRow(new Object[]{a.getId(), a.getCpf(), a.getNome(), a.getSituacao()});
+
+            DefaultTableModel professorModel =(DefaultTableModel) view.getProfessoresTable().getModel();
+            professorModel.setRowCount(0);
+            for(Professor p : professors)
+                professorModel.addRow(new Object[]{p.getId(), p.getCpf(), p.getNome(), p.getSituacao()});
         }
     }
 }

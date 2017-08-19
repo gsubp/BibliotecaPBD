@@ -4,6 +4,20 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "getProfessorEmprestimos",
+                procedureName = "getProfessorEmprestimos",
+                resultClasses = Emprestimo.class,
+                parameters = {@StoredProcedureParameter(name = "id_professor", type = Long.class, mode = ParameterMode.IN)}
+        ),
+        @NamedStoredProcedureQuery(
+                name = "getAlunoEmprestimos",
+                procedureName = "getAlunoEmprestimos",
+                resultClasses = Emprestimo.class,
+                parameters = {@StoredProcedureParameter(name = "id_aluno", type = Long.class, mode = ParameterMode.IN)}
+        )
+})
 @Table(name = "emprestimo")
 public class Emprestimo {
     @Id
@@ -15,6 +29,8 @@ public class Emprestimo {
     @Column(name = "data_entrega", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date entrega;
+    @Column(nullable = false, length = 20)
+    private String situacao;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "emprestimo", targetEntity = RealizaEmprestimo.class)
     private RealizaEmprestimo realizaEmprestimo;
 
@@ -44,6 +60,14 @@ public class Emprestimo {
 
     public void setEntrega(Date entrega) {
         this.entrega = entrega;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
     public RealizaEmprestimo getRealizaEmprestimo() {

@@ -28,7 +28,7 @@ public class LoginControl implements ActionListener {
             if (view.getComboBox().getSelectedIndex() == 0) {
                 Aluno aluno = FachadaDAO.loginAluno(login, senha);
                 if (aluno != null) {
-                    new TelaAluno(aluno);
+                    new HomeUsuario(aluno);
                     view.dispose();
                 } else
                     JOptionPane.showMessageDialog(null, "Aluno não cadastrado!");
@@ -36,7 +36,7 @@ public class LoginControl implements ActionListener {
             if (view.getComboBox().getSelectedIndex() == 1) {
                 Professor professor = FachadaDAO.loginProfessor(login, senha);
                 if (professor != null) {
-                    new TelaProfessor(professor);
+                    new HomeUsuario(professor);
                     view.dispose();
                 } else
                     JOptionPane.showMessageDialog(null, "Professor não cadastrado!");

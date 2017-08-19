@@ -3,11 +3,13 @@ package br.com.view;
 import br.com.control.LoginControl;
 
 import javax.swing.*;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 
 public class Login extends JFrame {
     private JPanel rootPanel;
-    private JTextField loginField;
+    private JFormattedTextField loginField;
     private JTextField senhaField;
     private JButton loginButton;
     private JButton cancelarButton;
@@ -20,7 +22,10 @@ public class Login extends JFrame {
         pack();
 
         setSize(350, 200);
-
+        try {
+            DefaultFormatterFactory factory = new DefaultFormatterFactory(new MaskFormatter("###.###.###-##"));
+            loginField.setFormatterFactory(factory);
+        } catch (Exception e){}
 
         loginButton.addActionListener(new LoginControl(this));
         primeiroAcessoButton.addActionListener(new LoginControl(this));

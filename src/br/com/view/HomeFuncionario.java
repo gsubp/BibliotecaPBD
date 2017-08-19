@@ -5,24 +5,22 @@ import br.com.model.pojo.Funcionario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import java.text.ParseException;
 
 public class HomeFuncionario extends JFrame{
-    private final DefaultTableModel livroTableModel;
     private JButton novoAlunoButton;
     private JButton novoProfessorButton;
     private JButton novoFuncionárioButton;
     private JButton novoLivroButton;
     private JButton novoDepartamentoButton;
     private JButton novoCursoButton;
-    private JButton emprestimosButton;
-    private JButton reservasButton;
-    private JTable registrosTable;
-    private JRadioButton alunoRadioButton;
-    private JRadioButton professorRadioButton;
-    private JFormattedTextField cpfField;
-    private JButton buscarButton;
-    private JButton aprovarButton;
-    private JButton receberButton;
+    private JTable emprestimosTable;
+    private JRadioButton alunoEmpRadioButton;
+    private JRadioButton professorEmpRadioButton;
+    private JFormattedTextField cpfEmprestimoField;
+    private JButton buscarEmpButton;
     private JButton novoButton;
     private JButton relatóriosButton;
     private JLabel funcionarioLabel;
@@ -37,11 +35,22 @@ public class HomeFuncionario extends JFrame{
     private JRadioButton autorRadioButton;
     private JTable livroTable;
     private JButton buscarLivroButtton;
-    private JButton devolucaoButton;
-    private JPanel cadastrosPanel;
-    private final DefaultTableModel emprestimoTableModel;
-    private final DefaultTableModel devolucaoTableModel;
-    private final DefaultTableModel reservaTableModel;
+    private JRadioButton alunoResRadioButton;
+    private JRadioButton professorResRadioButton;
+    private JFormattedTextField cpfResField;
+    private JButton buscaResButton;
+    private JTable reservaTable;
+    private JFormattedTextField cpfDevField;
+    private JButton buscaDevButton;
+    private JRadioButton alunoDevRadioButton;
+    private JRadioButton professorDevRadioButton;
+    private JTable devolucaoTable;
+    private JButton blockUserButton;
+    private JButton unblockUserButton;
+    private JTable alunosTable;
+    private JTable professoresTable;
+    private JButton findUserButton;
+    private JButton findAllUserButton;
 
     public HomeFuncionario(Funcionario funcionario) {
         setTitle("Biblioteca PBD");
@@ -50,6 +59,15 @@ public class HomeFuncionario extends JFrame{
         setSize(650, 300);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+
+        try {
+            DefaultFormatterFactory factory = new DefaultFormatterFactory(new MaskFormatter("###.###.###-##"));
+            cpfEmprestimoField.setFormatterFactory(factory);
+            cpfDevField.setFormatterFactory(factory);
+            cpfResField.setFormatterFactory(factory);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         // definindo controle
         TelaFuncionarioControl control = new TelaFuncionarioControl(this, funcionario);
@@ -63,30 +81,46 @@ public class HomeFuncionario extends JFrame{
         acervoGroup.add(tituloRadioButton);
         palavraChaveRadioButton.setSelected(true);
 
-        ButtonGroup regGroup = new ButtonGroup();
-        regGroup.add(alunoRadioButton);
-        regGroup.add(professorRadioButton);
-        alunoRadioButton.setSelected(true);
+        ButtonGroup empGroup = new ButtonGroup();
+        empGroup.add(alunoEmpRadioButton);
+        empGroup.add(professorEmpRadioButton);
+        alunoEmpRadioButton.setSelected(true);
+
+        ButtonGroup devGroup = new ButtonGroup();
+        devGroup.add(alunoDevRadioButton);
+        devGroup.add(professorDevRadioButton);
+        alunoDevRadioButton.setSelected(true);
+
+        ButtonGroup resGroup = new ButtonGroup();
+        resGroup.add(alunoResRadioButton);
+        resGroup.add(professorResRadioButton);
+        alunoResRadioButton.setSelected(true);
 
         // definindo modelos das tables
-        emprestimoTableModel = new DefaultTableModel();
+        DefaultTableModel emprestimoTableModel = new DefaultTableModel();
         emprestimoTableModel.addColumn("ID");
         emprestimoTableModel.addColumn("Livro");
         emprestimoTableModel.addColumn("Data do Emprestimo");
         emprestimoTableModel.addColumn("Data de Entrega");
         emprestimoTableModel.addColumn("Situação");
-        devolucaoTableModel = new DefaultTableModel();
+        emprestimosTable.setModel(emprestimoTableModel);
+
+        DefaultTableModel devolucaoTableModel = new DefaultTableModel();
         devolucaoTableModel.addColumn("ID");
         devolucaoTableModel.addColumn("Livro");
         devolucaoTableModel.addColumn("Data do Emprestimos");
         devolucaoTableModel.addColumn("Data de Entrega");
-        reservaTableModel = new DefaultTableModel();
+        devolucaoTable.setModel(devolucaoTableModel);
+
+        DefaultTableModel reservaTableModel = new DefaultTableModel();
         reservaTableModel.addColumn("ID");
         reservaTableModel.addColumn("Livro");
         reservaTableModel.addColumn("Data de Realização");
         reservaTableModel.addColumn("Data de Validação");
         reservaTableModel.addColumn("Data Limite");
-        livroTableModel = new DefaultTableModel();
+        reservaTable.setModel(reservaTableModel);
+
+        DefaultTableModel livroTableModel = new DefaultTableModel();
         livroTableModel.addColumn("id");
         livroTableModel.addColumn("Título");
         livroTableModel.addColumn("Autores");
@@ -96,6 +130,20 @@ public class HomeFuncionario extends JFrame{
         livroTableModel.addColumn("Nº de Exemplares");
         livroTable.setModel(livroTableModel);
 
+        DefaultTableModel alunoTableModel = new DefaultTableModel();
+        alunoTableModel.addColumn("id");
+        alunoTableModel.addColumn("CPF");
+        alunoTableModel.addColumn("Nome");
+        alunoTableModel.addColumn("Situação");
+        alunosTable.setModel(alunoTableModel);
+        DefaultTableModel profTableModel = new DefaultTableModel();
+        profTableModel.addColumn("id");
+        profTableModel.addColumn("CPF");
+        profTableModel.addColumn("Nome");
+        profTableModel.addColumn("Situação");
+        professoresTable.setModel(profTableModel);
+
+
         // eventos dos buttons
         novoAlunoButton.addActionListener(control);
         novoProfessorButton.addActionListener(control);
@@ -103,10 +151,11 @@ public class HomeFuncionario extends JFrame{
         novoDepartamentoButton.addActionListener(control);
         novoCursoButton.addActionListener(control);
         novoLivroButton.addActionListener(control);
-        emprestimosButton.addActionListener(control);
-        devolucaoButton.addActionListener(control);
-        reservasButton.addActionListener(control);
         buscarLivroButtton.addActionListener(control);
+        buscarEmpButton.addActionListener(control);
+        buscaDevButton.addActionListener(control);
+        buscaResButton.addActionListener(control);
+        findAllUserButton.addActionListener(control);
     }
 
     public JButton getNovoAlunoButton() {
@@ -133,40 +182,24 @@ public class HomeFuncionario extends JFrame{
         return novoCursoButton;
     }
 
-    public JButton getEmprestimosButton() {
-        return emprestimosButton;
+    public JTable getEmprestimosTable() {
+        return emprestimosTable;
     }
 
-    public JButton getReservasButton() {
-        return reservasButton;
+    public JRadioButton getAlunoEmpRadioButton() {
+        return alunoEmpRadioButton;
     }
 
-    public JTable getRegistrosTable() {
-        return registrosTable;
+    public JRadioButton getProfessorEmpRadioButton() {
+        return professorEmpRadioButton;
     }
 
-    public JRadioButton getAlunoRadioButton() {
-        return alunoRadioButton;
+    public JFormattedTextField getCpfEmprestimoField() {
+        return cpfEmprestimoField;
     }
 
-    public JRadioButton getProfessorRadioButton() {
-        return professorRadioButton;
-    }
-
-    public JFormattedTextField getCpfField() {
-        return cpfField;
-    }
-
-    public JButton getBuscarButton() {
-        return buscarButton;
-    }
-
-    public JButton getAprovarButton() {
-        return aprovarButton;
-    }
-
-    public JButton getReceberButton() {
-        return receberButton;
+    public JButton getBuscarEmpButton() {
+        return buscarEmpButton;
     }
 
     public JButton getNovoButton() {
@@ -187,18 +220,6 @@ public class HomeFuncionario extends JFrame{
 
     public JButton getMeusDadosButton() {
         return meusDadosButton;
-    }
-
-    public DefaultTableModel getEmprestimoTableModel() {
-        return emprestimoTableModel;
-    }
-
-    public DefaultTableModel getDevolucaoTableModel() {
-        return devolucaoTableModel;
-    }
-
-    public DefaultTableModel getReservaTableModel() {
-        return reservaTableModel;
     }
 
     public JRadioButton getPalavraChaveRadioButton() {
@@ -233,7 +254,67 @@ public class HomeFuncionario extends JFrame{
         return buscarLivroButtton;
     }
 
-    public JButton getDevolucaoButton() {
-        return devolucaoButton;
+    public JRadioButton getAlunoResRadioButton() {
+        return alunoResRadioButton;
+    }
+
+    public JRadioButton getProfessorResRadioButton() {
+        return professorResRadioButton;
+    }
+
+    public JFormattedTextField getCpfResField() {
+        return cpfResField;
+    }
+
+    public JButton getBuscaResButton() {
+        return buscaResButton;
+    }
+
+    public JTable getReservaTable() {
+        return reservaTable;
+    }
+
+    public JFormattedTextField getCpfDevField() {
+        return cpfDevField;
+    }
+
+    public JButton getBuscaDevButton() {
+        return buscaDevButton;
+    }
+
+    public JRadioButton getAlunoDevRadioButton() {
+        return alunoDevRadioButton;
+    }
+
+    public JRadioButton getProfessorDevRadioButton() {
+        return professorDevRadioButton;
+    }
+
+    public JTable getDevolucaoTable() {
+        return devolucaoTable;
+    }
+
+    public JButton getBlockUserButton() {
+        return blockUserButton;
+    }
+
+    public JButton getUnblockUserButton() {
+        return unblockUserButton;
+    }
+
+    public JTable getAlunosTable() {
+        return alunosTable;
+    }
+
+    public JTable getProfessoresTable() {
+        return professoresTable;
+    }
+
+    public JButton getFindUserButton() {
+        return findUserButton;
+    }
+
+    public JButton getFindAllUserButton() {
+        return findAllUserButton;
     }
 }
