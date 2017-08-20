@@ -22,7 +22,6 @@ public class HomeUsuario extends JFrame{
     private JTable livroTable;
     private JTable emprestimosTable;
     private JTable reservaTable;
-    private JTable devolucaoTable;
     private JButton sairButton;
     private JTextField nomeField;
     private JTextField enderecoField;
@@ -34,7 +33,6 @@ public class HomeUsuario extends JFrame{
     private JTable telefoneTable;
     private JButton updateButton;
     private JButton salvarButton;
-    private JButton updateDevButton;
     private JButton updateResButton;
     private JButton updateEmpButton;
 
@@ -66,13 +64,6 @@ public class HomeUsuario extends JFrame{
         emprestimoTableModel.addColumn("Data de Entrega");
         emprestimoTableModel.addColumn("Situação");
         emprestimosTable.setModel(emprestimoTableModel);
-
-        DefaultTableModel devolucaoTableModel = new DefaultTableModel();
-        devolucaoTableModel.addColumn("ID");
-        devolucaoTableModel.addColumn("Livro");
-        devolucaoTableModel.addColumn("Data do Emprestimos");
-        devolucaoTableModel.addColumn("Data de Entrega");
-        devolucaoTable.setModel(devolucaoTableModel);
 
         DefaultTableModel reservaTableModel = new DefaultTableModel();
         reservaTableModel.addColumn("ID");
@@ -159,10 +150,6 @@ public class HomeUsuario extends JFrame{
         return reservaTable;
     }
 
-    public JTable getDevolucaoTable() {
-        return devolucaoTable;
-    }
-
     public JButton getSairButton() {
         return sairButton;
     }
@@ -213,10 +200,6 @@ public class HomeUsuario extends JFrame{
 
     public JMenuItem getResItem() {
         return resItem;
-    }
-
-    public JButton getUpdateDevButton() {
-        return updateDevButton;
     }
 
     public JButton getUpdateResButton() {

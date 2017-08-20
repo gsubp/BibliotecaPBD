@@ -82,9 +82,8 @@ public class TelaFuncionarioControl implements ActionListener {
 
             }
         }
-        if(e.getSource() == view.getFindAllUserButton()){
+        if(e.getSource() == view.getFindAllUserButton())
             list();
-        }
         if(e.getSource() == view.getBlockUserButton()){
             int[] rows = view.getAlunosTable().getSelectedRows();
             for(int r : rows){
@@ -98,6 +97,51 @@ public class TelaFuncionarioControl implements ActionListener {
                 FachadaDAO.suspenderProfessor(professor);
             }
             list();
+        }
+        if(e.getSource() == view.getUnblockUserButton()){
+            int[] rows = view.getAlunosTable().getSelectedRows();
+            for(int r : rows){
+                aluno = FachadaDAO.buscaAlunoId((Long) view.getAlunosTable().getValueAt(r,0));
+                FachadaDAO.liberarAluno(aluno);
+            }
+
+            rows = view.getProfessoresTable().getSelectedRows();
+            for (int r : rows){
+                professor = FachadaDAO.buscaProfessorId((Long) view.getProfessoresTable().getValueAt(r,0));
+                FachadaDAO.liberarProfessor(professor);
+            }
+            list();
+        }
+        if(e.getSource() == view.getFindUserButton())
+            view.getBuscaPanel().setVisible(!view.getBuscaPanel().isVisible());
+        if(e.getSource() == view.getBuscarButton()){
+            if(view.getAlunoRadioButton().isSelected()){
+                aluno = FachadaDAO.buscaAlunoCPF(view.getBuscaCpfField().getText());
+                view.getBuscaCpfField().setText("");
+                DefaultTableModel alunoModel = (DefaultTableModel) view.getAlunosTable().getModel();
+                alunoModel.setRowCount(0);
+                DefaultTableModel professorModel =(DefaultTableModel) view.getProfessoresTable().getModel();
+                professorModel.setRowCount(0);
+                alunoModel.addRow(new Object[]{aluno.getId(), aluno.getCpf(), aluno.getNome(), aluno.getSituacao()});
+            }
+            else{
+                professor = FachadaDAO.buscaProfessorCPF(view.getBuscaCpfField().getText());
+                view.getBuscaCpfField().setText("");
+                DefaultTableModel professorModel =(DefaultTableModel) view.getProfessoresTable().getModel();
+                professorModel.setRowCount(0);
+                DefaultTableModel alunoModel = (DefaultTableModel) view.getAlunosTable().getModel();
+                alunoModel.setRowCount(0);
+                professorModel.addRow(new Object[]{professor.getId(), professor.getCpf(), professor.getNome(), professor.getSituacao()});
+            }
+        }
+        if(e.getSource() == view.getLateButton()){
+            List<AlunosAtraso> alunos = new ArrayList<>(FachadaDAO.listarAlunosEmAtraso());
+            //List<Professor> professors = new ArrayList<>(FachadaDAO.listarProfessores());
+
+            DefaultTableModel alunoModel = (DefaultTableModel) view.getAlunosTable().getModel();
+            alunoModel.setRowCount(0);
+            for(AlunosAtraso a : alunos)
+                alunoModel.addRow(new Object[]{a.getId(), a.getCpf(), a.getNome(), a.getSituacao()});
         }
 
 

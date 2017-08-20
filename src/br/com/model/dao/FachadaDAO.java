@@ -258,4 +258,17 @@ public class FachadaDAO {
         new ProfessorDAO().merge(professor);
     }
 
+    public static void liberarAluno(Aluno aluno) {
+        aluno.setSituacao("Regularizado");
+        new AlunoDAO().merge(aluno);
+    }
+
+    public static void liberarProfessor(Professor professor) {
+        professor.setSituacao("Regularizado");
+        new ProfessorDAO().merge(professor);
+    }
+
+    public static List<AlunosAtraso> listarAlunosEmAtraso() {
+        return new AlunoDAO().getAlunosAtraso();
+    }
 }

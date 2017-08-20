@@ -50,7 +50,6 @@ public class LoginControl implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Funcionário não cadastrado!");
             }
         }
-
         if (e.getSource() == view.getPrimeiroAcessoButton())
             new PrimeiroAcesso();
         if (e.getSource() == view.getSomenteBuscasButton())

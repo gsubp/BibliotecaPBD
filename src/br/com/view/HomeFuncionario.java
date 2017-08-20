@@ -51,6 +51,13 @@ public class HomeFuncionario extends JFrame{
     private JTable professoresTable;
     private JButton findUserButton;
     private JButton findAllUserButton;
+    private JFormattedTextField formattedTextField1;
+    private JRadioButton alunoRadioButton;
+    private JRadioButton professorRadioButton;
+    private JButton buscarButton;
+    private JPanel buscaPanel;
+    private JFormattedTextField buscaCpfField;
+    private JButton lateButton;
 
     public HomeFuncionario(Funcionario funcionario) {
         setTitle("Biblioteca PBD");
@@ -65,6 +72,7 @@ public class HomeFuncionario extends JFrame{
             cpfEmprestimoField.setFormatterFactory(factory);
             cpfDevField.setFormatterFactory(factory);
             cpfResField.setFormatterFactory(factory);
+            buscaCpfField.setFormatterFactory(factory);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -80,6 +88,11 @@ public class HomeFuncionario extends JFrame{
         acervoGroup.add(anoRadioButton);
         acervoGroup.add(tituloRadioButton);
         palavraChaveRadioButton.setSelected(true);
+
+        ButtonGroup buscaGroup = new ButtonGroup();
+        buscaGroup.add(alunoRadioButton);
+        buscaGroup.add(professorRadioButton);
+        alunoRadioButton.setSelected(true);
 
         ButtonGroup empGroup = new ButtonGroup();
         empGroup.add(alunoEmpRadioButton);
@@ -155,8 +168,13 @@ public class HomeFuncionario extends JFrame{
         buscarEmpButton.addActionListener(control);
         buscaDevButton.addActionListener(control);
         buscaResButton.addActionListener(control);
+        sairButton.addActionListener(control);
         findAllUserButton.addActionListener(control);
         blockUserButton.addActionListener(control);
+        unblockUserButton.addActionListener(control);
+        findUserButton.addActionListener(control);
+        buscarButton.addActionListener(control);
+        lateButton.addActionListener(control);
     }
 
     public JButton getNovoAlunoButton() {
@@ -317,5 +335,33 @@ public class HomeFuncionario extends JFrame{
 
     public JButton getFindAllUserButton() {
         return findAllUserButton;
+    }
+
+    public JFormattedTextField getFormattedTextField1() {
+        return formattedTextField1;
+    }
+
+    public JRadioButton getAlunoRadioButton() {
+        return alunoRadioButton;
+    }
+
+    public JRadioButton getProfessorRadioButton() {
+        return professorRadioButton;
+    }
+
+    public JButton getBuscarButton() {
+        return buscarButton;
+    }
+
+    public JPanel getBuscaPanel() {
+        return buscaPanel;
+    }
+
+    public JFormattedTextField getBuscaCpfField() {
+        return buscaCpfField;
+    }
+
+    public JButton getLateButton() {
+        return lateButton;
     }
 }

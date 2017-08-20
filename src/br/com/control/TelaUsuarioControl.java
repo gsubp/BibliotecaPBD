@@ -61,9 +61,6 @@ public class TelaUsuarioControl implements ActionListener{
                         emp.getEmprestimo(), emp.getEntrega(), emp.getSituacao()});
             }
         }
-        if(e.getSource() == view.getUpdateDevButton()){
-
-        }
 
         if(e.getSource() == view.getUpdateResButton()){}
     }
