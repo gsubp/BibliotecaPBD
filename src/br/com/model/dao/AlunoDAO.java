@@ -2,6 +2,7 @@ package br.com.model.dao;
 
 import br.com.model.pojo.Aluno;
 import br.com.model.pojo.AlunosAtraso;
+import br.com.model.pojo.ProfessoresAtraso;
 import br.com.model.pojo.Telefone;
 
 import javax.persistence.Query;
@@ -52,7 +53,7 @@ public class AlunoDAO extends DAO {
     }
 
     public List<AlunosAtraso> getAlunosAtraso(){
-        return getEntityManager().createQuery("select a from AlunosAtraso a").getResultList();
+        return getEntityManager().createQuery("select a from AlunosAtraso p").getResultList();
     }
 
     public List<Aluno> list() {

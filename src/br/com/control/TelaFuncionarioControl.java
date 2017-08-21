@@ -56,7 +56,6 @@ public class TelaFuncionarioControl implements ActionListener {
                 filtro = view.getEditoraRadioButton().getText();
             if (view.getAnoRadioButton().isSelected())
                 filtro = view.getAnoRadioButton().getText();
-
             livros = new ArrayList<>(FachadaDAO.buscaLivroFiltro(filtro, view.getBuscaField().getText()));
             DefaultTableModel model = (DefaultTableModel) view.getLivroTable().getModel();
             model.setRowCount(0);
@@ -77,7 +76,7 @@ public class TelaFuncionarioControl implements ActionListener {
             DefaultTableModel model = (DefaultTableModel) view.getEmprestimosTable().getModel();
             model.setRowCount(0);
             for(Emprestimo emp : emprestimos){
-                model.addRow(new Object[]{emp.getId(), emp.getRealizaEmprestimo().getExemplar().getLivro().getTitulo(),
+                model.addRow(new Object[]{emp.getId(), emp.getExemplar().getLivro().getTitulo(),
                 emp.getEmprestimo(), emp.getEntrega(), emp.getSituacao()});
 
             }
@@ -136,12 +135,17 @@ public class TelaFuncionarioControl implements ActionListener {
         }
         if(e.getSource() == view.getLateButton()){
             List<AlunosAtraso> alunos = new ArrayList<>(FachadaDAO.listarAlunosEmAtraso());
-            //List<Professor> professors = new ArrayList<>(FachadaDAO.listarProfessores());
+            List<ProfessoresAtraso> professors = new ArrayList<>(FachadaDAO.listarProfessoresEmAtraso());
 
             DefaultTableModel alunoModel = (DefaultTableModel) view.getAlunosTable().getModel();
             alunoModel.setRowCount(0);
             for(AlunosAtraso a : alunos)
                 alunoModel.addRow(new Object[]{a.getId(), a.getCpf(), a.getNome(), a.getSituacao()});
+
+            DefaultTableModel professorModel =(DefaultTableModel) view.getProfessoresTable().getModel();
+            professorModel.setRowCount(0);
+            for(ProfessoresAtraso p : professors)
+                professorModel.addRow(new Object[]{p.getId(), p.getCpf(), p.getNome(), p.getSituacao()});
         }
 
 

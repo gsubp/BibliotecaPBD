@@ -3,6 +3,8 @@ package br.com.control;
 import br.com.model.dao.FachadaDAO;
 import br.com.model.pojo.*;
 import br.com.view.HomeUsuario;
+
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,7 +48,30 @@ public class TelaUsuarioControl implements ActionListener{
                         l.getEdicao(), l.getAno(), l.getExemplares().size()});
             }
         }
-        if(e.getSource() == view.getEmpItem()){}
+        if(e.getSource() == view.getEmpItem()){
+            Emprestimo emprestimo = null;
+            Long idLivro = (Long) view.getLivroTable().getValueAt(view.getLivroTable().getSelectedRow(), 0);
+            if(usuario.getSituacao().equals("Suspenso"))
+                JOptionPane.showMessageDialog(null,"O usuário está suspenso.");
+            else{
+                if(usuario instanceof Aluno){
+                    if(FachadaDAO.getAlunoEmprestimos((Aluno) usuario).size() < 3)
+                        emprestimo = FachadaDAO.realizaEmprestimo(usuario, idLivro);
+                    else
+                        JOptionPane.showMessageDialog(null,"Não pode realizar emprestímos no momento.");
+                }
+                else{
+                    if(FachadaDAO.verificaEmprestimosProfessor((Professor) usuario) < 5)
+                        emprestimo = FachadaDAO.realizaEmprestimo(usuario, idLivro);
+                    else
+                        JOptionPane.showMessageDialog(null,"Não pode realizar emprestímos no momento.");
+                }
+                if(emprestimo.getId() != null)
+                    JOptionPane.showMessageDialog(null,"Emprestimo realizado");
+                else
+                    JOptionPane.showMessageDialog(null,"Emprestimo não realizado");
+            }
+        }
         if(e.getSource() == view.getResItem()){}
         if(e.getSource() == view.getUpdateEmpButton()){
             if(usuario instanceof Aluno)
@@ -57,7 +82,7 @@ public class TelaUsuarioControl implements ActionListener{
             DefaultTableModel model = (DefaultTableModel) view.getEmprestimosTable().getModel();
             model.setRowCount(0);
             for(Emprestimo emp : emprestimos) {
-                model.addRow(new Object[]{emp.getId(), emp.getRealizaEmprestimo().getExemplar().getLivro().getTitulo(),
+                model.addRow(new Object[]{emp.getId(), emp.getExemplar().getLivro().getTitulo(),
                         emp.getEmprestimo(), emp.getEntrega(), emp.getSituacao()});
             }
         }

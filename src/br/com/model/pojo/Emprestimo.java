@@ -31,8 +31,12 @@ public class Emprestimo {
     private Date entrega;
     @Column(nullable = false, length = 20)
     private String situacao;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "emprestimo", targetEntity = RealizaEmprestimo.class)
-    private RealizaEmprestimo realizaEmprestimo;
+    @OneToOne
+    @JoinColumn(name = "id_exemplar", nullable = false)
+    private Exemplar exemplar;
+    @OneToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
     public Emprestimo() {
         super();
@@ -70,12 +74,20 @@ public class Emprestimo {
         this.situacao = situacao;
     }
 
-    public RealizaEmprestimo getRealizaEmprestimo() {
-        return realizaEmprestimo;
+    public Exemplar getExemplar() {
+        return exemplar;
     }
 
-    public void setRealizaEmprestimo(RealizaEmprestimo realizaEmprestimo) {
-        this.realizaEmprestimo = realizaEmprestimo;
+    public void setExemplar(Exemplar exemplar) {
+        this.exemplar = exemplar;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

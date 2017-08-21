@@ -155,16 +155,9 @@ public class FachadaDAO {
         c.add((GregorianCalendar.DAY_OF_MONTH), 7);
         Date dataEntrega = c.getTime();
         emprestimo.setEntrega(dataEntrega);
-
-        Exemplar exemplar = new ExemplarDAO().findByIdLivro(idLivro);
-        exemplar.setSituacao("Emprestado");
-
-        RealizaEmprestimo realiza = new RealizaEmprestimo();
-        realiza.setExemplar(exemplar);
-        realiza.setUsuario(usuario);
-        realiza.setEmprestimo(emprestimo);
-        emprestimo.setRealizaEmprestimo(realiza);
-
+        emprestimo.setSituacao("Aguardando Aprovação");
+        emprestimo.setUsuario(usuario);
+        emprestimo.setExemplar(new ExemplarDAO().findByIdLivro(idLivro));
         return (Emprestimo) new EmprestimoDAO().persist(emprestimo);
     }
 // TODO: fachada de reserva
@@ -197,7 +190,7 @@ public class FachadaDAO {
         devolucao.setEmprestimo(emprestimo);
         devolucao.setUsuario(usuario);
         devolucao.setFuncionario(funcionario);
-        Exemplar exemplar = emprestimo.getRealizaEmprestimo().getExemplar();
+        Exemplar exemplar = emprestimo.getExemplar();
         exemplar.setSituacao("Disponível");
         new ExemplarDAO().merge(exemplar);
         return (DevolveEmprestimo) new DevolverEmprestimoDAO().persist(devolucao);
@@ -270,5 +263,9 @@ public class FachadaDAO {
 
     public static List<AlunosAtraso> listarAlunosEmAtraso() {
         return new AlunoDAO().getAlunosAtraso();
+    }
+
+    public static List<ProfessoresAtraso> listarProfessoresEmAtraso() {
+        return new ProfessorDAO().getProfessoresAtraso();
     }
 }

@@ -280,6 +280,7 @@
                           <contentAreaFilled value="false"/>
                           <icon value="br/com/etc/img/monitor.png"/>
                           <text value=""/>
+                          <toolTipText value="Consultar usuários em atrasados"/>
                         </properties>
                       </component>
                     </children>

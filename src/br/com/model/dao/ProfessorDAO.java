@@ -1,6 +1,8 @@
 package br.com.model.dao;
 
+import br.com.model.pojo.AlunosAtraso;
 import br.com.model.pojo.Professor;
+import br.com.model.pojo.ProfessoresAtraso;
 import br.com.model.pojo.Telefone;
 
 import javax.persistence.Query;
@@ -50,6 +52,10 @@ public class ProfessorDAO extends DAO {
 
     public List<Professor> list() {
         return getEntityManager().createQuery("select p from Professor p").getResultList();
+    }
+
+    public List<ProfessoresAtraso> getProfessoresAtraso(){
+        return getEntityManager().createQuery("select p from ProfessoresAtraso p").getResultList();
     }
 
     public Professor findById(Long id) {
