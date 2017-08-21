@@ -137,10 +137,6 @@ public class FachadaDAO {
         return livros;
     }
 
-    public static List<Livro> listarLivros() {
-        return new LivroDAO().getLivros();
-    }
-
     public static int verificaEmprestimosAluno(Aluno aluno) {
         return new AlunoDAO().getQntEmprestimos(aluno.getId());
     }
@@ -332,5 +328,15 @@ public class FachadaDAO {
 
     public static List<ProfessoresAtraso> getProfessoresAtraso() {
         return new ProfessorDAO().getProfessoresAtraso();
+    }
+
+    public static void registrarMulta(double valor) {
+        Multa multa = new Multa();
+        multa.setValor(valor);
+        new MultaDAO().persist(multa);
+    }
+
+    public static double consultarCaixa() {
+        return new MultaDAO().getTotal();
     }
 }

@@ -33,6 +33,7 @@ public class Login extends JFrame {
         somenteBuscasButton.addActionListener(new LoginControl(this));
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 

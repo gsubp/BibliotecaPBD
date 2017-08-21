@@ -19,6 +19,15 @@ public class TelaUsuarioControl implements ActionListener{
         this.view = view;
         this.usuario = usuario;
         this.view.getUsuarioLabel().setText(this.usuario.getNome());
+        this.view.getSituacaoLabel().setText("Situação: " +this.usuario.getSituacao());
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
     }
 
     @Override
@@ -105,6 +114,7 @@ public class TelaUsuarioControl implements ActionListener{
                 int dias = dataAtual.compareTo(dataEntrega);
                 if(dias > 0){
                     JOptionPane.showMessageDialog(null, "Valor da multa: R$" + dias + ",00");
+                    FachadaDAO.registrarMulta(dias);
                 }
                 FachadaDAO.devolverEmprestimo(emprestimo);
                 updateEmp();

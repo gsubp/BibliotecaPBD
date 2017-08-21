@@ -24,7 +24,7 @@ public class TelaFuncionarioControl implements ActionListener, Runnable{
     public TelaFuncionarioControl(HomeFuncionario view, Funcionario funcionario) {
         this.view = view;
         this.view.getFuncionarioLabel().setText(funcionario.getNome());
-        new Thread(this).run();
+        new Thread(this).start();
     }
 
 
@@ -42,10 +42,6 @@ public class TelaFuncionarioControl implements ActionListener, Runnable{
             new CadastroCurso();
         if (e.getSource() == view.getNovoLivroButton())
             new CadastroLivro();
-        if (e.getSource() == view.getSairButton()){
-            new Login();
-            view.dispose();;
-        }
         if(e.getSource() == view.getBuscarLivroButtton()){
             String filtro = null;
             List<Livro> livros;
@@ -165,17 +161,9 @@ public class TelaFuncionarioControl implements ActionListener, Runnable{
                 model.addRow(new Object[]{r.getId(), r.getExemplar().getLivro().getTitulo(), r.getRealizacao(),
                         r.getValidacao(), r.getLimite(), r.getSituacao()});
         }
-
-
-
-
-
-
-
-        if(e.getSource() == view.getSairButton()){
-            new Login();
-            view.dispose();
-        }
+        if(e.getSource() == view.getConsultarCaixaButton())
+            JOptionPane.showMessageDialog(null, "Valor atual no caixa: R$" +
+                    FachadaDAO.consultarCaixa());
     }
 
     public void getEmprestimos() {

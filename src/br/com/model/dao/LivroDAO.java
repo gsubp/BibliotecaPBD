@@ -61,11 +61,6 @@ public class LivroDAO extends DAO {
         return query.getResultList();
     }
 
-    public List<Livro> getLivros() {
-        Query query = getEntityManager().createQuery("select l from Livro l");
-        return query.getResultList();
-    }
-
     public Livro findById(Long id) {
         return getEntityManager().find(Livro.class, id);
     }

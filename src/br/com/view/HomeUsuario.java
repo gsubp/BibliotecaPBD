@@ -24,25 +24,16 @@ public class HomeUsuario extends JFrame{
     private JTable livroTable;
     private JTable emprestimosTable;
     private JTable reservaTable;
-    private JButton sairButton;
-    private JTextField nomeField;
-    private JTextField enderecoField;
-    private JTextField cpfField;
-    private JTextField situacaoField;
-    private JTextField matriculaField;
-    private JTextField codigoField;
-    private JTextField emailField;
-    private JTable telefoneTable;
-    private JButton updateButton;
-    private JButton salvarButton;
     private JButton updateResButton;
     private JButton updateEmpButton;
+    private JLabel situacaoLabel;
 
     public HomeUsuario(Usuario usuario){
         setTitle("Biblioteca PBD");
         setContentPane(rootPanel);
         pack();
         setSize(650, 300);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
@@ -163,50 +154,6 @@ public class HomeUsuario extends JFrame{
         return reservaTable;
     }
 
-    public JButton getSairButton() {
-        return sairButton;
-    }
-
-    public JTextField getNomeField() {
-        return nomeField;
-    }
-
-    public JTextField getEnderecoField() {
-        return enderecoField;
-    }
-
-    public JTextField getCpfField() {
-        return cpfField;
-    }
-
-    public JTextField getSituacaoField() {
-        return situacaoField;
-    }
-
-    public JTextField getMatriculaField() {
-        return matriculaField;
-    }
-
-    public JTextField getCodigoField() {
-        return codigoField;
-    }
-
-    public JTextField getEmailField() {
-        return emailField;
-    }
-
-    public JTable getTelefoneTable() {
-        return telefoneTable;
-    }
-
-    public JButton getUpdateButton() {
-        return updateButton;
-    }
-
-    public JButton getSalvarButton() {
-        return salvarButton;
-    }
-
     public JMenuItem getEmpItem() {
         return empItem;
     }
@@ -233,5 +180,9 @@ public class HomeUsuario extends JFrame{
 
     public JMenuItem getCanItem() {
         return canItem;
+    }
+
+    public JLabel getSituacaoLabel() {
+        return situacaoLabel;
     }
 }

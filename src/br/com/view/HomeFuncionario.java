@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 public class HomeFuncionario extends JFrame{
@@ -22,10 +24,7 @@ public class HomeFuncionario extends JFrame{
     private JRadioButton professorEmpRadioButton;
     private JFormattedTextField cpfEmprestimoField;
     private JButton buscarEmpButton;
-    private JButton novoButton;
-    private JButton relatóriosButton;
     private JLabel funcionarioLabel;
-    private JButton sairButton;
     private JPanel rootPanel;
     private JRadioButton palavraChaveRadioButton;
     private JRadioButton anoRadioButton;
@@ -52,12 +51,14 @@ public class HomeFuncionario extends JFrame{
     private JPanel buscaPanel;
     private JFormattedTextField buscaCpfField;
     private JButton lateButton;
+    private JButton consultarCaixaButton;
 
     public HomeFuncionario(Funcionario funcionario) {
         setTitle("Biblioteca PBD");
         setContentPane(rootPanel);
         pack();
         setSize(650, 300);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
@@ -154,7 +155,6 @@ public class HomeFuncionario extends JFrame{
         buscarLivroButtton.addActionListener(control);
         buscarEmpButton.addActionListener(control);
         buscaResButton.addActionListener(control);
-        sairButton.addActionListener(control);
         findAllUserButton.addActionListener(control);
         blockUserButton.addActionListener(control);
         unblockUserButton.addActionListener(control);
@@ -162,6 +162,7 @@ public class HomeFuncionario extends JFrame{
         buscarButton.addActionListener(control);
         lateButton.addActionListener(control);
         devItem.addActionListener(control);
+        consultarCaixaButton.addActionListener(control);
     }
 
     public JButton getNovoAlunoButton() {
@@ -208,20 +209,8 @@ public class HomeFuncionario extends JFrame{
         return buscarEmpButton;
     }
 
-    public JButton getNovoButton() {
-        return novoButton;
-    }
-
-    public JButton getRelatóriosButton() {
-        return relatóriosButton;
-    }
-
     public JLabel getFuncionarioLabel() {
         return funcionarioLabel;
-    }
-
-    public JButton getSairButton() {
-        return sairButton;
     }
 
     public JRadioButton getPalavraChaveRadioButton() {
@@ -326,5 +315,9 @@ public class HomeFuncionario extends JFrame{
 
     public JMenuItem getDevItem() {
         return devItem;
+    }
+
+    public JButton getConsultarCaixaButton() {
+        return consultarCaixaButton;
     }
 }
