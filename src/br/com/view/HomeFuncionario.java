@@ -10,6 +10,7 @@ import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
 
 public class HomeFuncionario extends JFrame{
+    private final JMenuItem devItem;
     private JButton novoAlunoButton;
     private JButton novoProfessorButton;
     private JButton novoFuncionárioButton;
@@ -25,7 +26,6 @@ public class HomeFuncionario extends JFrame{
     private JButton relatóriosButton;
     private JLabel funcionarioLabel;
     private JButton sairButton;
-    private JButton meusDadosButton;
     private JPanel rootPanel;
     private JRadioButton palavraChaveRadioButton;
     private JRadioButton anoRadioButton;
@@ -40,18 +40,12 @@ public class HomeFuncionario extends JFrame{
     private JFormattedTextField cpfResField;
     private JButton buscaResButton;
     private JTable reservaTable;
-    private JFormattedTextField cpfDevField;
-    private JButton buscaDevButton;
-    private JRadioButton alunoDevRadioButton;
-    private JRadioButton professorDevRadioButton;
-    private JTable devolucaoTable;
     private JButton blockUserButton;
     private JButton unblockUserButton;
     private JTable alunosTable;
     private JTable professoresTable;
     private JButton findUserButton;
     private JButton findAllUserButton;
-    private JFormattedTextField formattedTextField1;
     private JRadioButton alunoRadioButton;
     private JRadioButton professorRadioButton;
     private JButton buscarButton;
@@ -70,7 +64,6 @@ public class HomeFuncionario extends JFrame{
         try {
             DefaultFormatterFactory factory = new DefaultFormatterFactory(new MaskFormatter("###.###.###-##"));
             cpfEmprestimoField.setFormatterFactory(factory);
-            cpfDevField.setFormatterFactory(factory);
             cpfResField.setFormatterFactory(factory);
             buscaCpfField.setFormatterFactory(factory);
         } catch (ParseException e) {
@@ -99,11 +92,6 @@ public class HomeFuncionario extends JFrame{
         empGroup.add(professorEmpRadioButton);
         alunoEmpRadioButton.setSelected(true);
 
-        ButtonGroup devGroup = new ButtonGroup();
-        devGroup.add(alunoDevRadioButton);
-        devGroup.add(professorDevRadioButton);
-        alunoDevRadioButton.setSelected(true);
-
         ButtonGroup resGroup = new ButtonGroup();
         resGroup.add(alunoResRadioButton);
         resGroup.add(professorResRadioButton);
@@ -118,19 +106,13 @@ public class HomeFuncionario extends JFrame{
         emprestimoTableModel.addColumn("Situação");
         emprestimosTable.setModel(emprestimoTableModel);
 
-        DefaultTableModel devolucaoTableModel = new DefaultTableModel();
-        devolucaoTableModel.addColumn("ID");
-        devolucaoTableModel.addColumn("Livro");
-        devolucaoTableModel.addColumn("Data do Emprestimos");
-        devolucaoTableModel.addColumn("Data de Entrega");
-        devolucaoTable.setModel(devolucaoTableModel);
-
         DefaultTableModel reservaTableModel = new DefaultTableModel();
         reservaTableModel.addColumn("ID");
         reservaTableModel.addColumn("Livro");
         reservaTableModel.addColumn("Data de Realização");
         reservaTableModel.addColumn("Data de Validação");
         reservaTableModel.addColumn("Data Limite");
+        reservaTableModel.addColumn("Situação");
         reservaTable.setModel(reservaTableModel);
 
         DefaultTableModel livroTableModel = new DefaultTableModel();
@@ -156,6 +138,11 @@ public class HomeFuncionario extends JFrame{
         profTableModel.addColumn("Situação");
         professoresTable.setModel(profTableModel);
 
+        JPopupMenu empMenu = new JPopupMenu();
+        devItem = new JMenuItem("Receber Devolução");
+        empMenu.add(devItem);
+        emprestimosTable.setComponentPopupMenu(empMenu);
+
 
         // eventos dos buttons
         novoAlunoButton.addActionListener(control);
@@ -166,7 +153,6 @@ public class HomeFuncionario extends JFrame{
         novoLivroButton.addActionListener(control);
         buscarLivroButtton.addActionListener(control);
         buscarEmpButton.addActionListener(control);
-        buscaDevButton.addActionListener(control);
         buscaResButton.addActionListener(control);
         sairButton.addActionListener(control);
         findAllUserButton.addActionListener(control);
@@ -175,6 +161,7 @@ public class HomeFuncionario extends JFrame{
         findUserButton.addActionListener(control);
         buscarButton.addActionListener(control);
         lateButton.addActionListener(control);
+        devItem.addActionListener(control);
     }
 
     public JButton getNovoAlunoButton() {
@@ -237,10 +224,6 @@ public class HomeFuncionario extends JFrame{
         return sairButton;
     }
 
-    public JButton getMeusDadosButton() {
-        return meusDadosButton;
-    }
-
     public JRadioButton getPalavraChaveRadioButton() {
         return palavraChaveRadioButton;
     }
@@ -293,26 +276,6 @@ public class HomeFuncionario extends JFrame{
         return reservaTable;
     }
 
-    public JFormattedTextField getCpfDevField() {
-        return cpfDevField;
-    }
-
-    public JButton getBuscaDevButton() {
-        return buscaDevButton;
-    }
-
-    public JRadioButton getAlunoDevRadioButton() {
-        return alunoDevRadioButton;
-    }
-
-    public JRadioButton getProfessorDevRadioButton() {
-        return professorDevRadioButton;
-    }
-
-    public JTable getDevolucaoTable() {
-        return devolucaoTable;
-    }
-
     public JButton getBlockUserButton() {
         return blockUserButton;
     }
@@ -337,10 +300,6 @@ public class HomeFuncionario extends JFrame{
         return findAllUserButton;
     }
 
-    public JFormattedTextField getFormattedTextField1() {
-        return formattedTextField1;
-    }
-
     public JRadioButton getAlunoRadioButton() {
         return alunoRadioButton;
     }
@@ -363,5 +322,9 @@ public class HomeFuncionario extends JFrame{
 
     public JButton getLateButton() {
         return lateButton;
+    }
+
+    public JMenuItem getDevItem() {
+        return devItem;
     }
 }

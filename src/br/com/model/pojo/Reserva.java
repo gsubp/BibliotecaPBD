@@ -15,16 +15,20 @@ public class Reserva {
     @Column(name = "data_realizacao", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date realizacao;
-    @Column(name = "data_validacao", nullable = false)
+    @Column(name = "data_validacao")
     @Temporal(TemporalType.DATE)
     private Date validacao;
     @Column(name = "data_limite", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date limite;
-    @OneToOne(mappedBy = "reserva", targetEntity = EfetuaReserva.class)
-    private EfetuaReserva efetuaReserva;
-    @Column(nullable = false)
-    private boolean isRegistrado;
+    @OneToOne
+    @JoinColumn(name = "id_exemplar")
+    private Exemplar exemplar;
+    @OneToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
+    @Column(nullable = false, length = 20)
+    private String situacao;
 
 
     public Reserva() {
@@ -62,20 +66,28 @@ public class Reserva {
         this.limite = limite;
     }
 
-    public EfetuaReserva getEfetuaReserva() {
-        return efetuaReserva;
+    public Exemplar getExemplar() {
+        return exemplar;
     }
 
-    public void setEfetuaReserva(EfetuaReserva efetuaReserva) {
-        this.efetuaReserva = efetuaReserva;
+    public void setExemplar(Exemplar exemplar) {
+        this.exemplar = exemplar;
     }
 
-    public boolean isRegistrado() {
-        return isRegistrado;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setRegistrado(boolean registrado) {
-        isRegistrado = registrado;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
     @Override

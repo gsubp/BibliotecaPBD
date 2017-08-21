@@ -10,6 +10,8 @@ public class HomeUsuario extends JFrame{
     private final JMenuItem empItem;
     private final JMenuItem resItem;
     private final JMenuItem devItem;
+    private final JMenuItem presItem;
+    private final JMenuItem canItem;
     private JPanel rootPanel;
     private JLabel usuarioLabel;
     private JRadioButton palavraChaveRadioButton;
@@ -71,6 +73,7 @@ public class HomeUsuario extends JFrame{
         reservaTableModel.addColumn("Data de Realização");
         reservaTableModel.addColumn("Data de Validação");
         reservaTableModel.addColumn("Data Limite");
+        reservaTableModel.addColumn("Situação");
         reservaTable.setModel(reservaTableModel);
 
         DefaultTableModel livroTableModel = new DefaultTableModel();
@@ -96,13 +99,23 @@ public class HomeUsuario extends JFrame{
         empMenu.add(devItem);
         emprestimosTable.setComponentPopupMenu(empMenu);
 
+        JPopupMenu resMenu = new JPopupMenu();
+        presItem = new JMenuItem("Pegar emprestado");
+        resMenu.add(presItem);
+        canItem = new JMenuItem("Cancelar Reserva");
+        resMenu.add(canItem);
+
+        reservaTable.setComponentPopupMenu(resMenu);
+
         //listeners
         buscarLivroButtton.addActionListener(control);
         empItem.addActionListener(control);
         resItem.addActionListener(control);
         updateEmpButton.addActionListener(control);
-
-
+        updateResButton.addActionListener(control);
+        devItem.addActionListener(control);
+        presItem.addActionListener(control);
+        canItem.addActionListener(control);
 
     }
 
@@ -208,5 +221,17 @@ public class HomeUsuario extends JFrame{
 
     public JButton getUpdateEmpButton() {
         return updateEmpButton;
+    }
+
+    public JMenuItem getDevItem() {
+        return devItem;
+    }
+
+    public JMenuItem getPresItem() {
+        return presItem;
+    }
+
+    public JMenuItem getCanItem() {
+        return canItem;
     }
 }

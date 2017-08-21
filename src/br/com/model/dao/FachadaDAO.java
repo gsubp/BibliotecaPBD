@@ -147,34 +147,39 @@ public class FachadaDAO {
 
     public static Emprestimo realizaEmprestimo(Usuario usuario, Long idLivro) {
         Emprestimo emprestimo = new Emprestimo();
-        System.out.println("add emprestimo");
-
         Calendar c = new GregorianCalendar();
         Date dataEmprestimo = c.getTime();
         emprestimo.setEmprestimo(dataEmprestimo);
         c.add((GregorianCalendar.DAY_OF_MONTH), 7);
         Date dataEntrega = c.getTime();
         emprestimo.setEntrega(dataEntrega);
-        emprestimo.setSituacao("Aguardando Aprovação");
+        emprestimo.setSituacao("Em andamento");
         emprestimo.setUsuario(usuario);
         emprestimo.setExemplar(new ExemplarDAO().findByIdLivro(idLivro));
         return (Emprestimo) new EmprestimoDAO().persist(emprestimo);
     }
-// TODO: fachada de reserva
-//    public static void efetuarReserva(Usuario usuario, Long idLivro) {
-//        Exemplar exemplar = new ExemplarDAO().findByIdLivro(idLivro);
-//        Reserva reserva = new Reserva();
-//        Calendar c = new GregorianCalendar();
-//        Date dataRealizacao = c.getTime();
-//        reserva.setRealizacao(dataRealizacao);
-//        Date dataValidação = null;
-//        c.add((GregorianCalendar.DAY_OF_MONTH), 7);
-//        Date dataLimite = c.getTime();
-//        if(exemplar != null) {
-//            dataValidação = dataRealizacao;
-//            reserva.setValidacao(dataValidação);
-//        }
-//    }
+
+    public static Reserva efetuarReserva(Usuario usuario, Long idLivro) {
+        Exemplar exemplar = null;
+        exemplar = new ExemplarDAO().findByIdLivro(idLivro);
+
+        Reserva reserva = new Reserva();
+        Calendar c = new GregorianCalendar();
+        Date dataRealizacao = c.getTime();
+        reserva.setRealizacao(dataRealizacao);
+        Date dataValidação = null;
+        c.add((GregorianCalendar.DAY_OF_MONTH), 7);
+        Date dataLimite = c.getTime();
+        if(exemplar != null) {
+            dataValidação = dataRealizacao;
+            reserva.setExemplar(exemplar);
+            reserva.setSituacao("Em andamento");
+        }
+        reserva.setValidacao(dataValidação);
+        reserva.setLimite(dataLimite);
+        reserva.setUsuario(usuario);
+        return (Reserva) new ReservaDAO().persist(reserva);
+    }
 
     public static List<Emprestimo> getAlunoEmprestimos(Aluno aluno) {
         return new EmprestimoDAO().findByIdAluno(aluno.getId());
@@ -184,16 +189,10 @@ public class FachadaDAO {
         return new EmprestimoDAO().findByIdProfessor(professor.getId());
     }
 
-    public static DevolveEmprestimo devolverEmprestimo(Usuario usuario, Long id, Funcionario funcionario) {
-        DevolveEmprestimo devolucao = new DevolveEmprestimo();
-        Emprestimo emprestimo = new EmprestimoDAO().findById(id);
-        devolucao.setEmprestimo(emprestimo);
-        devolucao.setUsuario(usuario);
-        devolucao.setFuncionario(funcionario);
-        Exemplar exemplar = emprestimo.getExemplar();
-        exemplar.setSituacao("Disponível");
-        new ExemplarDAO().merge(exemplar);
-        return (DevolveEmprestimo) new DevolverEmprestimoDAO().persist(devolucao);
+    public static void devolverEmprestimo(Emprestimo emprestimo) {
+        emprestimo.setSituacao("Aguardando Aprovação");
+        new EmprestimoDAO().merge(emprestimo);
+
     }
 
     public static Aluno buscaAlunoCPF(String cpf) {
@@ -238,8 +237,14 @@ public class FachadaDAO {
     }
 
     public static void suspenderAluno(Aluno aluno) {
-        aluno.setSituacao("Suspenso");
-        new AlunoDAO().merge(aluno);
+        Calendar c = new GregorianCalendar();
+        c.getTime();
+        c.add(Calendar.DAY_OF_MONTH, 30);
+        Date dataliberacao = c.getTime();
+        Suspensao suspensao = new Suspensao();
+        suspensao.setLiberacao(dataliberacao);
+        suspensao.setUsuario(aluno);
+        new SuspensaoDAO().persist(suspensao);
     }
 
     public static Professor buscaProfessorId(Long id) {
@@ -247,8 +252,14 @@ public class FachadaDAO {
     }
 
     public static void suspenderProfessor(Professor professor) {
-        professor.setSituacao("Suspenso");
-        new ProfessorDAO().merge(professor);
+        Calendar c = new GregorianCalendar();
+        c.getTime();
+        c.add(Calendar.DAY_OF_MONTH, 30);
+        Date dataliberacao = c.getTime();
+        Suspensao suspensao = new Suspensao();
+        suspensao.setLiberacao(dataliberacao);
+        suspensao.setUsuario(professor);
+        new SuspensaoDAO().persist(suspensao);
     }
 
     public static void liberarAluno(Aluno aluno) {
@@ -266,6 +277,60 @@ public class FachadaDAO {
     }
 
     public static List<ProfessoresAtraso> listarProfessoresEmAtraso() {
+        return new ProfessorDAO().getProfessoresAtraso();
+    }
+
+    public static List<Reserva> getAlunoReservas(Aluno aluno) {
+        return new ReservaDAO().findByIdAluno(aluno.getId());
+    }
+
+    public static List<Reserva> getProfessorReservas(Professor professor) {
+        return new ReservaDAO().findByIdProfessor(professor.getId());
+    }
+
+    public static Emprestimo buscaEmprestimoId(Long idEmp) {
+        return new EmprestimoDAO().findById(idEmp);
+    }
+
+    public static Reserva buscaReservaId(Long idRes) {
+        return new ReservaDAO().findById(idRes);
+    }
+
+    public static void cancelarReserva(Reserva reserva) {
+        reserva.setSituacao("Cancelada");
+        reserva.getExemplar().setSituacao("Disponível");
+        new ExemplarDAO().merge(reserva.getExemplar());
+        new ReservaDAO().merge(reserva);
+    }
+
+    public static Emprestimo reservaViraEmprestimo(Usuario usuario, Reserva reserva) {
+        Emprestimo emprestimo = new Emprestimo();
+        Calendar c = new GregorianCalendar();
+        Date dataEmprestimo = c.getTime();
+        emprestimo.setEmprestimo(dataEmprestimo);
+        c.add((GregorianCalendar.DAY_OF_MONTH), 7);
+        Date dataEntrega = c.getTime();
+        emprestimo.setEntrega(dataEntrega);
+        emprestimo.setSituacao("Em andamento");
+        emprestimo.setUsuario(usuario);
+        emprestimo.setExemplar(reserva.getExemplar());
+        reserva.setSituacao("Concluída");
+        new ReservaDAO().merge(reserva);
+        return (Emprestimo) new EmprestimoDAO().persist(emprestimo);
+    }
+
+    public static void receberEmprestimpo(Emprestimo emprestimo) {
+        emprestimo.setSituacao("Recebido");
+        emprestimo.getExemplar().setSituacao("Disponível");
+        new ExemplarDAO().merge(emprestimo.getExemplar());
+        new EmprestimoDAO().merge(emprestimo);
+    }
+
+    public static List<AlunosAtraso> getAlunosAtraso() {
+        return new AlunoDAO().getAlunosAtraso();
+    }
+
+    public static List<ProfessoresAtraso> getProfessoresAtraso() {
         return new ProfessorDAO().getProfessoresAtraso();
     }
 }

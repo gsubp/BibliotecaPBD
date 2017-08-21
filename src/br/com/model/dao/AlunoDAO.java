@@ -53,7 +53,7 @@ public class AlunoDAO extends DAO {
     }
 
     public List<AlunosAtraso> getAlunosAtraso(){
-        return getEntityManager().createQuery("select a from AlunosAtraso p").getResultList();
+        return getEntityManager().createQuery("select a from AlunosAtraso a").getResultList();
     }
 
     public List<Aluno> list() {

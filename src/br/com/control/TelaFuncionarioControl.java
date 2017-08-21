@@ -4,6 +4,7 @@ import br.com.model.dao.FachadaDAO;
 import br.com.model.pojo.*;
 import br.com.view.*;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,15 +14,17 @@ import java.util.List;
 /**
  * Created by guilh on 04/07/2017.
  */
-public class TelaFuncionarioControl implements ActionListener {
+public class TelaFuncionarioControl implements ActionListener, Runnable{
     private HomeFuncionario view;
     private List<Emprestimo> emprestimos;
+    private List<Reserva> reservas;
     private Aluno aluno;
     private Professor professor;
 
     public TelaFuncionarioControl(HomeFuncionario view, Funcionario funcionario) {
         this.view = view;
         this.view.getFuncionarioLabel().setText(funcionario.getNome());
+        new Thread(this).run();
     }
 
 
@@ -65,21 +68,7 @@ public class TelaFuncionarioControl implements ActionListener {
             }
         }
         if(e.getSource() == view.getBuscarEmpButton()){
-            if (view.getAlunoEmpRadioButton().isSelected()) {
-                aluno = FachadaDAO.buscaAlunoCPF(view.getCpfEmprestimoField().getText());
-                emprestimos = new ArrayList<>(FachadaDAO.getAlunoEmprestimos(aluno));
-            }
-            if (view.getProfessorEmpRadioButton().isSelected()) {
-                professor = FachadaDAO.buscaProfessorCPF(view.getCpfEmprestimoField().getText());
-                emprestimos = new ArrayList<>(FachadaDAO.getProfessorEmprestimos(professor));
-            }
-            DefaultTableModel model = (DefaultTableModel) view.getEmprestimosTable().getModel();
-            model.setRowCount(0);
-            for(Emprestimo emp : emprestimos){
-                model.addRow(new Object[]{emp.getId(), emp.getExemplar().getLivro().getTitulo(),
-                emp.getEmprestimo(), emp.getEntrega(), emp.getSituacao()});
-
-            }
+            getEmprestimos();
         }
         if(e.getSource() == view.getFindAllUserButton())
             list();
@@ -147,6 +136,35 @@ public class TelaFuncionarioControl implements ActionListener {
             for(ProfessoresAtraso p : professors)
                 professorModel.addRow(new Object[]{p.getId(), p.getCpf(), p.getNome(), p.getSituacao()});
         }
+        if(e.getSource() == view.getDevItem()){
+            Long idEmp = (Long) view.getEmprestimosTable().getValueAt(view.getEmprestimosTable().getSelectedRow(), 0);
+            String situacao = (String) view.getEmprestimosTable().getValueAt(view.getEmprestimosTable().getSelectedRow(), 4);
+            if(situacao.equals("Aguardando Aprovação")){
+                FachadaDAO.receberEmprestimpo(FachadaDAO.buscaEmprestimoId(idEmp));
+                JOptionPane.showMessageDialog(null, "Emprestimo rescebido");
+                getEmprestimos();
+            }
+            else if(situacao.equals("Devolvido"))
+                JOptionPane.showMessageDialog(null, "Emprestimo já foi rescebido");
+
+            else
+                JOptionPane.showMessageDialog(null, "Emprestimo não foi devolvido");
+        }
+        if(e.getSource() == view.getBuscaResButton()){
+            if (view.getAlunoEmpRadioButton().isSelected()) {
+                aluno = FachadaDAO.buscaAlunoCPF(view.getCpfResField().getText());
+                reservas = new ArrayList<>(FachadaDAO.getAlunoReservas(aluno));
+            }
+            if (view.getProfessorEmpRadioButton().isSelected()) {
+                professor = FachadaDAO.buscaProfessorCPF(view.getCpfResField().getText());
+                reservas = new ArrayList<>(FachadaDAO.getProfessorReservas(professor));
+            }
+            DefaultTableModel model = (DefaultTableModel) view.getReservaTable().getModel();
+            model.setRowCount(0);
+            for(Reserva r : reservas)
+                model.addRow(new Object[]{r.getId(), r.getExemplar().getLivro().getTitulo(), r.getRealizacao(),
+                        r.getValidacao(), r.getLimite(), r.getSituacao()});
+        }
 
 
 
@@ -157,6 +175,24 @@ public class TelaFuncionarioControl implements ActionListener {
         if(e.getSource() == view.getSairButton()){
             new Login();
             view.dispose();
+        }
+    }
+
+    public void getEmprestimos() {
+        if (view.getAlunoEmpRadioButton().isSelected()) {
+            aluno = FachadaDAO.buscaAlunoCPF(view.getCpfEmprestimoField().getText());
+            emprestimos = new ArrayList<>(FachadaDAO.getAlunoEmprestimos(aluno));
+        }
+        if (view.getProfessorEmpRadioButton().isSelected()) {
+            professor = FachadaDAO.buscaProfessorCPF(view.getCpfEmprestimoField().getText());
+            emprestimos = new ArrayList<>(FachadaDAO.getProfessorEmprestimos(professor));
+        }
+        DefaultTableModel model = (DefaultTableModel) view.getEmprestimosTable().getModel();
+        model.setRowCount(0);
+        for(Emprestimo emp : emprestimos){
+            model.addRow(new Object[]{emp.getId(), emp.getExemplar().getLivro().getTitulo(),
+            emp.getEmprestimo(), emp.getEntrega(), emp.getSituacao()});
+
         }
     }
 
@@ -173,5 +209,19 @@ public class TelaFuncionarioControl implements ActionListener {
         professorModel.setRowCount(0);
         for(Professor p : professors)
             professorModel.addRow(new Object[]{p.getId(), p.getCpf(), p.getNome(), p.getSituacao()});
+    }
+
+    @Override
+    public void run() {
+        List<AlunosAtraso> alunos = new ArrayList<>(FachadaDAO.getAlunosAtraso());
+        List<ProfessoresAtraso> professores = new ArrayList<>(FachadaDAO.getProfessoresAtraso());
+
+        for (AlunosAtraso a : alunos)
+            FachadaDAO.suspenderAluno(FachadaDAO.buscaAlunoId(a.getId()));
+        for (ProfessoresAtraso p : professores)
+            FachadaDAO.suspenderProfessor(FachadaDAO.buscaProfessorId(p.getId()));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {}
     }
 }

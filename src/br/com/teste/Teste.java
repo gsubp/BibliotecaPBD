@@ -1,5 +1,6 @@
 package br.com.teste;
 
+import br.com.model.dao.FachadaDAO;
 import br.com.view.Login;
 
 import javax.persistence.EntityManager;
