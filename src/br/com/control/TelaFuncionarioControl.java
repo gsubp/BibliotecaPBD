@@ -16,15 +16,13 @@ import java.util.List;
  */
 public class TelaFuncionarioControl implements ActionListener, Runnable{
     private HomeFuncionario view;
-    private List<Emprestimo> emprestimos;
-    private List<Reserva> reservas;
     private Aluno aluno;
     private Professor professor;
 
     public TelaFuncionarioControl(HomeFuncionario view, Funcionario funcionario) {
         this.view = view;
         this.view.getFuncionarioLabel().setText(funcionario.getNome());
-        new Thread(this).start();
+        //new Thread(this).start();
     }
 
 
@@ -147,6 +145,7 @@ public class TelaFuncionarioControl implements ActionListener, Runnable{
                 JOptionPane.showMessageDialog(null, "Emprestimo não foi devolvido");
         }
         if(e.getSource() == view.getBuscaResButton()){
+            List<Reserva> reservas = null;
             if (view.getAlunoEmpRadioButton().isSelected()) {
                 aluno = FachadaDAO.buscaAlunoCPF(view.getCpfResField().getText());
                 reservas = new ArrayList<>(FachadaDAO.getAlunoReservas(aluno));
@@ -167,6 +166,7 @@ public class TelaFuncionarioControl implements ActionListener, Runnable{
     }
 
     public void getEmprestimos() {
+        List<Emprestimo> emprestimos = null;
         if (view.getAlunoEmpRadioButton().isSelected()) {
             aluno = FachadaDAO.buscaAlunoCPF(view.getCpfEmprestimoField().getText());
             emprestimos = new ArrayList<>(FachadaDAO.getAlunoEmprestimos(aluno));

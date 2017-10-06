@@ -233,14 +233,16 @@ public class FachadaDAO {
     }
 
     public static void suspenderAluno(Aluno aluno) {
-        Calendar c = new GregorianCalendar();
-        c.getTime();
-        c.add(Calendar.DAY_OF_MONTH, 30);
-        Date dataliberacao = c.getTime();
-        Suspensao suspensao = new Suspensao();
-        suspensao.setLiberacao(dataliberacao);
-        suspensao.setUsuario(aluno);
-        new SuspensaoDAO().persist(suspensao);
+        //Calendar c = new GregorianCalendar();
+        //c.getTime();
+        //c.add(Calendar.DAY_OF_MONTH, 30);
+        //Date dataliberacao = c.getTime();
+        //Suspensao suspensao = new Suspensao();
+        //suspensao.setLiberacao(dataliberacao);
+        //suspensao.setUsuario(aluno);
+        //new SuspensaoDAO().persist(suspensao);
+        aluno.setSituacao("Suspenso");
+        new AlunoDAO().merge(aluno);
     }
 
     public static Professor buscaProfessorId(Long id) {
@@ -248,14 +250,16 @@ public class FachadaDAO {
     }
 
     public static void suspenderProfessor(Professor professor) {
-        Calendar c = new GregorianCalendar();
-        c.getTime();
-        c.add(Calendar.DAY_OF_MONTH, 30);
-        Date dataliberacao = c.getTime();
-        Suspensao suspensao = new Suspensao();
-        suspensao.setLiberacao(dataliberacao);
-        suspensao.setUsuario(professor);
-        new SuspensaoDAO().persist(suspensao);
+        //Calendar c = new GregorianCalendar();
+        //c.getTime();
+        //c.add(Calendar.DAY_OF_MONTH, 30);
+        //Date dataliberacao = c.getTime();
+        //Suspensao suspensao = new Suspensao();
+        //suspensao.setLiberacao(dataliberacao);
+        //suspensao.setUsuario(professor);
+        //new SuspensaoDAO().persist(suspensao);
+        professor.setSituacao("Suspenso");
+        new ProfessorDAO().merge(professor);
     }
 
     public static void liberarAluno(Aluno aluno) {
