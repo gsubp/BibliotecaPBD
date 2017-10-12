@@ -137,9 +137,9 @@ public class FachadaDAO {
         return livros;
     }
 
-    public static int verificaEmprestimosAluno(Aluno aluno) {
-        return new AlunoDAO().getQntEmprestimos(aluno.getId());
-    }
+//    public static int verificaEmprestimosAluno(Aluno aluno) {
+//        return new AlunoDAO().getQntEmprestimos(aluno.getId());
+//    }
 
     public static Emprestimo realizaEmprestimo(Usuario usuario, Long idLivro) {
         Emprestimo emprestimo = new Emprestimo();

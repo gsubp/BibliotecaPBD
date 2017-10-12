@@ -6,10 +6,18 @@ import br.com.model.pojo.ProfessoresAtraso;
 import br.com.model.pojo.Telefone;
 
 import javax.persistence.Query;
+import javax.ws.rs.*;
 import java.util.List;
 
-
+@Path("/aluno")
 public class AlunoDAO extends DAO {
+    @PUT
+    @Path("/alterar")
+    @Consumes("application/json")
+    @Override
+    public void merge(Object object) {
+        super.merge(object);
+    }
 
     public static Aluno login(String login, String senha) {
         Aluno aluno = null;
@@ -22,6 +30,9 @@ public class AlunoDAO extends DAO {
         return aluno;
     }
 
+    @POST
+    @Path("/cadastrar")
+    @Consumes("application/json")
     @Override
     public Object persist(Object object) {
         super.persist(object);
@@ -34,21 +45,23 @@ public class AlunoDAO extends DAO {
         return aluno;
     }
 
-    public int getQntEmprestimos(Long id) {
-        Query query = getEntityManager().createQuery("select count(r.usuario.id) from Aluno " +
-                "join RealizaEmprestimo r " +
-                "on ? = r.usuario.id");
-        query.setParameter(0, id);
-        return Integer.parseInt(query.getSingleResult().toString());
-    }
+//    public int getQntEmprestimos(Long id) {
+//        Query query = getEntityManager().createQuery("select count(r.usuario.id) from Aluno " +
+//                "join RealizaEmprestimo r " +
+//                "on ? = r.usuario.id");
+//        query.setParameter(0, id);
+//        return Integer.parseInt(query.getSingleResult().toString());
+//    }
 
     public Aluno findByCpf(String cpf) {
         Query query = getEntityManager().createQuery("select a from Aluno a where a.cpf = ?");
         query.setParameter(0, cpf);
         return (Aluno) query.getSingleResult();
     }
-
-    public Aluno findById(Long id){
+    @GET
+    @Path("/buscar/{id_aluno}")
+    @Produces("application/json")
+    public Aluno findById(@PathParam("id_aluno") Long id){
         return getEntityManager().find(Aluno.class, id);
     }
 
@@ -56,7 +69,11 @@ public class AlunoDAO extends DAO {
         return getEntityManager().createQuery("select a from AlunosAtraso a").getResultList();
     }
 
+    @GET
+    @Path("/listar")
     public List<Aluno> list() {
         return getEntityManager().createQuery("select a from Aluno a").getResultList();
     }
+
+
 }
